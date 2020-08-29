@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpVelocity;
+    [SerializeField] private float fallMultiplier;
     private bool jumping;
     public bool stunned;
 
@@ -29,7 +30,6 @@ public class Movement : MonoBehaviour
         //Temp
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     void Update()
@@ -39,10 +39,14 @@ public class Movement : MonoBehaviour
         Move();
         Rotate();
 
-        if (Input.GetButtonDown("Jump"))
-            Jump();
         if (Input.GetButtonDown("Fire1"))
             Tag();
+    }
+
+    private void LateUpdate()
+    {
+        if (stunned) return;
+        Jump();
     }
 
     private void Move()
@@ -66,24 +70,27 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
-        if (!jumping)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity += new Vector3(0, jumpVelocity, 0);
+            if (!jumping)
+            {
+                rb.velocity += Vector3.up * jumpVelocity;
+            }
         }
-    }
 
-    private void Throw()
-    {
-
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
     }
 
     private void Tag()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
         {
             Player player = hit.transform.GetComponent<Player>();
-            
-            if(game is TagGame)
+
+            if (game is TagGame)
             {
                 TagGame tag = (TagGame)game;
                 tag.TagPlayer(GetComponent<Player>(), player);
