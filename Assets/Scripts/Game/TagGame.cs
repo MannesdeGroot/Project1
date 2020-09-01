@@ -74,4 +74,11 @@ public class TagGame : EliminationGame
         taggers.Add(tagged);
         tagged.isTagger = true;
     }
+
+    protected override void LoadSettings()
+    {
+        base.LoadSettings();
+
+        taggersAmount = GameSettings.amountOfTaggers;
+    }
 }

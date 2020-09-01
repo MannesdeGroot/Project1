@@ -14,14 +14,15 @@ public class EliminationGame : MiniGame
 
         if (!oneLive)
         {
-            foreach(Player player in players)
+            foreach (Player player in players)
             {
                 player.score++;
             }
 
-            foreach(Player player in eliminated)
+            foreach (Player player in eliminated)
             {
                 players.Add(player);
+                player.gameObject.SetActive(true);
             }
         }
     }
@@ -32,5 +33,14 @@ public class EliminationGame : MiniGame
 
         players.Remove(player);
         eliminated.Add(player);
+
+        player.gameObject.SetActive(false);
+    }
+
+    protected override void LoadSettings()
+    {
+        base.LoadSettings();
+
+        oneLive = GameSettings.oneLive;
     }
 }

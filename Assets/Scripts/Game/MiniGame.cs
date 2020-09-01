@@ -15,7 +15,7 @@ public class MiniGame : MonoBehaviour
     [SerializeField] private bool roundLimit;
     [SerializeField] protected int maxRounds;
     private int currentRound;
-    public int matchTime;
+    public float matchTime;
     private float matchTimer;
     [SerializeField] private Text timerText;
 
@@ -26,6 +26,10 @@ public class MiniGame : MonoBehaviour
 
     void Start()
     {
+        LoadSettings();
+
+        timerText.gameObject.SetActive(timed);
+
         Player[] test = FindObjectsOfType<Player>();
 
         foreach (Player p in test)
@@ -85,5 +89,15 @@ public class MiniGame : MonoBehaviour
         {
             EndRound();
         }
+    }
+
+    protected virtual void LoadSettings()
+    {
+        maxPlayers = GameSettings.maxPlayers;
+        minPlayers = GameSettings.minPlayers;
+        timed = GameSettings.timed;
+        matchTime = GameSettings.matchTime;
+        roundLimit = GameSettings.limitedRounds;
+        maxRounds = GameSettings.maxRounds;
     }
 }
