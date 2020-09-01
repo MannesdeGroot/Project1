@@ -6,10 +6,13 @@ public class Movement : MonoBehaviour
 {
     private Rigidbody rb;
     private MiniGame game;
+    private Player self;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
+    private float speed;
     [SerializeField] private float jumpVelocity;
+    private float jumpVel;
     [SerializeField] private float fallMultiplier;
     private bool jumping;
     public bool stunned;
@@ -26,6 +29,10 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
+        self = GetComponent<Player>();
+
+        speed = moveSpeed;
+        jumpVel = jumpVelocity;
 
         //Temp
         Cursor.lockState = CursorLockMode.Locked;
@@ -51,8 +58,8 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
-        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
-        float inputZ = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
+        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        float inputZ = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
         transform.Translate(inputX, 0, inputZ);
     }
@@ -74,7 +81,7 @@ public class Movement : MonoBehaviour
         {
             if (!jumping)
             {
-                rb.velocity += Vector3.up * jumpVelocity;
+                rb.velocity += Vector3.up * jumpVel;
             }
         }
 
@@ -90,12 +97,46 @@ public class Movement : MonoBehaviour
         {
             Player player = hit.transform.GetComponent<Player>();
 
-            if (game is TagGame)
+            if (game is TagGame && self.isTagger)
             {
                 TagGame tag = (TagGame)game;
-                tag.TagPlayer(GetComponent<Player>(), player);
+                tag.TagPlayer(self, player);
             }
         }
+    }
+
+    public IEnumerator ApplyBoost(BoosterType type, float multiplier, float duration)
+    {
+        switch (type)
+        {
+            case BoosterType.SPEED:
+                speed *= multiplier;
+                break;
+            case BoosterType.JUMP:
+                jumpVel *= multiplier;
+                break;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        switch (type)
+        {
+            case BoosterType.SPEED:
+                speed = moveSpeed;
+                break;
+            case BoosterType.JUMP:
+                jumpVel = jumpVelocity;
+                break;
+        }
+    }
+
+    public IEnumerator Stun(float duration)
+    {
+        stunned = true;
+
+        yield return new WaitForSeconds(duration);
+
+        stunned = false;
     }
 
     private void OnTriggerEnter(Collider c)
