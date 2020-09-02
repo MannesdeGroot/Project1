@@ -840,12 +840,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 921837000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8765644184ec7419049dbbeedb9c7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 468f63f0ccf523b4d9838b1240293aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   multiplier: 2
-  duration: 3.5
+  duration: 3
 --- !u!1 &1012821417
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,12 +940,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1167073525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8765644184ec7419049dbbeedb9c7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bd45621af15a314c8fc1111d4287b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  multiplier: 1.5
-  duration: 5
 --- !u!135 &1167073527
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1524,6 +1520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpVelocity: 6.5
+  powerJumpMultiplier: 1.25
+  powerJumps: 0
   fallMultiplier: 1.1
   stunned: 0
   cam: {fileID: 1320779385}

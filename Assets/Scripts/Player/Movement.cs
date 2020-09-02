@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private float speed;
     [SerializeField] private float jumpVelocity;
+    [SerializeField] private float powerJumpMultiplier;
+    public int powerJumps;
     private float jumpVel;
     [SerializeField] private float fallMultiplier;
     private bool jumping;
@@ -81,7 +83,14 @@ public class Movement : MonoBehaviour
         {
             if (!jumping)
             {
+                if(powerJumps > 0)
+                {
+                    jumpVel *= powerJumpMultiplier;
+                    powerJumps--;
+                }
+
                 rb.velocity += Vector3.up * jumpVel;
+                jumpVel = jumpVelocity;
             }
         }
 
@@ -105,29 +114,13 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public IEnumerator ApplyBoost(BoosterType type, float multiplier, float duration)
+    public void ApplySpeedBoost(float multiplier, float duration) => StartCoroutine(ApplyBoost(multiplier, duration));
+    private IEnumerator ApplyBoost(float multiplier, float duration)
     {
-        switch (type)
-        {
-            case BoosterType.SPEED:
-                speed *= multiplier;
-                break;
-            case BoosterType.JUMP:
-                jumpVel *= multiplier;
-                break;
-        }
+        speed *= multiplier;
 
         yield return new WaitForSeconds(duration);
-
-        switch (type)
-        {
-            case BoosterType.SPEED:
-                speed = moveSpeed;
-                break;
-            case BoosterType.JUMP:
-                jumpVel = jumpVelocity;
-                break;
-        }
+        speed = moveSpeed;
     }
 
     public IEnumerator Stun(float duration)
