@@ -115,6 +115,7 @@ public class Movement : MonoBehaviour
     }
 
     public void ApplySpeedBoost(float multiplier, float duration) => StartCoroutine(ApplyBoost(multiplier, duration));
+    
     private IEnumerator ApplyBoost(float multiplier, float duration)
     {
         speed *= multiplier;
