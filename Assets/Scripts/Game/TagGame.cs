@@ -14,6 +14,7 @@ public class TagGame : EliminationGame
         foreach(Player player in players)
         {
             player.isTagger = false;
+            player.SetTagger(false);
         }
 
         taggers = new List<Player>();
@@ -26,7 +27,7 @@ public class TagGame : EliminationGame
             if (!taggers.Contains(player))
             {
                 taggers.Add(player);
-                player.isTagger = true;
+                player.SetTagger(true);
             }
             else
             {
@@ -69,10 +70,10 @@ public class TagGame : EliminationGame
         if (tagged.isTagger) return;
 
         taggers.Remove(tagger);
-        tagger.isTagger = false;
+        tagger.SetTagger(false);
 
         taggers.Add(tagged);
-        tagged.isTagger = true;
+        tagged.SetTagger(true);
     }
 
     protected override void LoadSettings()
