@@ -8,25 +8,6 @@ public class EliminationGame : MiniGame
     [SerializeField] protected bool oneLive;
     protected List<Player> eliminated = new List<Player>();
 
-    protected override void StartRound()
-    {
-        base.StartRound();
-
-        if (!oneLive)
-        {
-            foreach (Player player in players)
-            {
-                player.score++;
-            }
-
-            foreach (Player player in eliminated)
-            {
-                players.Add(player);
-                player.gameObject.SetActive(true);
-            }
-        }
-    }
-
     public void EliminatePlayer(Player player)
     {
         if (!players.Contains(player)) return;
@@ -34,6 +15,7 @@ public class EliminationGame : MiniGame
         players.Remove(player);
         eliminated.Add(player);
 
+        //Vervang met daadwerkelijke spectator mode ofzo
         player.gameObject.SetActive(false);
     }
 

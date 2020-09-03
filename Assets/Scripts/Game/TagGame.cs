@@ -7,9 +7,9 @@ public class TagGame : EliminationGame
     public int taggersAmount;
     private List<Player> taggers;
 
-    protected override void StartRound()
+    protected override void StartGame()
     {
-        base.StartRound();
+        base.StartGame();
 
         foreach(Player player in players)
         {
@@ -33,35 +33,6 @@ public class TagGame : EliminationGame
             {
                 i--;
             }
-        }
-    }
-
-    protected override void EndRound()
-    {
-        base.EndRound();
-
-        foreach (Player player in taggers)
-        {
-            EliminatePlayer(player);
-        }
-
-        if (oneLive)
-        {
-            if (players.Count > 1)
-                StartRound();
-            else
-            {
-                if (state != GameState.FINISHED)
-                {
-                    print($"Winner is {players[0].userName}");
-                    state = GameState.FINISHED;
-                    EndGame();
-                }
-            }
-        }
-        else
-        {
-            StartRound();
         }
     }
 

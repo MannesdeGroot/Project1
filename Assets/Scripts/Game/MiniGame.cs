@@ -10,25 +10,9 @@ public class MiniGame : MonoBehaviour
     public int minPlayers, maxPlayers;
     public List<Player> players = new List<Player>();
 
-    [Header("Time")]
-    [SerializeField] private bool timed;
-    [SerializeField] private bool roundLimit;
-    [SerializeField] protected int maxRounds;
-    private int currentRound;
-    public float matchTime;
-    private float matchTimer;
-    [SerializeField] private Text timerText;
-
-    [Header("Events")]
-    public UnityEvent roundStart;
-    public UnityEvent roundEnd;
-    public UnityEvent gameEnd;
-
     void Start()
     {
         LoadSettings();
-
-        timerText.gameObject.SetActive(timed);
 
         Player[] test = FindObjectsOfType<Player>();
 
@@ -37,42 +21,20 @@ public class MiniGame : MonoBehaviour
             players.Add(p);
         }
 
-        StartRound();
+        StartGame();
     }
 
-    void Update()
+    protected virtual void StartGame()
     {
-        if (timed) CountDown();
-    }
-
-    protected virtual void StartRound()
-    {
-        if (state != GameState.RUNNING)
-            state = GameState.RUNNING;
-
-        matchTimer = matchTime;
-        roundStart.Invoke();
-    }
-
-    protected virtual void EndRound()
-    {
-        if (roundLimit)
-        {
-            currentRound++;
-            if (currentRound >= maxRounds) EndGame();
-            return;
-        }
-
-        roundEnd.Invoke();
+        state = GameState.RUNNING;
     }
 
     protected void EndGame()
     {
         print("Game Over");
-        gameEnd.Invoke();
     }
 
-    private void CountDown()
+    /*private void CountDown()
     {
         if (state != GameState.RUNNING) return;
 
@@ -89,15 +51,11 @@ public class MiniGame : MonoBehaviour
         {
             EndRound();
         }
-    }
+    }*/
 
     protected virtual void LoadSettings()
     {
         maxPlayers = GameSettings.maxPlayers;
         minPlayers = GameSettings.minPlayers;
-        timed = GameSettings.timed;
-        matchTime = GameSettings.matchTime;
-        roundLimit = GameSettings.limitedRounds;
-        maxRounds = GameSettings.maxRounds;
     }
 }
