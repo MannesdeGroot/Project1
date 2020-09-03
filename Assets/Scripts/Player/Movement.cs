@@ -41,21 +41,23 @@ public class Movement : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
+    private void Update()
     {
         if (stunned) return;
 
-        Move();
         Rotate();
 
         if (Input.GetButtonDown("Fire1"))
             Tag();
+        if (Input.GetButtonDown("Jump"))
+            Jump();
     }
 
-    private void LateUpdate()
+    void FixedUpdate()
     {
         if (stunned) return;
-        Jump();
+
+        Move();
     }
 
     private void Move()
@@ -79,24 +81,19 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!jumping)
         {
-            if (!jumping)
+            if (powerJumps > 0)
             {
-                if(powerJumps > 0)
-                {
-                    jumpVel *= powerJumpMultiplier;
-                    powerJumps--;
-                }
-
-                rb.velocity += Vector3.up * jumpVel;
-                jumpVel = jumpVelocity;
+                jumpVel *= powerJumpMultiplier;
+                powerJumps--;
             }
-        }
 
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            rb.velocity += Vector3.up * jumpVel;
+            jumpVel = jumpVelocity;
+
+            if (rb.velocity.y < 0)
+                rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
@@ -115,7 +112,7 @@ public class Movement : MonoBehaviour
     }
 
     public void ApplySpeedBoost(float multiplier, float duration) => StartCoroutine(ApplyBoost(multiplier, duration));
-    
+
     private IEnumerator ApplyBoost(float multiplier, float duration)
     {
         speed *= multiplier;
