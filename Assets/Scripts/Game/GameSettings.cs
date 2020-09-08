@@ -14,4 +14,5 @@ public class GameSettings
     //Settings for Tag
     public static int amountOfTaggers = 1;
     public static int eliminationTime = 10;
+    public static int tagKnockBack = 75;
 }

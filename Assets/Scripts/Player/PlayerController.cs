@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Movement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private MiniGame game;
     private Player self;
+    [SerializeField] private GameObject powerUpUiElement;
+    [SerializeField] private Image powerUpIcon;
+    [SerializeField] private Text powerUpName;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
@@ -26,6 +30,9 @@ public class Movement : MonoBehaviour
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
+    public PowerUp powerUp;
+    public Transform throwPos;
+    public float throwForce;
 
     void Start()
     {
@@ -51,6 +58,15 @@ public class Movement : MonoBehaviour
             Tag();
         if (Input.GetButtonDown("Jump"))
             Jump();
+        if (Input.GetButtonDown("Use"))
+        {
+            if (powerUp != null)
+            {
+                powerUp.Use();
+                powerUp = null;
+                powerUpUiElement.SetActive(false);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -106,7 +122,7 @@ public class Movement : MonoBehaviour
             if (game is TagGame && self.isTagger)
             {
                 TagGame tag = (TagGame)game;
-                tag.TagPlayer(self, player);
+                tag.TagPlayer(self, player, self.GetTagKnockBack());
             }
         }
     }
@@ -128,6 +144,17 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         stunned = false;
+    }
+
+    public void AddPowerUp(PowerUp type)
+    {
+        if (powerUp == null)
+        {
+            powerUp = type;
+            powerUpName.text = powerUp.powerUpName;
+            powerUpIcon.sprite = powerUp.icon;
+            powerUpUiElement.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider c)

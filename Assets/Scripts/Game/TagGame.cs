@@ -7,7 +7,7 @@ public class TagGame : EliminationGame
     public int taggersAmount;
     private List<Player> taggers;
 
-    protected override void StartGame()
+    public override void StartGame()
     {
         base.StartGame();
 
@@ -36,7 +36,7 @@ public class TagGame : EliminationGame
         }
     }
 
-    public void TagPlayer(Player tagger, Player tagged)
+    public void TagPlayer(Player tagger, Player tagged, float tagForceMultiplier)
     {
         if (tagged.isTagger) return;
 
@@ -45,6 +45,9 @@ public class TagGame : EliminationGame
 
         taggers.Add(tagged);
         tagged.SetTagger(true);
+
+        Vector3 force = tagger.transform.forward * tagForceMultiplier;
+        tagged.GetComponent<Rigidbody>().AddForce(force);
     }
 
     protected override void LoadSettings()

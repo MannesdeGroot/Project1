@@ -12,7 +12,7 @@ public class Dodgeball : MonoBehaviour
     {
         if (!active) return;
 
-        Movement player = c.gameObject.GetComponent<Movement>();
+        PlayerController player = c.gameObject.GetComponent<PlayerController>();
 
         if (player != null)
         {

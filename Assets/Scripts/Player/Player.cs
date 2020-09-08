@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public string userName;
     public int score;
     private float timer;
+    private PowerUp powerUp;
+    [SerializeField] private Image powerUpIcon;
+    [SerializeField] private Text powerUpName;
 
     [Header("Tag")]
     public bool isTagger;
@@ -59,5 +62,10 @@ public class Player : MonoBehaviour
         timer--;
 
         StartCoroutine(CountDown());
+    }
+
+    public float GetTagKnockBack()
+    {
+        return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
     }
 }

@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpBoost : MonoBehaviour
+public class JumpBoost : PowerUp
 {
-    private void OnTriggerEnter(Collider c)
+    public override void Use()
     {
-        Movement player = c.GetComponent<Movement>();
-        if (player == null) return;
-
         player.powerJumps++;
-        Destroy(gameObject);
     }
 }

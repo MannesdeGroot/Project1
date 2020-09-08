@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBoost : MonoBehaviour
+public class SpeedBoost : PowerUp
 {
     [SerializeField] private float multiplier;
     [SerializeField] private float duration;
 
-    private void OnTriggerEnter(Collider c)
+    public override void Use()
     {
-        Movement player = c.GetComponent<Movement>();
-        if (player == null) return;
-
         player.ApplySpeedBoost(multiplier, duration);
-
-        Destroy(gameObject);
     }
 }
