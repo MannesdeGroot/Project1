@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("View")]
     [SerializeField] private Transform cam;
     [SerializeField] private float viewClamp;
+    public Camera camera;
     private float mInputVert;
 
     [Header("Interaction")]
@@ -33,9 +35,15 @@ public class PlayerController : MonoBehaviour
     public PowerUp powerUp;
     public Transform throwPos;
     public float throwForce;
+    [Header("Multiplayer")]
+    private PhotonView PV;
 
     void Start()
     {
+        PV = transform.GetComponent<PhotonView>();
+
+        
+
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
         self = GetComponent<Player>();
@@ -50,30 +58,42 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (stunned) return;
-
-        Rotate();
-
-        if (Input.GetButtonDown("Fire1"))
-            Tag();
-        if (Input.GetButtonDown("Jump"))
-            Jump();
-        if (Input.GetButtonDown("Use"))
+        if (PV.IsMine)
         {
-            if (powerUp != null)
+            if (stunned) return;
+
+            Rotate();
+
+            if (Input.GetButtonDown("Fire1"))
+                Tag();
+            if (Input.GetButtonDown("Jump"))
+                Jump();
+            if (Input.GetButtonDown("Use"))
             {
-                powerUp.Use();
-                powerUp = null;
-                powerUpUiElement.SetActive(false);
+                if (powerUp != null)
+                {
+                    powerUp.Use();
+                    powerUp = null;
+                    powerUpUiElement.SetActive(false);
+                }
             }
         }
+        else
+        {
+            camera.gameObject.SetActive(false);
+        }
+
     }
 
     void FixedUpdate()
     {
-        if (stunned) return;
+        if (PV.IsMine)
+        {
+            if (stunned) return;
 
-        Move();
+            Move();
+        }
+        
     }
 
     private void Move()

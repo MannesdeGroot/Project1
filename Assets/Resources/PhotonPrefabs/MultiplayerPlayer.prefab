@@ -256,9 +256,9 @@ GameObject:
   - component: {fileID: 8365694527029506795}
   - component: {fileID: 8365694527029506792}
   - component: {fileID: -1735088442909388877}
-  - component: {fileID: 904061091960343576}
   - component: {fileID: 2390331649518250727}
   - component: {fileID: 3561587741493653113}
+  - component: {fileID: 1254240501794656238}
   m_Layer: 0
   m_Name: MultiplayerPlayer
   m_TagString: Untagged
@@ -321,21 +321,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &904061091960343576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8365694527029506793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de1712a0b4273e4db6f31d5bd61af27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  sencitivity: 300
-  camera: {fileID: 8967993017982801457}
 --- !u!54 &2390331649518250727
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -366,3 +351,31 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1254240501794656238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365694527029506793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d16ac929c234384aa470449b1e4d4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpUiElement: {fileID: 0}
+  powerUpIcon: {fileID: 0}
+  powerUpName: {fileID: 0}
+  moveSpeed: 10
+  jumpVelocity: 6.5
+  powerJumpMultiplier: 1.25
+  powerJumps: 0
+  fallMultiplier: 1.1
+  stunned: 0
+  cam: {fileID: 4610273369893841015}
+  viewClamp: 75
+  camera: {fileID: 8967993017982801457}
+  tagDistance: 1
+  powerUp: {fileID: 0}
+  throwPos: {fileID: 0}
+  throwForce: 0
