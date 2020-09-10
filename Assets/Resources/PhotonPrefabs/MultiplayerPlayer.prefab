@@ -299,11 +299,12 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 2
+  observableSearch: 0
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -1735088442909388877}
+  - {fileID: 1254240501794656238}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -380,6 +381,10 @@ MonoBehaviour:
   powerUp: {fileID: 0}
   throwPos: {fileID: 0}
   throwForce: 0
+  isTagger: 0
+  invinceble: 0
+  powerupImage: {fileID: 0}
+  idle: 0
 --- !u!65 &7050751456763110064
 BoxCollider:
   m_ObjectHideFlags: 0

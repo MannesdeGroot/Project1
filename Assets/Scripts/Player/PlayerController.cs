@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 {
     private Rigidbody rb;
     private MiniGame game;
@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+   
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
