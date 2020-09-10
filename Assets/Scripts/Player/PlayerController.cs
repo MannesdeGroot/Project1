@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 {
     private Rigidbody rb;
     private MiniGame game;
-    private Player self;
+    private int timer;
     [SerializeField] private GameObject powerUpUiElement;
     [SerializeField] private Image powerUpIcon;
     [SerializeField] private Text powerUpName;
@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("View")]
     [SerializeField] private Transform cam;
     [SerializeField] private float viewClamp;
+    [SerializeField] private Text roleText;
+    [SerializeField] private Text timerText;
+    [SerializeField] private Color runnerColor, taggerColor;
     public Camera camera;
     private float mInputVert;
 
@@ -47,11 +50,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         PV = transform.GetComponent<PhotonView>();
 
-        
-
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
-        self = GetComponent<Player>();
 
         speed = moveSpeed;
         jumpVel = jumpVelocity;
@@ -60,8 +60,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-   
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -162,14 +160,64 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
         {
-            Player player = hit.transform.GetComponent<Player>();
+            PlayerController player = hit.transform.GetComponent<PlayerController>();
 
-            if (game is TagGame && self.isTagger)
+            if (game is TagGame && isTagger)
             {
                 TagGame tag = (TagGame)game;
-                tag.TagPlayer(self, player, self.GetTagKnockBack());
+                tag.TagPlayer(this, player, GetTagKnockBack());
             }
         }
+    }
+
+    public void SetTagger(bool value)
+    {
+        isTagger = value;
+
+        if (roleText == null) return;
+        roleText.color = isTagger ? taggerColor : runnerColor;
+        roleText.text = isTagger ? "Tagger" : "Runner";
+
+        timerText.gameObject.SetActive(isTagger);
+
+        if (isTagger)
+        {
+            timer = GameSettings.eliminationTime;
+            StartCoroutine(CountDown());
+        }
+        else
+        {
+            StopCoroutine(CountDown());
+        }
+    }
+
+    private void EliminatePlayer()
+    {
+
+    }
+
+    private IEnumerator CountDown()
+    {
+        if (timer <= 0)
+            EliminatePlayer();
+
+        if (timer >= 0)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+            string secondsText = seconds < 10 ? $"0{seconds}" : seconds.ToString();
+            timerText.text = $"{minutes}:{secondsText}";
+        }
+
+        yield return new WaitForSeconds(1);
+        timer--;
+
+        StartCoroutine(CountDown());
+    }
+
+    public float GetTagKnockBack()
+    {
+        return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
     }
 
     public void ApplySpeedBoost(float multiplier, float duration) => StartCoroutine(ApplyBoost(multiplier, duration));

@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EliminationGame : MiniGame
 {
     [SerializeField] protected bool oneLive;
-    protected List<Player> eliminated = new List<Player>();
+    protected List<PlayerController> eliminated = new List<PlayerController>();
 
-    public void EliminatePlayer(Player player)
+    public void EliminatePlayer(PlayerController player)
     {
         if (!players.Contains(player)) return;
 

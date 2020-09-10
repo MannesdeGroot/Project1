@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MiniGame : MonoBehaviour
 {
     protected GameState state = GameState.STARTING;
     public int minPlayers, maxPlayers;
-    public List<Player> players = new List<Player>();
+    public List<PlayerController> players = new List<PlayerController>();
 
     void Start()
     {
@@ -17,9 +16,9 @@ public class MiniGame : MonoBehaviour
     public virtual void StartGame()
     {
         state = GameState.RUNNING; 
-        Player[] test = FindObjectsOfType<Player>();
+        PlayerController[] test = FindObjectsOfType<PlayerController>();
 
-        foreach (Player p in test)
+        foreach (PlayerController p in test)
         {
             players.Add(p);
         }

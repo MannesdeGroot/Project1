@@ -5,25 +5,25 @@ using UnityEngine;
 public class TagGame : EliminationGame
 {
     public int taggersAmount;
-    private List<Player> taggers;
+    private List<PlayerController> taggers;
 
     public override void StartGame()
     {
         base.StartGame();
 
-        foreach(Player player in players)
+        foreach(PlayerController player in players)
         {
             player.isTagger = false;
             player.SetTagger(false);
         }
 
-        taggers = new List<Player>();
+        taggers = new List<PlayerController>();
 
         for (int i = 0; i < taggersAmount; i++)
         {
             int random = Random.Range(0, players.Count);
 
-            Player player = players[random];
+            PlayerController player = players[random];
             if (!taggers.Contains(player))
             {
                 taggers.Add(player);
@@ -35,8 +35,8 @@ public class TagGame : EliminationGame
             }
         }
     }
-
-    public void TagPlayer(Player tagger, Player tagged, float tagForceMultiplier)
+    
+    public void TagPlayer(PlayerController tagger, PlayerController tagged, float tagForceMultiplier)
     {
         if (tagged.isTagger) return;
 

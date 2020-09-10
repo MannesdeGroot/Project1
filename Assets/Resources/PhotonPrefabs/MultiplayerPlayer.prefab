@@ -376,6 +376,10 @@ MonoBehaviour:
   stunned: 0
   cam: {fileID: 4610273369893841015}
   viewClamp: 75
+  roleText: {fileID: 0}
+  timerText: {fileID: 0}
+  runnerColor: {r: 0, g: 0, b: 0, a: 0}
+  taggerColor: {r: 0, g: 0, b: 0, a: 0}
   camera: {fileID: 8967993017982801457}
   tagDistance: 1
   powerUp: {fileID: 0}
