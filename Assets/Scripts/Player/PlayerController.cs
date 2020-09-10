@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
     public float throwForce;
     [Header("Multiplayer")]
     private PhotonView PV;
+    public bool isTagger;
+    public bool invinceble;
+    public Image powerupImage;
+    [Header("Animations")]
+    public bool idle;
 
     void Start()
     {
@@ -56,6 +61,24 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(isTagger);
+            stream.SendNext(invinceble);
+            stream.SendNext(powerupImage);
+            stream.SendNext(idle);
+
+        }
+        else if (stream.IsReading)
+        {
+            isTagger = (bool)stream.ReceiveNext();
+            invinceble = (bool)stream.ReceiveNext();
+            powerupImage = (Image)stream.ReceiveNext();
+            idle = (bool)stream.ReceiveNext();
+        }
+    }
     private void Update()
     {
         if (PV.IsMine)
@@ -82,7 +105,7 @@ public class PlayerController : MonoBehaviour
         {
             camera.gameObject.SetActive(false);
         }
-
+        AnimationUpdate();
     }
 
     void FixedUpdate()
@@ -176,7 +199,11 @@ public class PlayerController : MonoBehaviour
             powerUpUiElement.SetActive(true);
         }
     }
+    
+    void AnimationUpdate()
+    {
 
+    }
     private void OnTriggerEnter(Collider c)
     {
         jumping = false;
