@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public Transform throwPos;
     public float throwForce;
     [Header("Multiplayer")]
-    private PhotonView PV;
+    private PhotonView pV;
     public bool isTagger;
     public bool invinceble;
     public Image powerupImage;
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     void Start()
     {
-        PV = transform.GetComponent<PhotonView>();
+        pV = transform.GetComponent<PhotonView>();
 
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     }
     private void Update()
     {
-        if (PV.IsMine)
+        if (pV.IsMine)
         {
             if (stunned) return;
 
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     void FixedUpdate()
     {
-        if (PV.IsMine)
+        if (pV.IsMine)
         {
             if (stunned) return;
 
@@ -160,16 +160,31 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
         {
-            PlayerController player = hit.transform.GetComponent<PlayerController>();
-
-            if (game is TagGame && isTagger)
+            if(hit.transform.tag == "Player")
             {
-                TagGame tag = (TagGame)game;
-                tag.TagPlayer(this, player, GetTagKnockBack());
+                PlayerController player = hit.transform.GetComponent<PlayerController>();
+
+                if (/*game is TagGame &&*/ isTagger && !player.isTagger)
+                {
+                    TagGame tag = (TagGame)game;
+
+                    //de line hieronder moet nog in "Tagged", maar weet niet hoe, pls fix.
+                    //tag.TagPlayer(this, player, GetTagKnockBack());
+
+                    isTagger = false;
+                    player.pV.RPC("Tagged", RpcTarget.All);
+                }
             }
+            
         }
     }
 
+    [PunRPC]
+    public void Tagged()
+    {
+        SetTagger(true);
+    }
+    
     public void SetTagger(bool value)
     {
         isTagger = value;
@@ -217,7 +232,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     public float GetTagKnockBack()
     {
-        return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
+        if(timer != 0)
+        {
+            return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
+
+        }
+        return 0;
     }
 
     public void ApplySpeedBoost(float multiplier, float duration) => StartCoroutine(ApplyBoost(multiplier, duration));
