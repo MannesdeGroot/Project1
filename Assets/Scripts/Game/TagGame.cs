@@ -36,7 +36,7 @@ public class TagGame : EliminationGame
         }
     }
     
-    public void TagPlayer(PlayerController tagger, PlayerController tagged, float tagForceMultiplier)
+    public void TagPlayer(PlayerController tagger, PlayerController tagged)
     {
         if (tagged.isTagger) return;
 
@@ -45,9 +45,6 @@ public class TagGame : EliminationGame
 
         taggers.Add(tagged);
         tagged.SetTagger(true);
-
-        Vector3 force = tagger.transform.forward * tagForceMultiplier;
-        tagged.GetComponent<Rigidbody>().AddForce(force);
     }
 
     protected override void LoadSettings()
