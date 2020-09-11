@@ -28,7 +28,7 @@ public class TagGame : EliminationGame
             if (!taggers.Contains(player))
             {
                 taggers.Add(player);
-                player.pV.RPC("Tagged", RpcTarget.All, transform.position, 0);
+                player.PhotonTag(0);
             }
             else
             {

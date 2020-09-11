@@ -181,6 +181,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
+    public void PhotonTag(float knockback)
+    {
+        pV.RPC("Tagged", RpcTarget.All, transform.position, knockback);
+    }
+
     [PunRPC]
     public void Tagged(Vector3 taggerPos, float knockBackMultiplier)
     {
