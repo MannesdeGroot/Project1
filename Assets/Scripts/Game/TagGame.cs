@@ -12,10 +12,10 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         base.StartGame();
 
-        foreach(PlayerController player in players)
+        foreach(GameObject player in players)
         {
-            player.isTagger = false;
-            player.SetTagger(false);
+            player.GetComponent<PlayerController>().isTagger = false;
+            player.GetComponent<PlayerController>().SetTagger(false);
         }
 
         taggers = new List<PlayerController>();
@@ -24,7 +24,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         {
             int random = Random.Range(0, players.Count);
 
-            PlayerController player = players[random];
+            PlayerController player = players[random].GetComponent<PlayerController>();
             if (!taggers.Contains(player))
             {
                 taggers.Add(player);

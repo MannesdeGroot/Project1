@@ -9,9 +9,9 @@ public class EliminationGame : MiniGame
 
     public void EliminatePlayer(PlayerController player)
     {
-        if (!players.Contains(player)) return;
+        if (!players.Contains(player.gameObject)) return;
 
-        players.Remove(player);
+        players.Remove(player.gameObject);
         eliminated.Add(player);
 
         //Vervang met daadwerkelijke spectator mode ofzo
