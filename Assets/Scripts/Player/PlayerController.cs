@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 player = hit.transform.GetComponent<PlayerController>();
 
-                if (/*game is TagGame &&*/ isTagger && !player.isTagger)
+                if (game is TagGame && isTagger && !player.isTagger)
                 {
                     tag = (TagGame)game;
 

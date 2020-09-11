@@ -13,6 +13,12 @@ public class MiniGame : MonoBehaviour
         LoadSettings();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+            StartGame();
+    }
+
     public virtual void StartGame()
     {
         state = GameState.RUNNING; 
