@@ -6,7 +6,7 @@ using Photon.Pun;
 public class TagGame : EliminationGame, Photon.Pun.IPunObservable
 {
     public int taggersAmount;
-    private List<PlayerController> taggers;
+    private List<GameObject> taggers;
 
     public override void StartGame()
     {
@@ -18,16 +18,16 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
             player.GetComponent<PlayerController>().SetTagger(false);
         }
 
-        taggers = new List<PlayerController>();
+        taggers = new List<GameObject>();
 
         for (int i = 0; i < taggersAmount; i++)
         {
             int random = Random.Range(0, players.Count);
 
             PlayerController player = players[random].GetComponent<PlayerController>();
-            if (!taggers.Contains(player))
+            if (!taggers.Contains(player.gameObject))
             {
-                taggers.Add(player);
+                taggers.Add(player.gameObject);
                 player.PhotonTag(0);
             }
             else
@@ -41,10 +41,10 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         if (tagged.isTagger) return;
 
-        taggers.Remove(tagger);
+        taggers.Remove(tagger.gameObject);
         tagger.SetTagger(false);
 
-        taggers.Add(tagged);
+        taggers.Add(tagged.gameObject);
         tagged.SetTagger(true);
     }
 
@@ -63,7 +63,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         }
         else if (stream.IsReading)
         {
-            taggers = (List<PlayerController>)stream.ReceiveNext();
+            taggers = (List<GameObject>)stream.ReceiveNext();
         }
     }
 }
