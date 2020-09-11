@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGame : MonoBehaviour
+public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
 {
     protected GameState state = GameState.STARTING;
     public int minPlayers, maxPlayers;
@@ -39,5 +40,17 @@ public class MiniGame : MonoBehaviour
     {
         maxPlayers = GameSettings.maxPlayers;
         minPlayers = GameSettings.minPlayers;
+    }
+
+    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(players);
+        }
+        else if (stream.IsReading)
+        {
+            players = (List<PlayerController>)stream.ReceiveNext();
+        }
     }
 }

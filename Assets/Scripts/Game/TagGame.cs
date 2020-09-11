@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class TagGame : EliminationGame
+public class TagGame : EliminationGame, Photon.Pun.IPunObservable
 {
     public int taggersAmount;
     private List<PlayerController> taggers;
@@ -53,5 +53,17 @@ public class TagGame : EliminationGame
         base.LoadSettings();
 
         taggersAmount = GameSettings.amountOfTaggers;
+    }
+
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(taggers);
+        }
+        else if (stream.IsReading)
+        {
+            taggers = (List<PlayerController>)stream.ReceiveNext();
+        }
     }
 }
