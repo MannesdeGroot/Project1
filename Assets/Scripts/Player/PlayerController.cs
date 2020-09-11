@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
             Move();
         }
-        
+
     }
 
     private void Move()
@@ -156,26 +156,27 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
+    TagGame tag;
+    PlayerController player;
     private void Tag()
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
         {
-            if(hit.transform.tag == "Player")
+            if (hit.transform.tag == "Player")
             {
-                PlayerController player = hit.transform.GetComponent<PlayerController>();
+                player = hit.transform.GetComponent<PlayerController>();
 
                 if (/*game is TagGame &&*/ isTagger && !player.isTagger)
                 {
-                    TagGame tag = (TagGame)game;
+                    tag = (TagGame)game;
 
                     //de line hieronder moet nog in "Tagged", maar weet niet hoe, pls fix.
-                    //tag.TagPlayer(this, player, GetTagKnockBack());
 
                     isTagger = false;
                     player.pV.RPC("Tagged", RpcTarget.All);
                 }
             }
-            
+
         }
     }
 
@@ -183,8 +184,9 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public void Tagged()
     {
         SetTagger(true);
+        tag.TagPlayer(this, player, GetTagKnockBack());
     }
-    
+
     public void SetTagger(bool value)
     {
         isTagger = value;
@@ -232,7 +234,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     public float GetTagKnockBack()
     {
-        if(timer != 0)
+        if (timer != 0)
         {
             return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
 
@@ -269,7 +271,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             powerUpUiElement.SetActive(true);
         }
     }
-    
+
     void AnimationUpdate()
     {
 
