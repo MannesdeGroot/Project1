@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public void Tagged(Vector3 taggerPos)
     {
         SetTagger(true);
-        rb.AddForce((transform.position - taggerPos) * 100);
+        rb.AddForce((transform.position - taggerPos) * GetTagKnockBack());
     }
 
     public void SetTagger(bool value)
