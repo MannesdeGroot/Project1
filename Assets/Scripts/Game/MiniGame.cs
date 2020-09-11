@@ -51,13 +51,13 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(players);
+            //stream.SendNext(players);
             stream.SendNext(shadfksjd);
             //stream.SendNext(asudfhsud);
         }
         else if (stream.IsReading)
         {
-            players = (List<GameObject>)stream.ReceiveNext();
+            //players = (List<GameObject>)stream.ReceiveNext();
             shadfksjd = (bool)stream.ReceiveNext();
             //asudfhsud = (List<GameObject>)stream.ReceiveNext();
         }
