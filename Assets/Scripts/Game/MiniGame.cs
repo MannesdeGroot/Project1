@@ -10,6 +10,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> asudfhsud = new List<GameObject>();
     public bool shadfksjd;
+    private PhotonView pv;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            pv.TransferOwnership(PhotonNetwork.MasterClient);
             //StartGame();
             shadfksjd = !shadfksjd;
         }
