@@ -19,7 +19,10 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
+        {
             StartGame();
+            shadfksjd = !shadfksjd;
+        }
     }
 
     public virtual void StartGame()
