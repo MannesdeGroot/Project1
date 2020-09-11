@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TagGame : EliminationGame
 {
@@ -27,7 +28,7 @@ public class TagGame : EliminationGame
             if (!taggers.Contains(player))
             {
                 taggers.Add(player);
-                player.SetTagger(true);
+                player.pV.RPC("Tagged", RpcTarget.All, transform.position, 0);
             }
             else
             {

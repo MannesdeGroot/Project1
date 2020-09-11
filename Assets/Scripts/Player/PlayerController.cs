@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public Transform throwPos;
     public float throwForce;
     [Header("Multiplayer")]
-    private PhotonView pV;
+    public PhotonView pV;
     public bool isTagger;
     public bool invinceble;
     public Image powerupImage;
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     tag.TagPlayer(this, player);
 
                     isTagger = false;
-                    player.pV.RPC("Tagged", RpcTarget.All, transform.position);
+                    player.pV.RPC("Tagged", RpcTarget.All, transform.position, 1);
                 }
             }
 
@@ -182,10 +182,10 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     }
 
     [PunRPC]
-    public void Tagged(Vector3 taggerPos)
+    public void Tagged(Vector3 taggerPos, float knockBackMultiplier)
     {
         SetTagger(true);
-        rb.AddForce((transform.position - taggerPos) * GetTagKnockBack());
+        rb.AddForce((transform.position - taggerPos) * GetTagKnockBack() * knockBackMultiplier);
     }
 
     public void SetTagger(bool value)
