@@ -55,7 +55,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         taggersAmount = GameSettings.amountOfTaggers;
     }
 
-    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {

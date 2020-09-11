@@ -44,7 +44,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
         minPlayers = GameSettings.minPlayers;
     }
 
-    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
