@@ -171,10 +171,10 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     tag = (TagGame)game;
 
                     //de line hieronder moet nog in "Tagged", maar weet niet hoe, pls fix.
-                    tag.TagPlayer(this, player);
+                    //tag.TagPlayer(this, player);
 
                     isTagger = false;
-                    player.pV.RPC("Tagged", RpcTarget.All, player.transform.position);
+                    player.pV.RPC("Tagged", RpcTarget.All, transform.position);
                 }
             }
 
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public void Tagged(Vector3 taggerPos)
     {
         SetTagger(true);
-        //rb.AddForce()
+        rb.AddForce((transform.position - taggerPos) * 100);
     }
 
     public void SetTagger(bool value)
