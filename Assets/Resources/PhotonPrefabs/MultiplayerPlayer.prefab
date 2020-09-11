@@ -385,6 +385,7 @@ MonoBehaviour:
   powerUp: {fileID: 0}
   throwPos: {fileID: 0}
   throwForce: 0
+  pV: {fileID: 0}
   isTagger: 0
   invinceble: 0
   powerupImage: {fileID: 0}
