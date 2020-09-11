@@ -8,6 +8,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     protected GameState state = GameState.STARTING;
     public int minPlayers, maxPlayers;
     public List<GameObject> players = new List<GameObject>();
+    public List<GameObject> asudfhsud = new List<GameObject>();
 
     void Start()
     {
@@ -46,11 +47,13 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(players);
+            //stream.SendNext(players);
+            stream.SendNext(asudfhsud);
         }
         else if (stream.IsReading)
         {
-            players = (List<GameObject>)stream.ReceiveNext();
+            //players = (List<GameObject>)stream.ReceiveNext();
+            asudfhsud = (List<GameObject>)stream.ReceiveNext();
         }
     }
 }
