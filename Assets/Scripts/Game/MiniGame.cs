@@ -14,6 +14,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
 
     void Start()
     {
+        pv = transform.GetComponent<PhotonView>();
         LoadSettings();
     }
 
@@ -27,9 +28,15 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
+    public void StartGameActivate()
+    {
+        pv.RPC("StartGame", RpcTarget.All);
+    }
+
+    [PunRPC]
     public virtual void StartGame()
     {
-        state = GameState.RUNNING; 
+        state = GameState.RUNNING;
         PlayerController[] test = FindObjectsOfType<PlayerController>();
 
         foreach (PlayerController p in test)

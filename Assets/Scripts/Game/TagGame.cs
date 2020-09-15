@@ -6,7 +6,7 @@ using Photon.Pun;
 public class TagGame : EliminationGame, Photon.Pun.IPunObservable
 {
     public int taggersAmount;
-    private List<GameObject> taggers;
+    private List<string> taggers;
     PhotonView pV;
 
 
@@ -24,17 +24,30 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
             player.GetComponent<PlayerController>().SetTagger(false);
         }
 
-        taggers = new List<GameObject>();
+        taggers = new List<string>();
+        List<string> playerIDs = new List<string>();
+        for (int i = 0; i < players.Count; i++)
+        {
+            playerIDs.Add(players[i].GetComponent<PhotonView>().ViewID.ToString());
+        }
 
         for (int i = 0; i < taggersAmount; i++)
         {
-            int random = Random.Range(0, players.Count);
+            int random = Random.Range(0, playerIDs.Count);
 
-            PlayerController player = players[random].GetComponent<PlayerController>();
-            if (!taggers.Contains(player.gameObject))
+            //PlayerController player = players[random].GetComponent<PlayerController>();
+            string playerID = playerIDs[random];
+            if (!taggers.Contains(playerID))
             {
-                taggers.Add(player.gameObject);
-                player.PhotonTag(transform.position ,0);
+                for (int j = 0; j < players.Count; j++)
+                {
+                    if(players[j].GetComponent<PhotonView>().ViewID.ToString() == playerID)
+                    {
+                        taggers.Add(playerID);
+                        players[j].GetComponent<PlayerController>().PhotonTag(transform.position, 0);
+                    }
+                }
+                
             }
             else
             {
@@ -51,15 +64,13 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         }
     }
 
-    public void TagPlayer(PlayerController tagger, PlayerController tagged)
+    public void TagPlayer(string taggerID, string taggedID)
     {
-        if (tagged.isTagger) return;
+        if (taggers.Contains(taggerID)) return;
 
-        taggers.Remove(tagger.gameObject);
-        tagger.SetTagger(false);
+        taggers.Remove(taggerID);
 
-        taggers.Add(tagged.gameObject);
-        tagged.SetTagger(true);
+        taggers.Add(taggedID);
     }
 
     protected override void LoadSettings()
@@ -75,11 +86,11 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(taggers);
+            //stream.SendNext(taggers);
         }
         else if (stream.IsReading)
         {
-            taggers = (List<GameObject>)stream.ReceiveNext();
+            //taggers = (List<GameObject>)stream.ReceiveNext();
         }
     }
 }
