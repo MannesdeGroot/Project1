@@ -11,8 +11,10 @@ public class Options : MonoBehaviour
     [Header("UI_Ellements")]
     public Slider soundEffectsSlider;
     public Slider musicSlider;
+    public Slider sensitivitySlider;
     public Dropdown qualityDropdown;
     public Dropdown resolutionDropdown;
+    public Toggle fullscreenToggle;
     [Header("Misc")]
     Resolution[] resolutions;
 
@@ -60,6 +62,27 @@ public class Options : MonoBehaviour
     public void SetResolution(int res)
     {
         Screen.SetResolution(resolutions[res].width, resolutions[res].height, Screen.fullScreen);
+    }
+
+    public void SetFullscreen(bool fullscreen)
+    {
+        Screen.fullScreen = fullscreen;
+        fullscreenToggle.isOn = fullscreen;
+    }
+
+    public void SetSensitivity(float sensitivity)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if(players.Length != 0)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                //players[i].GetComponent<PlayerController>().sensitivity = sensitivity;
+            }
+        }
+        
+        sensitivitySlider.value = sensitivity;
+
     }
 
     public void QuitGame()
