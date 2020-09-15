@@ -66,6 +66,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
 
     public void TagPlayer(string taggerID, string taggedID)
     {
+        print(taggerID + "  " + taggedID);
         if (taggers.Contains(taggerID)) return;
 
         taggers.Remove(taggerID);
