@@ -47,7 +47,8 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            FindPlayersActivate();
+            FindPlayers();
+            StartGame();
         }
     }
 
@@ -69,11 +70,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         taggersAmount = GameSettings.amountOfTaggers;
     }
 
-    public void FindPlayersActivate()
-    {
-        pV.RPC("FindPlayers", RpcTarget.All);
-    }
-    [PunRPC]
+    
     public void FindPlayers()
     {
         players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
