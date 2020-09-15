@@ -23,7 +23,7 @@ public class MiniGame : MonoBehaviour, Photon.Pun.IPunObservable
         {
             pv.TransferOwnership(PhotonNetwork.MasterClient);
             //StartGame();
-            shadfksjd = !shadfksjd;
+
         }
     }
 

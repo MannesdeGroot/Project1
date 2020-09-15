@@ -7,7 +7,13 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
 {
     public int taggersAmount;
     private List<GameObject> taggers;
+    PhotonView pV;
 
+
+    private void Start()
+    {
+        pV = transform.GetComponent<PhotonView>();
+    }
     public override void StartGame()
     {
         base.StartGame();
@@ -36,7 +42,15 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            FindPlayersActivate();
+        }
+    }
+
     public void TagPlayer(PlayerController tagger, PlayerController tagged)
     {
         if (tagged.isTagger) return;
@@ -55,6 +69,15 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         taggersAmount = GameSettings.amountOfTaggers;
     }
 
+    public void FindPlayersActivate()
+    {
+        pV.RPC("FindPlayers", RpcTarget.All);
+    }
+    [PunRPC]
+    public void FindPlayers()
+    {
+        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
