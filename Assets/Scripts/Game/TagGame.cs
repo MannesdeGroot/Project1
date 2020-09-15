@@ -75,11 +75,11 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         if (stream.IsWriting)
         {
-            //stream.SendNext(taggers);
+            stream.SendNext(taggers);
         }
         else if (stream.IsReading)
         {
-            //taggers = (List<GameObject>)stream.ReceiveNext();
+            taggers = (List<GameObject>)stream.ReceiveNext();
         }
     }
 }
