@@ -47,7 +47,6 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            FindPlayers();
             StartGame();
         }
     }
@@ -71,10 +70,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
     }
 
     
-    public void FindPlayers()
-    {
-        players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-    }
+    
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
