@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 {
+    public float sensitivity;
     private Rigidbody rb;
     private MiniGame game;
     private int timer;
@@ -129,8 +130,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     private void Rotate()
     {
-        float rotHor = Input.GetAxis("Mouse X") * Time.deltaTime * Settings.sensitivity;
-        mInputVert -= Input.GetAxis("Mouse Y") * Time.deltaTime * Settings.sensitivity;
+        float rotHor = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+        mInputVert -= Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
         mInputVert = Mathf.Clamp(mInputVert, -viewClamp, viewClamp);
 
