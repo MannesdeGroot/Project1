@@ -174,27 +174,30 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     tag.TagPlayer(this, player);
 
                     isTagger = false;
-                    player.pV.RPC("Tagged", RpcTarget.All, transform.position, 1);
+                    player.PhotonTag(transform.position, 1);
                 }
             }
 
         }
     }
 
-    public void PhotonTag(float knockback)
+    public void PhotonTag(Vector3 taggerPos, float knockback)
     {
-        pV.RPC("Tagged", RpcTarget.All, transform.position, knockback);
+        pV.RPC("Tagged", RpcTarget.All, taggerPos, knockback);
     }
 
     [PunRPC]
     public void Tagged(Vector3 taggerPos, float knockBackMultiplier)
     {
+        print("punrpcTagged");
+        print(taggerPos + "   " + knockBackMultiplier);
         SetTagger(true);
         rb.AddForce((transform.position - taggerPos) * GetTagKnockBack() * knockBackMultiplier);
     }
 
     public void SetTagger(bool value)
     {
+        print("setTagger");
         isTagger = value;
 
         if (roleText == null) return;

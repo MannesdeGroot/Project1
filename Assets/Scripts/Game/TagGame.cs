@@ -34,7 +34,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
             if (!taggers.Contains(player.gameObject))
             {
                 taggers.Add(player.gameObject);
-                player.PhotonTag(0);
+                player.PhotonTag(transform.position ,0);
             }
             else
             {
