@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float inputZ = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
-        animForwardSpeed = 1;
+        animForwardSpeed = Mathf.Abs(inputX + inputZ);
         pV.RPC("SpeedAnim", RpcTarget.All);
 
         transform.Translate(inputX, 0, inputZ);
