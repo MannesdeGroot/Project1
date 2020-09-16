@@ -43,6 +43,8 @@ MonoBehaviour:
   - FindPlayers
   - StartGame
   - ChooseTagger
+  - AnimationUpdate
+  - SpeedAnim
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
