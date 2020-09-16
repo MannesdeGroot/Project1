@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private float jumpVel;
     [SerializeField] private float fallMultiplier;
     private bool jumping;
+    [SerializeField] private float jumpMoveMultiplier;
+    private float moveInputMultiplier;
     public bool stunned;
 
     [Header("View")]
@@ -131,8 +133,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     private void Move()
     {
-        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        float inputZ = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        float inputX = Input.GetAxis("Horizontal") * moveInputMultiplier * Time.deltaTime * speed;
+        float inputZ = Input.GetAxis("Vertical") * moveInputMultiplier * Time.deltaTime * speed;
 
         animForwardSpeed = Mathf.Abs(inputX + inputZ);
         pV.RPC("SpeedAnim", RpcTarget.All);
@@ -170,7 +172,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
-    TagGame tag;
     PlayerController player;
     private void Tag()
     {
@@ -286,10 +287,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private void OnTriggerEnter(Collider c)
     {
         jumping = false;
+        moveInputMultiplier = 1;
     }
 
     private void OnTriggerExit(Collider c)
     {
         jumping = true;
+        moveInputMultiplier = jumpMoveMultiplier;
     }
 }

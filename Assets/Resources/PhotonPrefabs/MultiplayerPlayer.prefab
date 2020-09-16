@@ -231,6 +231,7 @@ MonoBehaviour:
   powerJumpMultiplier: 1.25
   powerJumps: 0
   fallMultiplier: 1.1
+  jumpMoveMultiplier: 0.5
   stunned: 0
   cam: {fileID: 4610273369893841015}
   viewClamp: 75
