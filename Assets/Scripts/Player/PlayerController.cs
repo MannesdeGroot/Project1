@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [SerializeField] private Transform cam;
     [SerializeField] private float viewClamp;
     [SerializeField] private Text roleText;
-    [SerializeField] private Text timerText;
+    public Text timerText;
     [SerializeField] private Color runnerColor, taggerColor;
     public Camera camera;
     private float mInputVert;
@@ -221,39 +221,13 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         timerText.gameObject.SetActive(isTagger);
 
         if (isTagger)
-        {
-            timer = GameSettings.eliminationTime;
-            StartCoroutine(CountDown());
             pV.RPC("AnimationUpdate", RpcTarget.All);
-        }
-        else
-        {
-            StopCoroutine(CountDown());
-        }
     }
 
-    private void EliminatePlayer()
+    public void Eliminate()
     {
-
-    }
-
-    private IEnumerator CountDown()
-    {
-        if (timer <= 0)
-            EliminatePlayer();
-
-        if (timer >= 0)
-        {
-            int minutes = Mathf.FloorToInt(timer / 60);
-            int seconds = Mathf.FloorToInt(timer % 60);
-            string secondsText = seconds < 10 ? $"0{seconds}" : seconds.ToString();
-            timerText.text = $"{minutes}:{secondsText}";
-        }
-
-        yield return new WaitForSeconds(1);
-        timer--;
-
-        StartCoroutine(CountDown());
+        Camera newCam = FindObjectOfType<Camera>();
+        Destroy(gameObject);
     }
 
     public float GetTagKnockBack()
