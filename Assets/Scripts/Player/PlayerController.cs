@@ -180,11 +180,10 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 player = hit.transform.GetComponent<PlayerController>();
 
-                if (game is TagGame && isTagger && !player.isTagger)
+                if (/*game is TagGame &&*/ isTagger && !player.isTagger)
                 {
-                    tag = (TagGame)game;
+                    //tag = (TagGame)game;
 
-                    //de line hieronder moet nog in "Tagged", maar weet niet hoe, pls fix.
                     tag.TagPlayer(pV.ViewID.ToString(), player.pV.ViewID.ToString());
 
                     isTagger = false;
