@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public float sensitivity;
     private Rigidbody rb;
     private MiniGame game;
+    private Animator anim;
     private int timer;
     [SerializeField] private GameObject powerUpUiElement;
     [SerializeField] private Image powerUpIcon;
@@ -42,10 +43,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("Multiplayer")]
     public PhotonView pV;
     public bool isTagger;
-    public bool invinceble;
+    public bool invincible;
     public Image powerupImage;
     [Header("Animations")]
-    public bool idle;
+    private float animForwardSpeed;
+    private bool animTag;
+    private bool animThrow;
 
     void Start()
     {
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
+        anim = GetComponentInChildren<Animator>();
 
         speed = moveSpeed;
         jumpVel = jumpVelocity;
@@ -67,19 +71,25 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(isTagger);
-            stream.SendNext(invinceble);
+            stream.SendNext(invincible);
             stream.SendNext(powerupImage);
-            stream.SendNext(idle);
-
+            stream.SendNext(animForwardSpeed);
+            stream.SendNext(animTag);
+            stream.SendNext(animThrow);
+            stream.SendNext(jumping);
         }
         else if (stream.IsReading)
         {
             isTagger = (bool)stream.ReceiveNext();
-            invinceble = (bool)stream.ReceiveNext();
+            invincible = (bool)stream.ReceiveNext();
             powerupImage = (Image)stream.ReceiveNext();
-            idle = (bool)stream.ReceiveNext();
+            animForwardSpeed = (float)stream.ReceiveNext();
+            animTag = (bool)stream.ReceiveNext();
+            animThrow = (bool)stream.ReceiveNext();
+            jumping = (bool)stream.ReceiveNext();
         }
     }
+
     private void Update()
     {
         if (pV.IsMine)
@@ -117,13 +127,15 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
             Move();
         }
-
     }
 
     private void Move()
     {
         float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float inputZ = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+
+        animForwardSpeed = 1;
+        pV.RPC("SpeedAnim", RpcTarget.All);
 
         transform.Translate(inputX, 0, inputZ);
     }
@@ -151,6 +163,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
             rb.velocity += Vector3.up * jumpVel;
             jumpVel = jumpVelocity;
+            pV.RPC("AnimationUpdate", RpcTarget.All);
 
             if (rb.velocity.y < 0)
                 rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
@@ -176,6 +189,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
+                    pV.RPC("AnimationUpdate", RpcTarget.All);
                 }
             }
 
@@ -211,6 +225,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         {
             timer = GameSettings.eliminationTime;
             StartCoroutine(CountDown());
+            pV.RPC("AnimationUpdate", RpcTarget.All);
         }
         else
         {
@@ -282,10 +297,21 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
-    void AnimationUpdate()
+    [PunRPC]
+    public void AnimationUpdate()
     {
-
+        anim.SetBool("Tagger", isTagger);
+        anim.SetBool("Tag", animTag);
+        anim.SetBool("Throw", animThrow);
+        anim.SetBool("Jump", jumping);
     }
+
+    [PunRPC]
+    public void SpeedAnim()
+    {
+        anim.SetFloat("Speed", animForwardSpeed);
+    }
+
     private void OnTriggerEnter(Collider c)
     {
         jumping = false;
