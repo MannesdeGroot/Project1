@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 1db2a2b447e206842822992817713ad9
+ModelImporter:
+  serializedVersion: 20101
+  internalIDToNameTable:
+  - first:
+      74: 5311591580338154298
+    second: Character_Rig.001|Armature.012|Armature.012|Armature.017|mixamo.com|Layer0|Armatu
+  - first:
+      74: -1037076209206988189
+    second: Character_Rig.001|Armature|mixamo.com|Layer0
+  - first:
+      74: 3841908191403192762
+    second: Character_Rig.001|Armature|mixamo.com|Layer0.001
+  - first:
+      74: -2990475334164948186
+    second: Character_Rig.001|Dance_01
+  - first:
+      74: -2021399010225283162
+    second: Character_Rig.001|Dance_02
+  - first:
+      74: -8086855322830494099
+    second: Character_Rig.001|Dance_03
+  - first:
+      74: -8095742953595053031
+    second: Character_Rig.001|Dance_04
+  - first:
+      74: -897145624102950684
+    second: Character_Rig.001|Dance_05
+  - first:
+      74: -238599780254216636
+    second: Character_Rig.001|Dance_06
+  - first:
+      74: -1355235477046174675
+    second: Character_Rig.001|Dance_07
+  - first:
+      74: 6739955626768616597
+    second: Character_Rig.001|Dance_08
+  - first:
+      74: -3292701499407851879
+    second: Character_Rig.001|Dance_09
+  - first:
+      74: 7232323082432919834
+    second: Character_Rig.001|Dance_10
+  - first:
+      74: 3775152945431328403
+    second: Character_Rig.001|Dance_11
+  - first:
+      74: 8191458869836920260
+    second: Character_Rig.001|Dance_12
+  - first:
+      74: -3752575000303785424
+    second: Character_Rig.001|Dance_13
+  - first:
+      74: 8575020406239620915
+    second: Character_Rig.001|Dance_14
+  - first:
+      74: 2528238991685102096
+    second: Character_Rig.001|Dance_14.001
+  - first:
+      74: 192224427707484153
+    second: Character_Rig.001|Defeated
+  - first:
+      74: 7191775310713699449
+    second: Character_Rig.001|Gesture_Crazy
+  - first:
+      74: 3121087260296762893
+    second: Character_Rig.001|HangingRope_Idle
+  - first:
+      74: -2974674965688607980
+    second: Character_Rig.001|Hit_LowerPart
+  - first:
+      74: -6615535119163044611
+    second: Character_Rig.001|Hit_Moving
+  - first:
+      74: -5115448389834948834
+    second: Character_Rig.001|Idle_ArmSwing
+  - first:
+      74: 2366533675551894507
+    second: Character_Rig.001|Idle_Happy
+  - first:
+      74: 8742186908766527950
+    second: Character_Rig.001|Idle_Neutral
+  - first:
+      74: 7216035631578630008
+    second: Character_Rig.001|Idle_Sad
+  - first:
+      74: -6280121380570334881
+    second: Character_Rig.001|Jog
+  - first:
+      74: -9151119806095345746
+    second: Character_Rig.001|Jump_Forward
+  - first:
+      74: -4496248790260110143
+    second: Character_Rig.001|Jump_Happy
+  - first:
+      74: -1074848193665665976
+    second: Character_Rig.001|Jump_Standing
+  - first:
+      74: -5055677340920064685
+    second: Character_Rig.001|Punch
+  - first:
+      74: 1935332848260044151
+    second: Character_Rig.001|Run_NonTagger
+  - first:
+      74: 6840573553623846455
+    second: Character_Rig.001|Sassy_Walk
+  - first:
+      74: -2844815245964169762
+    second: Character_Rig.001|Tagger_Run
+  - first:
+      74: -7737989070789994004
+    second: Character_Rig.001|Throw_Hard
+  - first:
+      74: 5878371727176493448
+    second: Character_Rig.001|Throw_Soft
+  - first:
+      74: 2748774747478733753
+    second: Character_Rig.001|Victory
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
