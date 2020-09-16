@@ -218,8 +218,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         roleText.color = isTagger ? taggerColor : runnerColor;
         roleText.text = isTagger ? "Tagger" : "Runner";
 
-        timerText.gameObject.SetActive(isTagger);
-
         if (isTagger)
             pV.RPC("AnimationUpdate", RpcTarget.All);
     }
