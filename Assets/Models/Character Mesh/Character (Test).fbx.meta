@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: f192509ea1257de45b64bcfe8707485c
+ModelImporter:
+  serializedVersion: 20101
+  internalIDToNameTable:
+  - first:
+      74: -6730142881966149641
+    second: Character_Rig|Armature.012|Armature.012|Armature.017|mixamo.com|Layer0|Armatu
+  - first:
+      74: 6808530923085705799
+    second: Character_Rig|Armature.012|Armature.012|Dance_01|Armature.012|Dance_01
+  - first:
+      74: 753018849193099148
+    second: Character_Rig|Armature.012|Armature.012|Dance_02|Armature.012|Dance_02
+  - first:
+      74: -4527308563221283399
+    second: Character_Rig|Armature.012|Armature.012|Dance_03|Armature.012|Dance_03
+  - first:
+      74: -7890559654518750434
+    second: Character_Rig|Armature.012|Armature.012|Dance_04|Armature.012|Dance_04
+  - first:
+      74: -7595846135933163353
+    second: Character_Rig|Armature.012|Armature.012|Dance_06|Armature.012|Dance_06
+  - first:
+      74: -3310678527219105243
+    second: Character_Rig|Armature.012|Armature.012|Dance_YMCA|Armature.012|Dance_YMCA
+  - first:
+      74: -2488218229998160650
+    second: Character_Rig|Armature.012|Armature.012|Defeated|Armature.012|Defeated
+  - first:
+      74: -694426616633673165
+    second: Character_Rig|Armature.012|Armature.012|Happy_idle|Armature.012|Happy_idle
+  - first:
+      74: -3583626318315371847
+    second: Character_Rig|Armature.012|Armature.012|Idle_01|Armature.012|Idle_01
+  - first:
+      74: 6410234851542292628
+    second: Character_Rig|Armature.012|Armature.012|Idle_Sad|Armature.012|Idle_Sad
+  - first:
+      74: -7867786792450894701
+    second: Character_Rig|Armature.012|Armature.012|Jog|Armature.012|Jog
+  - first:
+      74: -8556841404313890509
+    second: Character_Rig|Armature.012|Armature.012|Jump_forward|Armature.012|Jump_forwar
+  - first:
+      74: 5385227815505025476
+    second: Character_Rig|Armature.012|Armature.012|Jump_Happy|Armature.012|Jump_Happy
+  - first:
+      74: 3892246431264568646
+    second: Character_Rig|Armature.012|Armature.012|Jump|Armature.012|Jump
+  - first:
+      74: -8350278983515987464
+    second: Character_Rig|Armature.012|Armature.012|Run_01|Armature.012|Run_01
+  - first:
+      74: 8127666254618531103
+    second: Character_Rig|Armature.012|Armature.012|Run_02|Armature.012|Run_02
+  - first:
+      74: -1902724543121255015
+    second: Character_Rig|Armature.012|Armature.012|Temp_Tag|Armature.012|Temp_Tag
+  - first:
+      74: -6109205120412732921
+    second: Character_Rig|Armature.012|Armature.012|Throw_01|Armature.012|Throw_01
+  - first:
+      74: -1633628407210004831
+    second: Character_Rig|Armature.012|Armature.012|Throw_02|Armature.012|Throw_02
+  - first:
+      74: -2067149285262447609
+    second: Character_Rig|Armature.012|Armature.012|Victory|Armature.012|Victory
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyebrows
+    second: {fileID: 2100000, guid: 491a5811543401e4aa6c089965677e22, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat
+    second: {fileID: 2100000, guid: ebbcdc4db69328d4a89b6789f9bc79e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: 190fbe4157c06e842bd0b957ee8b676d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt
+    second: {fileID: 2100000, guid: 5108a5f39e4f5594387851f9208304fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt_02
+    second: {fileID: 2100000, guid: d2afcb29e4c12524b93c0e99e4636f4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes
+    second: {fileID: 2100000, guid: 5f5b78d79907dbc40aac2f25c02b519a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 326d637e9c859704ca04fca62ce07c0d, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
