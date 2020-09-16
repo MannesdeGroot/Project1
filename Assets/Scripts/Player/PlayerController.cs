@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                 {
                     //tag = (TagGame)game;
 
-                    tag.TagPlayer(pV.ViewID.ToString(), player.pV.ViewID.ToString());
+                    //tag.TagPlayer(pV.ViewID.ToString(), player.pV.ViewID.ToString());
 
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
