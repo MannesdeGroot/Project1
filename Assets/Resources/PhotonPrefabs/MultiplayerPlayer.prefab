@@ -233,21 +233,24 @@ MonoBehaviour:
   fallMultiplier: 1.1
   jumpMoveMultiplier: 0.5
   stunned: 0
-  cam: {fileID: 4610273369893841015}
+  jumpDirMultiplier: 0.5
+  camTransform: {fileID: 4610273369893841015}
   viewClamp: 75
   roleText: {fileID: 3190119831055500651}
   timerText: {fileID: 3190119832240783234}
   runnerColor: {r: 0.10690634, g: 0.735849, b: 0.22313954, a: 1}
   taggerColor: {r: 0.735849, g: 0.2179779, b: 0.2179779, a: 1}
-  camera: {fileID: 8967993017982801457}
+  cam: {fileID: 8967993017982801457}
   tagDistance: 1
   powerUp: {fileID: 0}
-  throwPos: {fileID: 0}
-  throwForce: 0
+  throwPos: {fileID: 2099466970495739996}
+  forwardThrowForce: 350
+  upwardsThrowForce: 125
   pV: {fileID: 0}
   isTagger: 0
   invincible: 0
   powerupImage: {fileID: 0}
+  animThrow: 0
 --- !u!65 &7050751456763110064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -338,6 +341,11 @@ GameObject:
 --- !u!4 &7842151603401676759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f192509ea1257de45b64bcfe8707485c, type: 3}
+  m_PrefabInstance: {fileID: 7736711541843111996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2099466970495739996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -685501252642449312, guid: f192509ea1257de45b64bcfe8707485c, type: 3}
   m_PrefabInstance: {fileID: 7736711541843111996}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8575435608360794661
