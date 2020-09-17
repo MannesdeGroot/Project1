@@ -77,7 +77,7 @@ public class Options : MonoBehaviour
         {
             for (int i = 0; i < players.Length; i++)
             {
-                //players[i].GetComponent<PlayerController>().sensitivity = sensitivity;
+                players[i].GetComponent<PlayerController>().sensitivity = sensitivity;
             }
         }
         

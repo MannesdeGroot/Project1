@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [SerializeField] private Color runnerColor, taggerColor;
     public Camera cam;
     private float mInputVert;
+    public GameObject voteScreen;
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
