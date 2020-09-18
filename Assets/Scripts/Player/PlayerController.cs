@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("View")]
     [SerializeField] private Transform camTransform;
     [SerializeField] private float viewClamp;
-    [SerializeField] private Text roleText;
+    public Text roleText;
     public Text timerText;
     [SerializeField] private Color runnerColor, taggerColor;
     public Camera cam;
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (timer != 0)
         {
-            return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
+            return GameSettings.tagKnockBack * (GameSettings.roundTime / timer);
         }
         return 0;
     }
