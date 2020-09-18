@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("View")]
     [SerializeField] private Transform camTransform;
     [SerializeField] private float viewClamp;
+    public Text pregameTimer;
     public Text roleText;
     public Text timerText;
     [SerializeField] private Color runnerColor, taggerColor;

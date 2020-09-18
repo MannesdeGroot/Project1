@@ -6,28 +6,26 @@ using UnityEngine;
 
 public class TagManager : MonoBehaviour
 {
+    public GameState state;
+    public float startDelay;
     public float roundTime;
     public List<string> playerIDs = new List<string>();
     public PhotonView pV;
     public string[] playerIDsArray;
     private List<PlayerController> players = new List<PlayerController>();
     private float timer;
+    public GameObject voteCam;
 
     void Start()
     {
+        state = GameState.STARTING;
+        StartCoroutine(PreGameCountDown());
         pV = GetComponent<PhotonView>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            StartGame();
-        }
-    }
-    
     public void StartGame()
     {
+        state = GameState.RUNNING;
         players = FindObjectsOfType<PlayerController>().ToList();
 
         foreach (PlayerController player in players)
@@ -42,14 +40,12 @@ public class TagManager : MonoBehaviour
     private void StartRound()
     {
         players[Random.Range(0, players.Count - 1)].PhotonTag(transform.position, 0);
-        timer = GameSettings.roundTime;
+        timer = roundTime;
         StartCoroutine(CountDown());
     }
 
     private void EndRound()
     {
-        //Zet vote camera aan
-
         for (int i = 0; i < players.Count; i++)
         {
             if (players[i].isTagger)
@@ -66,6 +62,8 @@ public class TagManager : MonoBehaviour
         else
         {
             print($"{players[0]} won");
+            Destroy(players[0]);
+            voteCam.SetActive(true);
         }
     }
 
@@ -79,7 +77,7 @@ public class TagManager : MonoBehaviour
             int minutes = Mathf.FloorToInt(timer / 60);
             int seconds = Mathf.FloorToInt(timer % 60);
             string secondsText = seconds < 10 ? $"0{seconds}" : seconds.ToString();
-            
+
             foreach (PlayerController player in players)
             {
                 player.timerText.text = $"{minutes}:{secondsText}";
@@ -90,5 +88,38 @@ public class TagManager : MonoBehaviour
         timer--;
 
         StartCoroutine(CountDown());
+    }
+
+    private IEnumerator PreGameCountDown()
+    {
+        if (state == GameState.STARTING)
+        {
+            List<PlayerController> pregamePlayers = FindObjectsOfType<PlayerController>().ToList();
+
+            int minutes = Mathf.FloorToInt(startDelay / 60);
+            int seconds = Mathf.FloorToInt(startDelay % 60);
+            string secText = seconds < 10 ? $"0{seconds}" : seconds.ToString();
+
+            foreach (PlayerController player in pregamePlayers)
+            {
+                player.pregameTimer.text = $"{minutes}:{secText}";
+            }
+
+            if (startDelay < 0)
+            {
+                foreach (PlayerController player in pregamePlayers)
+                {
+                    player.pregameTimer.gameObject.SetActive(false);
+                }
+
+                StartGame();
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+                startDelay--;
+                StartCoroutine(PreGameCountDown());
+            }
+        }
     }
 }

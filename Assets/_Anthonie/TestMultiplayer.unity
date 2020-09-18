@@ -839,8 +839,7 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 1652194406}
+  ObservedComponents: []
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -856,10 +855,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afdf192ad528be4e9634ce3290437eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 0
+  state: 0
+  startDelay: 60
+  roundTime: 60
   playerIDs: []
   pV: {fileID: 0}
   playerIDsArray: []
+  voteCam: {fileID: 21143902}
 --- !u!4 &1652194407
 Transform:
   m_ObjectHideFlags: 0
