@@ -15,39 +15,47 @@ public class TagManager : MonoBehaviour
 
     void Start()
     {
-        pV = transform.GetComponent<PhotonView>();
+        pV = GetComponent<PhotonView>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            StartRound();
+            StartGame();
         }
     }
     
-    public void ChooseTagger()
+    public void StartGame()
     {
-        players = FindObjectsOfType<PlayerController>().ToList<PlayerController>();
-        players[Random.Range(0, players.Count - 1)].PhotonTag(transform.position, 0);
+        players = FindObjectsOfType<PlayerController>().ToList();
+
+        foreach (PlayerController player in players)
+        {
+            player.roleText.gameObject.SetActive(true);
+            player.timerText.gameObject.SetActive(true);
+        }
+
+        StartRound();
     }
 
     private void StartRound()
     {
-        ChooseTagger();
-        timer = GameSettings.eliminationTime;
+        players[Random.Range(0, players.Count - 1)].PhotonTag(transform.position, 0);
+        timer = GameSettings.roundTime;
         StartCoroutine(CountDown());
     }
 
     private void EndRound()
     {
+        //Zet vote camera aan
+
         for (int i = 0; i < players.Count; i++)
         {
             if (players[i].isTagger)
             {
                 players[i].Eliminate();
                 players.Remove(players[i]);
-                break;
             }
         }
 

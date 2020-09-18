@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
         if (isTagger)
         {
-            timer = GameSettings.eliminationTime;
+            timer = GameSettings.roundTime;
             StartCoroutine(CountDown());
         }
         else
@@ -66,6 +66,6 @@ public class Player : MonoBehaviour
 
     public float GetTagKnockBack()
     {
-        return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
+        return GameSettings.tagKnockBack * (GameSettings.roundTime / timer);
     }
 }
