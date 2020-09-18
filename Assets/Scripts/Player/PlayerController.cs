@@ -188,26 +188,20 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
-    PlayerController player;
     private void Tag()
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
         {
             if (hit.transform.tag == "Player")
             {
-                player = hit.transform.GetComponent<PlayerController>();
+                PlayerController player = hit.transform.GetComponent<PlayerController>();
 
-                if (/*game is TagGame &&*/ isTagger && !player.isTagger)
+                if (isTagger && !player.isTagger && !player.invincible)
                 {
-                    //tag = (TagGame)game;
-
-                    //tag.TagPlayer(pV.ViewID.ToString(), player.pV.ViewID.ToString());
-
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
                 }
             }
-
         }
     }
 
@@ -268,6 +262,15 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         yield return new WaitForSeconds(duration);
 
         stunned = false;
+    }
+
+    public IEnumerator SetInvincible(float duration)
+    {
+        invincible = true;
+
+        yield return new WaitForSeconds(duration);
+
+        invincible = false;
     }
 
     public void AddPowerUp(PowerUp type)
