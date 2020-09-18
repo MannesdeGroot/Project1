@@ -34,7 +34,14 @@ public class TagManager : MonoBehaviour
             player.timerText.gameObject.SetActive(true);
         }
 
-        StartRound();
+        if (players.Count > 1)
+        {
+            StartRound();
+        }
+        else
+        {
+            EndRound();
+        }
     }
 
     private void StartRound()
