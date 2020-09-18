@@ -45,6 +45,9 @@ MonoBehaviour:
   - ChooseTagger
   - AnimationUpdate
   - SpeedAnim
+  - UnVote
+  - Vote
+  - UpdateVoteCountText
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

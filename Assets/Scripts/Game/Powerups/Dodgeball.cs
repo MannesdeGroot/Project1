@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dodgeball : MonoBehaviour
 {
+    public PlayerController thrower;
     [SerializeField] private bool active;
     [SerializeField] private float duration;
     [SerializeField] private float despawnTime;
@@ -14,7 +15,7 @@ public class Dodgeball : MonoBehaviour
 
         PlayerController player = c.gameObject.GetComponent<PlayerController>();
 
-        if (player != null)
+        if (player != null && player != thrower)
         {
             StartCoroutine(player.Stun(duration));
             active = false;

@@ -27,21 +27,25 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [SerializeField] private float jumpMoveMultiplier;
     private float moveInputMultiplier;
     public bool stunned;
+    private Vector3 input;
+    [SerializeField] private float jumpDirMultiplier;
 
     [Header("View")]
-    [SerializeField] private Transform cam;
+    [SerializeField] private Transform camTransform;
     [SerializeField] private float viewClamp;
     [SerializeField] private Text roleText;
     public Text timerText;
     [SerializeField] private Color runnerColor, taggerColor;
-    public Camera camera;
+    public Camera cam;
     private float mInputVert;
+    public GameObject voteScreen;
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
     public PowerUp powerUp;
     public Transform throwPos;
-    public float throwForce;
+    public float forwardThrowForce;
+    public float upwardsThrowForce;
     [Header("Multiplayer")]
     public PhotonView pV;
     public bool isTagger;
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("Animations")]
     private float animForwardSpeed;
     private bool animTag;
-    private bool animThrow;
+    public bool animThrow;
 
     void Start()
     {
@@ -108,6 +112,9 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 if (powerUp != null)
                 {
+                    if (powerUp is DodgeballItem)
+                        animThrow = true;
+
                     powerUp.Use();
                     powerUp = null;
                     powerUpUiElement.SetActive(false);
@@ -116,7 +123,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
         else
         {
-            camera.gameObject.SetActive(false);
+            cam.gameObject.SetActive(false);
         }
         AnimationUpdate();
     }
@@ -133,13 +140,13 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     private void Move()
     {
-        float inputX = Input.GetAxis("Horizontal") * moveInputMultiplier * Time.deltaTime * speed;
-        float inputZ = Input.GetAxis("Vertical") * moveInputMultiplier * Time.deltaTime * speed;
+        input.x = Input.GetAxis("Horizontal") * moveInputMultiplier * Time.deltaTime * speed;
+        input.z = Input.GetAxis("Vertical") * moveInputMultiplier * Time.deltaTime * speed;
 
-        animForwardSpeed = Mathf.Abs(inputX + inputZ);
+        animForwardSpeed = input.magnitude;
         pV.RPC("SpeedAnim", RpcTarget.All);
 
-        transform.Translate(inputX, 0, inputZ);
+        transform.Translate(input);
     }
 
     private void Rotate()
@@ -150,7 +157,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         mInputVert = Mathf.Clamp(mInputVert, -viewClamp, viewClamp);
 
         transform.Rotate(0, rotHor, 0);
-        cam.localRotation = Quaternion.Euler(mInputVert, 0, 0);
+        camTransform.localRotation = Quaternion.Euler(mInputVert, 0, 0);
     }
 
     private void Jump()
@@ -163,7 +170,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                 powerJumps--;
             }
 
-            rb.velocity += Vector3.up * jumpVel;
+            rb.velocity += Vector3.up * jumpVel + input * (jumpVel * jumpDirMultiplier);
             jumpVel = jumpVelocity;
             pV.RPC("AnimationUpdate", RpcTarget.All);
 
@@ -226,6 +233,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public void Eliminate()
     {
         Camera newCam = FindObjectOfType<Camera>();
+        newCam.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
@@ -234,7 +242,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         if (timer != 0)
         {
             return GameSettings.tagKnockBack * (GameSettings.eliminationTime / timer);
-
         }
         return 0;
     }
