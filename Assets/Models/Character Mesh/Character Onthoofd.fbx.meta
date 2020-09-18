@@ -766,7 +766,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -845,7 +845,7 @@ ModelImporter:
       name: Character_Rig_Onthoofd|Jump_Forward
       takeName: Character_Rig_Onthoofd|Jump_Forward
       internalID: 0
-      firstFrame: 0
+      firstFrame: 22
       lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
@@ -903,7 +903,7 @@ ModelImporter:
       name: Character_Rig_Onthoofd|Jump_Standing
       takeName: Character_Rig_Onthoofd|Jump_Standing
       internalID: 0
-      firstFrame: 0
+      firstFrame: 19
       lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
@@ -969,7 +969,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1027,7 +1027,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

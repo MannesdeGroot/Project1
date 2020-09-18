@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 {
     public float sensitivity;
+    public GameObject model;
+    public GameObject modelHeadless;
     private Rigidbody rb;
     private MiniGame game;
     private Animator anim;
@@ -62,7 +64,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         rb = GetComponent<Rigidbody>();
         game = FindObjectOfType<MiniGame>();
-        anim = GetComponentInChildren<Animator>();
 
         speed = moveSpeed;
         jumpVel = jumpVelocity;
@@ -70,6 +71,18 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         //Temp
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (!pV.IsMine)
+        {
+            cam.gameObject.SetActive(false);
+            modelHeadless.SetActive(false);
+            anim = model.GetComponent<Animator>();
+        }
+        else
+        {
+            model.SetActive(false);
+            anim = modelHeadless.GetComponent<Animator>();
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -121,10 +134,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                 }
             }
         }
-        else
-        {
-            cam.gameObject.SetActive(false);
-        }
+
         AnimationUpdate();
     }
 
@@ -144,7 +154,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         input.z = Input.GetAxis("Vertical") * moveInputMultiplier * Time.deltaTime * speed;
 
         animForwardSpeed = input.magnitude;
-        pV.RPC("SpeedAnim", RpcTarget.All);
 
         transform.Translate(input);
     }
@@ -172,7 +181,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
             rb.velocity += Vector3.up * jumpVel + input * (jumpVel * jumpDirMultiplier);
             jumpVel = jumpVelocity;
-            pV.RPC("AnimationUpdate", RpcTarget.All);
 
             if (rb.velocity.y < 0)
                 rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
@@ -196,7 +204,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
-                    pV.RPC("AnimationUpdate", RpcTarget.All);
                 }
             }
 
@@ -225,9 +232,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         if (roleText == null) return;
         roleText.color = isTagger ? taggerColor : runnerColor;
         roleText.text = isTagger ? "Tagger" : "Runner";
-
-        if (isTagger)
-            pV.RPC("AnimationUpdate", RpcTarget.All);
     }
 
     public void Eliminate()
@@ -276,22 +280,16 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
-    [PunRPC]
     public void AnimationUpdate()
     {
         anim.SetBool("Tagger", isTagger);
         anim.SetBool("Tag", animTag);
         anim.SetBool("Throw", animThrow);
         anim.SetBool("Jump", jumping);
-    }
-
-    [PunRPC]
-    public void SpeedAnim()
-    {
         anim.SetFloat("Speed", animForwardSpeed);
     }
 
-    private void OnTriggerEnter(Collider c)
+    private void OnTriggerStay(Collider c)
     {
         jumping = false;
         moveInputMultiplier = 1;

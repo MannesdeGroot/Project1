@@ -937,7 +937,7 @@ ModelImporter:
       name: Character_Rig|Jump_Forward
       takeName: Character_Rig|Jump_Forward
       internalID: 0
-      firstFrame: 0
+      firstFrame: 22
       lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
@@ -995,7 +995,7 @@ ModelImporter:
       name: Character_Rig|Jump_Standing
       takeName: Character_Rig|Jump_Standing
       internalID: 0
-      firstFrame: 0
+      firstFrame: 19
       lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
