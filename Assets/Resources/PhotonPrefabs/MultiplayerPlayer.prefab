@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52843283277130319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.273, z: 0.088}
+  m_LocalPosition: {x: 0, y: 1.273, z: 0.114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3190119832007156421}
@@ -56,7 +56,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 8365694527029506793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 7842151603401676759}
   - {fileID: 6693084418044773579}
@@ -248,7 +248,7 @@ MonoBehaviour:
   powerUpUiElement: {fileID: 9130675463480876481}
   powerUpIcon: {fileID: 7537335076520617832}
   powerUpName: {fileID: 3688461603101607823}
-  moveSpeed: 10
+  moveSpeed: 6
   jumpVelocity: 6.5
   powerJumpMultiplier: 1.25
   powerJumps: 0
