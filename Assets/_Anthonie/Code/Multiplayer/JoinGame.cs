@@ -3,33 +3,18 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JoinGame : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
-    public bool joinGame = false;
-    public bool leaveGame = false;
+    public int minPlayers;
+    public int maxPlayers;
     public string roomName;
     public int roomSize;
     public GameObject roomListingPrefab;
     public Transform roomsPannel;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        if (joinGame)
-        {
-            joinGame = false;
-            Join();
-        }
-        if (leaveGame)
-        {
-            leaveGame = false;
-            Leave();
-        }
-    }
+    public InputField roomSizeInput;
+    
 
     public override void OnConnectedToMaster()
     {
@@ -67,7 +52,7 @@ public class JoinGame : MonoBehaviourPunCallbacks, ILobbyCallbacks
             tempButton.SetRoom();
         }
     }
-    public void Join()
+    public void JoinRandom()
     {
         PhotonNetwork.JoinRandomRoom();
 
@@ -80,13 +65,28 @@ public class JoinGame : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     public void CreateRoom()
     {
+        if(roomSize < minPlayers)
+        {
+            roomSize = minPlayers;
+        }
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)roomSize };
-        PhotonNetwork.CreateRoom(roomName, roomOps);
+        if(roomName == "")
+        {
+            PhotonNetwork.CreateRoom("Room " + Random.Range(0, 1000).ToString(), roomOps);
+        }
+        else
+        {
+            PhotonNetwork.CreateRoom(roomName, roomOps);
+
+        }
+
+
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        //CreateRoom();
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)roomSize };
+        PhotonNetwork.CreateRoom(roomName + Random.Range(0,1000).ToString(), roomOps);
     }
 
     public void Leave()
@@ -102,6 +102,16 @@ public class JoinGame : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public void OnRoomSizeChanged(string sizeIn)
     {
         roomSize = int.Parse(sizeIn);
+        if(roomSize < minPlayers)
+        {
+            roomSize = minPlayers;
+            roomSizeInput.text = minPlayers.ToString();
+        }
+        else if(roomSize > maxPlayers)
+        {
+            roomSize = maxPlayers;
+            roomSizeInput.text = maxPlayers.ToString();
+        }
     }
 
     public void JoinLobbyOnClick()

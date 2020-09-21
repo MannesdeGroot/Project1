@@ -10,10 +10,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    void Update()
-    {
-        
-    }
 
     public override void OnConnectedToMaster()
     {

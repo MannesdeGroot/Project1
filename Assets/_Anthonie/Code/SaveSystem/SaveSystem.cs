@@ -46,6 +46,7 @@ public class SaveSystem : MonoBehaviour
         dataHolder.music = options.musicSlider.value;
         dataHolder.soundEffects = options.soundEffectsSlider.value;
         dataHolder.sensitivity = options.sensitivitySlider.value;
+        dataHolder.name = options.nameInput.text;
 
     }
 
@@ -57,6 +58,7 @@ public class SaveSystem : MonoBehaviour
             options.SetMusic(dataHolder.music);
             options.SetSoundEffects(dataHolder.soundEffects);
             options.SetSensitivity(dataHolder.sensitivity);
+            options.SetName(dataHolder.name);
         }
     }
 

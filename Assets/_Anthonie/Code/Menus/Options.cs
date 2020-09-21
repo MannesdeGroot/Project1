@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class Options : MonoBehaviour
+public class Options : MonoBehaviourPunCallbacks
 {
     [Header("Audio")]
     public AudioMixer audioMixer;
@@ -15,6 +16,7 @@ public class Options : MonoBehaviour
     public Dropdown qualityDropdown;
     public Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
+    public InputField nameInput;
     [Header("Misc")]
     Resolution[] resolutions;
 
@@ -85,8 +87,21 @@ public class Options : MonoBehaviour
 
     }
 
+    public void SetName(string name)
+    {
+        PhotonNetwork.NickName = name;
+        nameInput.text = name;
+    }
+
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        base.OnConnectedToMaster();
+
+        PhotonNetwork.NickName = nameInput.text;
     }
 }

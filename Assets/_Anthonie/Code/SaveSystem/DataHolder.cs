@@ -9,4 +9,5 @@ public class DataHolder
     public float soundEffects;
     public float sensitivity;
     public bool fullscreen;
+    public string name;
 }
