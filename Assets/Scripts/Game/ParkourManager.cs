@@ -5,10 +5,19 @@ using UnityEngine;
 public class ParkourManager : MonoBehaviour
 {
     private bool gameEnded;
+    public GameObject voteCam;
+    public VoteSystem voteSystem;
 
     private void EndGame(PlayerController winner)
     {
+        foreach(PlayerController player in FindObjectsOfType<PlayerController>())
+        {
+            player.gameObject.SetActive(false);
+        }
+
         print($"{winner} won");
+        voteCam.SetActive(true);
+        voteSystem.PhotonStartVoting();
     }
 
     private void OnTriggerEnter(Collider c)

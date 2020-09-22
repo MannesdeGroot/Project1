@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     public void Eliminate()
     {
-        Camera newCam = FindObjectOfType<Camera>();
+        Camera newCam = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
         newCam.gameObject.SetActive(true);
         if (roleText == null) return;
         roleText.enabled = false;
