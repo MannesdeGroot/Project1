@@ -94,6 +94,8 @@ public class TagManager : MonoBehaviour
             print($"{players[0]} won");
             players[0].Eliminate();
             voteCam.SetActive(true);
+            VoteSystem vote = FindObjectOfType<VoteSystem>();
+            vote.StartVoting();
         }
     }
 
