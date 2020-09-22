@@ -202,6 +202,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                 {
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
+                    SetTagger(false);
                 }
             }
         }
