@@ -229,7 +229,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.4
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
@@ -251,7 +251,7 @@ MonoBehaviour:
   powerUpUiElement: {fileID: 9130675463480876481}
   powerUpIcon: {fileID: 7537335076520617832}
   powerUpName: {fileID: 3688461603101607823}
-  moveSpeed: 6
+  moveSpeed: 5
   jumpVelocity: 6.5
   powerJumpMultiplier: 1.25
   powerJumps: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   taggerColor: {r: 0.735849, g: 0.2179779, b: 0.2179779, a: 1}
   cam: {fileID: 8967993017982801457}
   voteScreen: {fileID: 0}
-  tagDistance: 1
+  tagDistance: 2
   powerUp: {fileID: 0}
   throwPos: {fileID: 2099466970495739996}
   forwardThrowForce: 350
