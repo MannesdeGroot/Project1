@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3897770772397014054
+--- !u!1 &6310281457487657581
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3897770772397014051}
-  - component: {fileID: 3897770772397014050}
-  - component: {fileID: 3897770772397014049}
-  - component: {fileID: 3897770772397014048}
-  - component: {fileID: 3897770772397014055}
+  - component: {fileID: 6690465728765190359}
+  - component: {fileID: 7743540113328992114}
+  - component: {fileID: 5517582433184553912}
+  - component: {fileID: 5862982040579632874}
+  - component: {fileID: -1660245482061754396}
   m_Layer: 0
-  m_Name: Dodgeball Item
+  m_Name: Trefbal Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3897770772397014051
+--- !u!4 &6690465728765190359
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897770772397014054}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.35, y: -2.65, z: 6.59}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_GameObject: {fileID: 6310281457487657581}
+  m_LocalRotation: {x: 0.00000008146034, y: 0.00000004371139, z: -9.873644e-16, w: 1}
+  m_LocalPosition: {x: 3.715705, y: 0.00000023841858, z: 7.5243626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3897770772397014050
+--- !u!33 &7743540113328992114
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897770772397014054}
+  m_GameObject: {fileID: 6310281457487657581}
   m_Mesh: {fileID: -3378781628680790088, guid: d9295628c61022b4aa33e4716c9f088f, type: 3}
---- !u!23 &3897770772397014049
+--- !u!23 &5517582433184553912
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897770772397014054}
+  m_GameObject: {fileID: 6310281457487657581}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b869eb4ab4ea4f341bdb9a4cee97d090, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,32 +83,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3897770772397014048
+--- !u!135 &5862982040579632874
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897770772397014054}
+  m_GameObject: {fileID: 6310281457487657581}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3897770772397014055
+  m_Radius: 0.20360756
+  m_Center: {x: -0.000000014901161, y: 0, z: -0.000000022351742}
+--- !u!114 &-1660245482061754396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3897770772397014054}
+  m_GameObject: {fileID: 6310281457487657581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4a1f47548bdbde4885b8262cb97f77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 936345f7fc3934efa8119a8700d904c7, type: 3}
+  icon: {fileID: 0}
   powerUpName: Dodgeball
-  dodgeball: {fileID: 8397020758197380939, guid: 357933fb069799c4ea9fb3cf5c776e15, type: 3}
-  throwAnimTime: 1.7
+  dodgeball: {fileID: 6310281457487657581, guid: 1a77a3980d2b23840bc9d0c90e43e9bb, type: 3}
+  throwAnimTime: 1.4
