@@ -273,8 +273,8 @@ MonoBehaviour:
   taggerColor: {r: 0.735849, g: 0.2179779, b: 0.2179779, a: 1}
   cam: {fileID: 8967993017982801457}
   voteScreen: {fileID: 0}
-  head: {fileID: 2343256467909982710}
-  tagDistance: 2
+  head: {fileID: 746860077429478558}
+  tagDistance: 3
   powerUp: {fileID: 0}
   throwPos: {fileID: 2099466970495739996}
   forwardThrowForce: 350
@@ -432,9 +432,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1db2a2b447e206842822992817713ad9, type: 3}
   m_PrefabInstance: {fileID: 6586555877505868576}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2343256467909982710 stripped
+--- !u!4 &746860077429478558 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -293632295022716202, guid: 1db2a2b447e206842822992817713ad9, type: 3}
+  m_CorrespondingSourceObject: {fileID: -3371712996083140674, guid: 1db2a2b447e206842822992817713ad9, type: 3}
   m_PrefabInstance: {fileID: 6586555877505868576}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6769623045242979080
