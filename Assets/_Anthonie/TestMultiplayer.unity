@@ -729,6 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  taggersAmount: 1
   startDelay: 60
   roundTime: 60
   playerIDs: []
