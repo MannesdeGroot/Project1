@@ -265,6 +265,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         Camera newCam = FindObjectOfType<Camera>();
         newCam.gameObject.SetActive(true);
+        if (roleText == null) return;
         roleText.enabled = false;
         timerText.enabled = false;
         Destroy(gameObject);

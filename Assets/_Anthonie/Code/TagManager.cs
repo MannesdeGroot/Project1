@@ -93,7 +93,7 @@ public class TagManager : MonoBehaviour
         else
         {
             print($"{players[0]} won");
-            players[0].Eliminate();
+            Destroy(players[0]);
             voteCam.SetActive(true);
             voteSystem.StartVoting();
         }
