@@ -16,6 +16,7 @@ public class TagManager : MonoBehaviour
     private List<PlayerController> players = new List<PlayerController>();
     private float timer;
     public GameObject voteCam;
+    public VoteSystem voteSystem;
 
     void Start()
     {
@@ -94,8 +95,7 @@ public class TagManager : MonoBehaviour
             print($"{players[0]} won");
             players[0].Eliminate();
             voteCam.SetActive(true);
-            VoteSystem vote = FindObjectOfType<VoteSystem>();
-            vote.StartVoting();
+            voteSystem.StartVoting();
         }
     }
 
