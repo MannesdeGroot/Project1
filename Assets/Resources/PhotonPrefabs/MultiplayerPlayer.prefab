@@ -262,7 +262,7 @@ MonoBehaviour:
   speedFov: 0
   jumpParticle: {fileID: 691043975865978858, guid: 46a9a23bd061369468322ab1959fa47d, type: 3}
   speedBoostParticle: {fileID: 1452142693253795384}
-  stunParticle: {fileID: 5064254698383788085}
+  stunParticle: {fileID: 3012979858140999261}
   camTransform: {fileID: 4610273369893841015}
   viewClamp: 75
   pregameTimer: {fileID: 5364981531639410020}
@@ -430,16 +430,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: StunnedParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 8368472597471898965, guid: 1a8810c09d22eb34388673352448a940, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a8810c09d22eb34388673352448a940, type: 3}
+--- !u!1 &3012979858140999261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8368472597471898965, guid: 1a8810c09d22eb34388673352448a940, type: 3}
+  m_PrefabInstance: {fileID: 6769623045242979080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4350519608050947304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7030874118559766496, guid: 1a8810c09d22eb34388673352448a940, type: 3}
-  m_PrefabInstance: {fileID: 6769623045242979080}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &5064254698383788085 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1996590640322136893, guid: 1a8810c09d22eb34388673352448a940, type: 3}
   m_PrefabInstance: {fileID: 6769623045242979080}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6848164601061831135
@@ -500,6 +504,10 @@ PrefabInstance:
     - target: {fileID: 7878507168610723466, guid: ba0fcdd1e20a707438898c362530e9bb, type: 3}
       propertyPath: m_Name
       value: CloudTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878507168610723466, guid: ba0fcdd1e20a707438898c362530e9bb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba0fcdd1e20a707438898c362530e9bb, type: 3}

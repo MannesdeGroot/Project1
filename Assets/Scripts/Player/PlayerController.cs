@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public float speedFov;
     public GameObject jumpParticle;
     public ParticleSystem speedBoostParticle;
-    public ParticleSystem stunParticle;
+    public GameObject stunParticle;
 
     [Header("View")]
     [SerializeField] private Transform camTransform;
@@ -275,12 +275,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public IEnumerator Stun(float duration)
     {
         stunned = true;
-        stunParticle.Play();
+        stunParticle.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
         stunned = false;
-        stunParticle.Stop();
+        stunParticle.SetActive(false);
     }
 
     public IEnumerator SetInvincible(float duration)
