@@ -67,6 +67,11 @@ public class TagManager : MonoBehaviour
             timer = roundTime;
             StartCoroutine(CountDown());
         }
+
+        foreach (PlayerController player in players)
+        {
+            player.SetTagger(player.isTagger);
+        }
     }
 
     private void EndRound()
