@@ -25,11 +25,7 @@ public class VoteSystem : MonoBehaviour
         voting = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        PlayerController[] players = FindObjectsOfType<PlayerController>();
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].voteScreen.SetActive(true);
-        }
+        
     }
 
     void Voting()
@@ -50,12 +46,6 @@ public class VoteSystem : MonoBehaviour
         voteTime = voteStartTime;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        PlayerController[] players = FindObjectsOfType<PlayerController>();
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].voteScreen.SetActive(false);
-        }
 
         VoteButton tempVoteButton = null;
         bool moreThanOne = false;
