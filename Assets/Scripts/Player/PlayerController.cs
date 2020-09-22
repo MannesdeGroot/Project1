@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("View")]
     [SerializeField] private Transform camTransform;
     [SerializeField] private float viewClamp;
+    private Vector3 camDefaultPos;
     public Text pregameTimer;
     public Text roleText;
     public Text timerText;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public Camera cam;
     private float mInputVert;
     public GameObject voteScreen;
+    public Transform head;
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
@@ -80,6 +82,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        camDefaultPos = cam.transform.localPosition;
 
         if (!pV.IsMine)
         {
@@ -142,6 +146,15 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     powerUpUiElement.SetActive(false);
                 }
             }
+        }
+
+        if (jumping)
+        {
+            cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, head.position.z);
+        }
+        else
+        {
+            cam.transform.localPosition = camDefaultPos;
         }
 
         AnimationUpdate();
