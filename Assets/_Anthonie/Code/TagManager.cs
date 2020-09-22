@@ -95,7 +95,7 @@ public class TagManager : MonoBehaviour
             print($"{players[0]} won");
             Destroy(players[0]);
             voteCam.SetActive(true);
-            voteSystem.StartVoting();
+            voteSystem.PhotonStartVoting();
         }
     }
 
