@@ -7,6 +7,7 @@ using UnityEngine;
 public class TagManager : MonoBehaviour
 {
     public GameState state;
+    public int taggersAmount;
     public float startDelay;
     public float roundTime;
     public List<string> playerIDs = new List<string>();
@@ -46,7 +47,19 @@ public class TagManager : MonoBehaviour
 
     private void StartRound()
     {
-        players[Random.Range(0, players.Count - 1)].PhotonTag(transform.position, 0);
+        for (int i = 0; i < taggersAmount; i++)
+        {
+            PlayerController randPlayer = players[Random.Range(0, players.Count - 1)];
+
+            if (!randPlayer.isTagger)
+            {
+                randPlayer.PhotonTag(transform.position, 0);
+            }
+            else
+            {
+                i--;
+            }
+        }
         timer = roundTime;
         StartCoroutine(CountDown());
     }
