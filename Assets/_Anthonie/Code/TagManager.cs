@@ -47,21 +47,26 @@ public class TagManager : MonoBehaviour
 
     private void StartRound()
     {
-        for (int i = 0; i < taggersAmount; i++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            PlayerController randPlayer = players[Random.Range(0, players.Count - 1)];
+            for (int i = 0; i < taggersAmount; i++)
+            {
+                PlayerController randPlayer = players[Random.Range(0, players.Count)];
 
-            if (!randPlayer.isTagger)
-            {
-                randPlayer.PhotonTag(transform.position, 0);
+                if (!randPlayer.isTagger)
+                {
+                    randPlayer.PhotonTag(transform.position, 0);
+                    print(randPlayer.nickName);
+                    print(i);
+                }
+                else
+                {
+                    i--;
+                }
             }
-            else
-            {
-                i--;
-            }
+            timer = roundTime;
+            StartCoroutine(CountDown());
         }
-        timer = roundTime;
-        StartCoroutine(CountDown());
     }
 
     private void EndRound()

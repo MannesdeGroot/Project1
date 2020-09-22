@@ -270,6 +270,7 @@ MonoBehaviour:
   throwPos: {fileID: 2099466970495739996}
   forwardThrowForce: 350
   upwardsThrowForce: 125
+  nickName: 
   pV: {fileID: 0}
   isTagger: 0
   invincible: 0

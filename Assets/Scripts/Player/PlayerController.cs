@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public float forwardThrowForce;
     public float upwardsThrowForce;
     [Header("Multiplayer")]
+    public string nickName;
     public PhotonView pV;
     public bool isTagger;
     public bool invincible;
@@ -69,7 +70,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         speed = moveSpeed;
         jumpVel = jumpVelocity;
 
-        //Temp
+        nickName = PhotonNetwork.NickName;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

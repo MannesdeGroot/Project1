@@ -730,7 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   taggersAmount: 1
-  startDelay: 60
+  startDelay: 15
   roundTime: 60
   playerIDs: []
   pV: {fileID: 0}
