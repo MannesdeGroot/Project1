@@ -64,9 +64,9 @@ public class TagManager : MonoBehaviour
                     i--;
                 }
             }
-            timer = roundTime;
-            StartCoroutine(CountDown());
         }
+        timer = roundTime;
+        StartCoroutine(CountDown());
 
         foreach (PlayerController player in players)
         {
