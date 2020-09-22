@@ -96,7 +96,12 @@ public class VoteSystem : MonoBehaviour
         {
             sceneName = tempVoteButton.sceneName;
         }
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+
+        }
 
 
     }

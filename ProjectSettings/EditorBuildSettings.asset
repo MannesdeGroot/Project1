@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: c8e9cb9326af4eb4ab26fc38af710aea
   - enabled: 1
-    path: Assets/_Anthonie/TestMultiplayer.unity
+    path: Assets/Scenes/Tag.unity
     guid: e24bfb37f58a7ff429da9815c07ff34f
   m_configObjects: {}
