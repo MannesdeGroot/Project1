@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [SerializeField] private float jumpDirMultiplier;
     public float normalFov;
     public float speedFov;
-    public GameObject jumpParticle;
+    public ParticleSystem jumpParticle;
     public ParticleSystem speedBoostParticle;
     public GameObject stunParticle;
 
@@ -182,11 +182,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (!jumping)
         {
-            Instantiate(jumpParticle, transform.position, jumpParticle.transform.rotation);
+            pV.RPC("PlayJump", RpcTarget.All);
 
             if (powerJumps > 0)
             {
-                speedBoostParticle.Play();
+                pV.RPC("PlaySpeed", RpcTarget.All, true);
                 jumpVel *= powerJumpMultiplier;
                 powerJumps--;
                 powerJumped = true;
@@ -198,6 +198,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             if (rb.velocity.y < 0)
                 rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+    }
+
+    [PunRPC]
+    public void PlayJump()
+    {
+        jumpParticle.Play();
     }
 
     private void Tag()
@@ -265,22 +271,41 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private IEnumerator ApplyBoost(float multiplier, float duration)
     {
         speed *= multiplier;
-        speedBoostParticle.Play();
+        pV.RPC("PlaySpeed", RpcTarget.All, true);
 
         yield return new WaitForSeconds(duration);
         speed = moveSpeed;
-        speedBoostParticle.Stop();
+        pV.RPC("PlaySpeed", RpcTarget.All, false);
+    }
+
+    [PunRPC]
+    public void PlaySpeed(bool play)
+    {
+        if (play)
+        {
+            speedBoostParticle.Play();
+        }
+        else
+        {
+            speedBoostParticle.Stop();
+        }
     }
 
     public IEnumerator Stun(float duration)
     {
         stunned = true;
-        stunParticle.SetActive(true);
+        pV.RPC("PlayStun", RpcTarget.All, true);
 
         yield return new WaitForSeconds(duration);
 
         stunned = false;
-        stunParticle.SetActive(false);
+        pV.RPC("PlayStun", RpcTarget.All, false);
+    }
+
+    [PunRPC]
+    public void PlayStun(bool play)
+    {
+        stunParticle.SetActive(play);
     }
 
     public IEnumerator SetInvincible(float duration)
@@ -319,7 +344,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         if (powerJumped)
         {
             powerJumped = false;
-            speedBoostParticle.Stop();
+            pV.RPC("PlaySpeed", RpcTarget.All, false);
         }
     }
 
