@@ -11,15 +11,26 @@ public class VoteSystem : MonoBehaviour
     float voteTime;
     public bool voting;
     public VoteButton currentVote;
+    public PhotonView pv;
+
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartVoting();
+        }
         if (voting)
         {
             Voting();
         }
     }
 
+    [PunRPC]
     public void StartVoting()
     {
         voting = true;
@@ -28,6 +39,10 @@ public class VoteSystem : MonoBehaviour
         
     }
 
+    public void PhotonStartVoting()
+    {
+        pv.RPC("StartVoting", RpcTarget.All);
+    }
     void Voting()
     {
         voteTime -= Time.deltaTime;
