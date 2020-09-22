@@ -256,6 +256,11 @@ MonoBehaviour:
   jumpMoveMultiplier: 0.5
   stunned: 0
   jumpDirMultiplier: 0.5
+  normalFov: 0
+  speedFov: 0
+  jumpParticle: {fileID: 691043975865978858, guid: 46a9a23bd061369468322ab1959fa47d, type: 3}
+  speedBoostParticle: {fileID: 5417440566720053223, guid: ba0fcdd1e20a707438898c362530e9bb, type: 3}
+  stunParticle: {fileID: 1996590640322136893, guid: 1a8810c09d22eb34388673352448a940, type: 3}
   camTransform: {fileID: 4610273369893841015}
   viewClamp: 75
   pregameTimer: {fileID: 5364981531639410020}

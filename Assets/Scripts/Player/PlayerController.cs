@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [SerializeField] private float jumpVelocity;
     [SerializeField] private float powerJumpMultiplier;
     public int powerJumps;
+    private bool powerJumped;
     private float jumpVel;
     [SerializeField] private float fallMultiplier;
     private bool jumping;
@@ -31,6 +32,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public bool stunned;
     private Vector3 input;
     [SerializeField] private float jumpDirMultiplier;
+    public float normalFov;
+    public float speedFov;
+    public GameObject jumpParticle;
+    public ParticleSystem speedBoostParticle;
+    public ParticleSystem stunParticle;
 
     [Header("View")]
     [SerializeField] private Transform camTransform;
@@ -176,10 +182,14 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (!jumping)
         {
+            Instantiate(jumpParticle, transform.position, jumpParticle.transform.rotation);
+
             if (powerJumps > 0)
             {
+                speedBoostParticle.Play();
                 jumpVel *= powerJumpMultiplier;
                 powerJumps--;
+                powerJumped = true;
             }
 
             rb.velocity += Vector3.up * jumpVel + input * (jumpVel * jumpDirMultiplier);
@@ -236,6 +246,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         Camera newCam = FindObjectOfType<Camera>();
         newCam.gameObject.SetActive(true);
+        roleText.enabled = false;
+        timerText.enabled = false;
         Destroy(gameObject);
     }
 
@@ -253,18 +265,22 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private IEnumerator ApplyBoost(float multiplier, float duration)
     {
         speed *= multiplier;
+        speedBoostParticle.Play();
 
         yield return new WaitForSeconds(duration);
         speed = moveSpeed;
+        speedBoostParticle.Stop();
     }
 
     public IEnumerator Stun(float duration)
     {
         stunned = true;
+        stunParticle.Play();
 
         yield return new WaitForSeconds(duration);
 
         stunned = false;
+        stunParticle.Stop();
     }
 
     public IEnumerator SetInvincible(float duration)
@@ -300,6 +316,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         jumping = false;
         moveInputMultiplier = 1;
+        if (powerJumped)
+        {
+            powerJumped = false;
+            speedBoostParticle.Stop();
+        }
     }
 
     private void OnTriggerExit(Collider c)
