@@ -49,7 +49,7 @@ MonoBehaviour:
   powerups:
   - {fileID: 8623000837427834684, guid: 68380cd9507fd3142b92fc3b9c207e63, type: 3}
   - {fileID: 7788565453010866395, guid: 85677a6456bef014c822a628b7621ac5, type: 3}
-  - {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
+  timeToSpawnNext: 0
   pv: {fileID: 7136110196476159950}
 --- !u!114 &7136110196476159950
 MonoBehaviour:
@@ -69,7 +69,8 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7236910406341028046}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
