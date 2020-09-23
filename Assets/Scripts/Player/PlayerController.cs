@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public float speedFov;
     public ParticleSystem jumpParticle;
     public ParticleSystem speedBoostParticle;
+    public ParticleSystem tagParticle;
     public GameObject stunParticle;
 
     [Header("View")]
@@ -155,7 +156,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
         else
         {
-            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, camDefaultPos, 30);
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, camDefaultPos, 5);
         }
 
         AnimationUpdate();
@@ -234,6 +235,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     isTagger = false;
                     player.PhotonTag(transform.position, 1);
                     SetTagger(false);
+                    tagParticle.transform.position = hit.point;
+                    tagParticle.Play();
                 }
             }
         }
