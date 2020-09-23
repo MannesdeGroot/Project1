@@ -274,7 +274,7 @@ MonoBehaviour:
   cam: {fileID: 8967993017982801457}
   voteScreen: {fileID: 0}
   head: {fileID: 746860077429478558}
-  tagDistance: 3
+  tagDistance: 5
   powerUp: {fileID: 0}
   throwPos: {fileID: 2099466970495739996}
   forwardThrowForce: 350
