@@ -172,8 +172,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         {
             if (player != null && pV.IsMine)
             {
-                player.nameTag.rotation = Quaternion.LookRotation(Vector3.RotateTowards(player.nameTag.forward, transform.position - player.nameTag.position, Time.deltaTime, 0));
-                print("print(print(print))");
+                Vector3 newDir = Vector3.RotateTowards(player.nameTag.forward, new Vector3(transform.position.x, player.nameTag.position.y, transform.position.z) - player.nameTag.position, Time.deltaTime * 100, 0);
+                player.nameTag.rotation = Quaternion.LookRotation(newDir);
             }
         }
     }
