@@ -103,8 +103,16 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             anim = modelHeadless.GetComponent<Animator>();
         }
 
-        nickNameText.text = nickName;
-        players = FindObjectsOfType<PlayerController>().ToList();
+        if (pV.IsMine)
+        {
+            nickNameText.text = nickName;
+            players = FindObjectsOfType<PlayerController>().ToList();
+
+            foreach(PlayerController player in players)
+            {
+                player.nickNameText.text = player.nickName;
+            }
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -118,6 +126,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             stream.SendNext(animTag);
             stream.SendNext(animThrow);
             stream.SendNext(jumping);
+            stream.SendNext(nickName);
         }
         else if (stream.IsReading)
         {
@@ -128,6 +137,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             animTag = (bool)stream.ReceiveNext();
             animThrow = (bool)stream.ReceiveNext();
             jumping = (bool)stream.ReceiveNext();
+            nickName = (string)stream.ReceiveNext();
         }
     }
 
