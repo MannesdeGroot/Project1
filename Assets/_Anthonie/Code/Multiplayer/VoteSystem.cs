@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 {
@@ -12,6 +13,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
     public bool voting;
     public VoteButton currentVote;
     public PhotonView pv;
+    public Text voteTimeText;
 
     private void Start()
     {
@@ -47,7 +49,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
     void Voting()
     {
         voteTime -= Time.deltaTime;
-
+        voteTimeText.text = voteTime.ToString("#");
         
 
         if (voteTime < 0)
