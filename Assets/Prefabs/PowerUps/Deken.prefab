@@ -95,6 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e5f04d583ae6948aee9a422e2acb9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: de40fe164175d0143b65da7f7edba805, type: 3}
   powerUpName: 
   duration: 5

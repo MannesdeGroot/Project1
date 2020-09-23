@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468f63f0ccf523b4d9838b1240293aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1c7d61e9a77858e45861d9ca6ab75ffc, type: 3}
   powerUpName: Soda
   multiplier: 2
   duration: 2

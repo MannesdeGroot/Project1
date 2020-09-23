@@ -25,10 +25,11 @@ public class PowerupSpawn : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (PhotonNetwork.IsMasterClient && spawnedObj == null)
         {
-            timeToSpawnNext = Random.Range(minRespawnTime, maxRespawnTime);
+            timeToSpawnNext -= Time.deltaTime;
             if(timeToSpawnNext < 0 )
             {
                 pv.RPC("SpawnPowerup", RpcTarget.All, Random.Range(0, powerups.Count));
+                timeToSpawnNext = Random.Range(minRespawnTime, maxRespawnTime);
 
             }
         }

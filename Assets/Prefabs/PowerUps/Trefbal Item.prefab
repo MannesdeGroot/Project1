@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a1f47548bdbde4885b8262cb97f77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d6dccd8ce9c22f940a381941aa92ad5d, type: 3}
   powerUpName: Dodgeball
   dodgeball: {fileID: 6310281457487657581, guid: 1a77a3980d2b23840bc9d0c90e43e9bb, type: 3}
   throwAnimTime: 1.4

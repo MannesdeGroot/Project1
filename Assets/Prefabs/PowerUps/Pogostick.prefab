@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd45621af15a314c8fc1111d4287b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6883c26a9269b9546a4d6e40d5b9fe12, type: 3}
   powerUpName: Pogostick
