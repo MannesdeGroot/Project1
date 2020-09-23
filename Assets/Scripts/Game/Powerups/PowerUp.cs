@@ -21,7 +21,7 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
 
     private void Update()
     {
-        transform.Rotate(0, rotateSpeed, 0);
+        transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
     }
     public void OnTriggerEnter(Collider c)
     {

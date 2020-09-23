@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5832865455272412612}
   - component: {fileID: 8581177478594703630}
   - component: {fileID: 7238873925454584863}
+  - component: {fileID: 5996737285184396451}
   m_Layer: 0
   m_Name: Pogostick
   m_TagString: Untagged
@@ -99,3 +100,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6883c26a9269b9546a4d6e40d5b9fe12, type: 3}
   powerUpName: Pogostick
+  rotateSpeed: 10
+--- !u!114 &5996737285184396451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788565453010866395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7238873925454584863}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

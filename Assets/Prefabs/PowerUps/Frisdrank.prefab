@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5426563407119088163}
   - component: {fileID: 7830618334413950697}
   - component: {fileID: 7816538678081405397}
+  - component: {fileID: 2700451904473192314}
   m_Layer: 0
   m_Name: Frisdrank
   m_TagString: Untagged
@@ -98,5 +99,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 1c7d61e9a77858e45861d9ca6ab75ffc, type: 3}
   powerUpName: Soda
+  rotateSpeed: 10
   multiplier: 2
   duration: 2
+--- !u!114 &2700451904473192314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623000837427834684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7816538678081405397}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
