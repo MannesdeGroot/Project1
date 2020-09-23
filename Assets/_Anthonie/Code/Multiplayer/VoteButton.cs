@@ -52,7 +52,7 @@ public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
     [PunRPC]
     public void UpdateVoteCountText()
     {
-        voteCountText.text = voteAmount.ToString();
+        voteCountText.text = new string('I', voteAmount);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
