@@ -56,13 +56,7 @@ public class TagGame : EliminationGame, Photon.Pun.IPunObservable
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            StartGame();
-        }
-    }
+    
 
     public void TagPlayer(string taggerID, string taggedID)
     {
