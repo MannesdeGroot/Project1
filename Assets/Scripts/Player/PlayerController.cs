@@ -195,6 +195,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (!jumping)
         {
+            jumping = true;
+            moveInputMultiplier = jumpMoveMultiplier;
             pV.RPC("PlayJump", RpcTarget.All);
 
             if (powerJumps > 0)
@@ -361,11 +363,5 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             powerJumped = false;
             pV.RPC("PlaySpeed", RpcTarget.All, false);
         }
-    }
-
-    private void OnTriggerExit(Collider c)
-    {
-        jumping = true;
-        moveInputMultiplier = jumpMoveMultiplier;
     }
 }
