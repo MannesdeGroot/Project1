@@ -119,6 +119,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 
     }
 
+    [PunRPC]
     public void LoadScene(int sceneInt)
     {
         PhotonNetwork.LoadLevel(sceneInt);
