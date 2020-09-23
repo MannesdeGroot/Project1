@@ -49,7 +49,14 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
     void Voting()
     {
         voteTime -= Time.deltaTime;
-        voteTimeText.text = voteTime.ToString("#");
+        if(voteTime < 1)
+        {
+            voteTimeText.text = "0";
+        }
+        else
+        {
+            voteTimeText.text = voteTime.ToString("#");
+        }
         
 
         if (voteTime < 0)
