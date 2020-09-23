@@ -114,7 +114,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            pv.RPC("StartVoting", RpcTarget.All, sceneInt);
+            pv.RPC("LoadScene", RpcTarget.All, sceneInt);
         }
 
     }
