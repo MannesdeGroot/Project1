@@ -10,15 +10,15 @@ public class ParkourManager : MonoBehaviour
 
     private void EndGame(PlayerController winner)
     {
-        foreach(PlayerController player in FindObjectsOfType<PlayerController>())
+        foreach (PlayerController player in FindObjectsOfType<PlayerController>())
         {
             print(1);
             Destroy(player.gameObject);
+            print($"{winner} won");
+            voteCam.SetActive(true);
+            voteSystem.PhotonStartVoting();
         }
 
-        print($"{winner} won");
-        voteCam.SetActive(true);
-        voteSystem.PhotonStartVoting();
     }
 
     private void OnTriggerEnter(Collider c)
