@@ -36,6 +36,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
         voting = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        voteTime = voteStartTime;
         
     }
 
