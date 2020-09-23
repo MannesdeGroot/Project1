@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
         else
         {
-            cam.transform.localPosition = camDefaultPos;
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, camDefaultPos, 30);
         }
 
         AnimationUpdate();
