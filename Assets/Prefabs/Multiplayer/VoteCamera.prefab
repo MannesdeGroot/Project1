@@ -201,7 +201,8 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1279360324835232519}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -352,6 +353,10 @@ PrefabInstance:
       propertyPath: voteButtons.Array.data[1]
       value: 
       objectReference: {fileID: 209525365861819768}
+    - target: {fileID: 3081217039840962513, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
+      propertyPath: pv
+      value: 
+      objectReference: {fileID: 4252416185168145453}
     - target: {fileID: 4129182371262446098, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -694,6 +699,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5410621761195300768, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
   m_PrefabInstance: {fileID: 4252416185168145622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1279360324835232519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3081217039840962513, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
+  m_PrefabInstance: {fileID: 4252416185168145622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359918127293232320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39a16ed67458e54fa71ca45d9ab8e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &477542745806711587 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4441410586580748277, guid: 62860b7b6bf703c45878413594b399ca, type: 3}

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class VoteSystem : MonoBehaviour
+public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 {
     public List<VoteButton> voteButtons;
     public float voteStartTime;
@@ -109,5 +109,19 @@ public class VoteSystem : MonoBehaviour
         }
 
 
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            //stream.SendNext(isTagger);
+
+        }
+        else if (stream.IsReading)
+        {
+            //isTagger = (bool)stream.ReceiveNext();
+
+        }
     }
 }
