@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         if (jumping)
         {
-            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, head.position.z);
+            cam.transform.position = new Vector3(cam.transform.position.x, head.transform.position.y, head.position.z);
         }
         else
         {
