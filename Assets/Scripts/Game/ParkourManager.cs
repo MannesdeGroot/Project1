@@ -12,7 +12,8 @@ public class ParkourManager : MonoBehaviour
     {
         foreach(PlayerController player in FindObjectsOfType<PlayerController>())
         {
-            player.gameObject.SetActive(false);
+            print(1);
+            Destroy(player.gameObject);
         }
 
         print($"{winner} won");
