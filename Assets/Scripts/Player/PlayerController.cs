@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("Animations")]
     private float animForwardSpeed;
     private bool animTag;
+    private bool animJump;
     public bool animThrow;
 
     void Start()
@@ -150,7 +151,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         if (jumping)
         {
-            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, head.localPosition.z);
+            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, head.position.z);
         }
         else
         {
@@ -195,6 +196,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (!jumping)
         {
+            animJump = true;
             pV.RPC("PlayJump", RpcTarget.All);
 
             if (powerJumps > 0)
@@ -348,13 +350,14 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         anim.SetBool("Tagger", isTagger);
         anim.SetBool("Tag", animTag);
         anim.SetBool("Throw", animThrow);
-        anim.SetBool("Jump", jumping);
+        anim.SetBool("Jump", animJump);
         anim.SetFloat("Speed", animForwardSpeed);
     }
 
     private void OnTriggerStay(Collider c)
     {
         jumping = false;
+        animJump = false;
         moveInputMultiplier = 1;
         if (powerJumped)
         {
