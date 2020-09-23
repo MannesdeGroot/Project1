@@ -27,6 +27,9 @@ public class TagManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (state == GameState.FINISHED)
+            return;
+
         state = GameState.RUNNING;
         players = FindObjectsOfType<PlayerController>().ToList();
 
@@ -48,6 +51,9 @@ public class TagManager : MonoBehaviour
 
     private void StartRound()
     {
+        if (state == GameState.FINISHED)
+            return;
+
         if (PhotonNetwork.IsMasterClient)
         {
             for (int i = 0; i < taggersAmount; i++)
@@ -92,6 +98,7 @@ public class TagManager : MonoBehaviour
         }
         else
         {
+            state = GameState.FINISHED;
             print($"{players[0]} won");
             Destroy(players[0].gameObject);
             voteCam.SetActive(true);
