@@ -99,8 +99,6 @@ public class TagManager : MonoBehaviour
         else
         {
             state = GameState.FINISHED;
-            print($"{players[0]} won");
-            Destroy(players[0].gameObject);
             voteCam.SetActive(true);
             voteSystem.PhotonStartVoting();
         }
