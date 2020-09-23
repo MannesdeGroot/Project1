@@ -114,11 +114,16 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
+            pv.RPC("StartVoting", RpcTarget.All, sceneInt);
         }
 
-            PhotonNetwork.LoadLevel(sceneInt);
-
     }
+
+    public void LoadScene(int sceneInt)
+    {
+        PhotonNetwork.LoadLevel(sceneInt);
+    }
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
