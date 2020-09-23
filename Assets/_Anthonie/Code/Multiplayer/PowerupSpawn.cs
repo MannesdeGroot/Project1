@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class PowerupSpawn : MonoBehaviour, Photon.Pun.IPunObservable
 {
@@ -28,17 +29,20 @@ public class PowerupSpawn : MonoBehaviour, Photon.Pun.IPunObservable
             timeToSpawnNext -= Time.deltaTime;
             if(timeToSpawnNext < 0 )
             {
-                pv.RPC("SpawnPowerup", RpcTarget.All, Random.Range(0, powerups.Count));
+                //pv.RPC("SpawnPowerup", RpcTarget.All, Random.Range(0, powerups.Count));
+                SpawnPowerup(Random.Range(0, powerups.Count));
                 timeToSpawnNext = Random.Range(minRespawnTime, maxRespawnTime);
 
             }
         }
     }
 
-    [PunRPC]
+    
     public void SpawnPowerup(int powerupIndex)
     {
-        spawnedObj = Instantiate(powerups[powerupIndex], transform.position, Quaternion.identity);
+        spawnedObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", powerups[powerupIndex].name), transform.position, Quaternion.identity);
+
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
