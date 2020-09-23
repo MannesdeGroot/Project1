@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         speed = moveSpeed;
         jumpVel = jumpVelocity;
 
-        nickName = PhotonNetwork.NickName;
+        nickName = pV.Owner.NickName;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -103,16 +103,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             anim = modelHeadless.GetComponent<Animator>();
         }
 
-        if (pV.IsMine)
-        {
-            nickNameText.text = nickName;
-            players = FindObjectsOfType<PlayerController>().ToList();
-
-            foreach(PlayerController player in players)
-            {
-                player.nickNameText.text = player.nickName;
-            }
-        }
+        players = FindObjectsOfType<PlayerController>().ToList();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -182,6 +173,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         {
             if (player != null && pV.IsMine)
             {
+                player.nickNameText.text = player.nickName;
+
                 Vector3 newDir = Vector3.RotateTowards(player.nameTag.forward, new Vector3(transform.position.x, player.nameTag.position.y, transform.position.z) - player.nameTag.position, Time.deltaTime * 100, 0);
                 player.nameTag.rotation = Quaternion.LookRotation(newDir);
             }
