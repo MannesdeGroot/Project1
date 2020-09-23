@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VoteButton : MonoBehaviour
+public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
 {
     public PhotonView pV;
     public int voteAmount;
@@ -55,6 +55,8 @@ public class VoteButton : MonoBehaviour
         voteCountText.text = new string('I', voteAmount);
     }
 
-
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
+    }
 }
