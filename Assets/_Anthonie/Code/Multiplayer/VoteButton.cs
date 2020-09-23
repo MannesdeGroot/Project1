@@ -57,6 +57,15 @@ public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        throw new System.NotImplementedException();
+        if (stream.IsWriting)
+        {
+            //stream.SendNext(isTagger);
+            
+        }
+        else if (stream.IsReading)
+        {
+            //isTagger = (bool)stream.ReceiveNext();
+            
+        }
     }
 }
