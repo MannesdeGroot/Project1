@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minRespawnTime: 10
-  maxRespawnTime: 60
+  maxRespawnTime: 30
   powerups:
   - {fileID: 8623000837427834684, guid: 68380cd9507fd3142b92fc3b9c207e63, type: 3}
   - {fileID: 7788565453010866395, guid: 85677a6456bef014c822a628b7621ac5, type: 3}
