@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,9 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public float forwardThrowForce;
     public float upwardsThrowForce;
     [Header("Multiplayer")]
+    private List<PlayerController> players;
     public string nickName;
+    public Text nickNameText;
     public PhotonView pV;
     public bool isTagger;
     public bool invincible;
@@ -98,6 +101,9 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             model.SetActive(false);
             anim = modelHeadless.GetComponent<Animator>();
         }
+
+        nickNameText.text = nickName;
+        players = FindObjectsOfType<PlayerController>().ToList();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -160,6 +166,16 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
 
         AnimationUpdate();
+
+        foreach (PlayerController player in players)
+        {
+            if (player != null)
+            {
+                player.nickNameText.transform.LookAt(transform);
+                Quaternion nameTagRot = new Quaternion(0, player.nickNameText.transform.rotation.y, 0, 0);
+                player.nickNameText.transform.rotation = nameTagRot;
+            }
+        }
     }
 
     void FixedUpdate()
