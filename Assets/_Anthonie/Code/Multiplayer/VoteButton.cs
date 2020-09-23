@@ -25,7 +25,8 @@ public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
     public void VoteActivate()
     {
         pV.RPC("Vote", RpcTarget.All);
-        if(voteSystem.currentVote != null)
+        pV.RPC("UpdateVoteCountText", RpcTarget.All);
+        if (voteSystem.currentVote != null)
         {
             voteSystem.currentVote.UnVoteActivate();
         }
@@ -35,6 +36,7 @@ public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
     public void UnVoteActivate()
     {
         pV.RPC("UnVote", RpcTarget.All);
+        pV.RPC("UpdateVoteCountText", RpcTarget.All);
     }
 
     [PunRPC]
