@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("Multiplayer")]
     private List<PlayerController> players;
     public string nickName;
+    public Transform nameTag;
     public Text nickNameText;
     public PhotonView pV;
     public bool isTagger;
@@ -169,11 +170,10 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         foreach (PlayerController player in players)
         {
-            if (player != null)
+            if (player != null && pV.IsMine)
             {
-                player.nickNameText.transform.LookAt(transform);
-                Quaternion nameTagRot = new Quaternion(0, player.nickNameText.transform.rotation.y, 0, 0);
-                player.nickNameText.transform.rotation = nameTagRot;
+                player.nameTag.rotation = Quaternion.LookRotation(Vector3.RotateTowards(player.nameTag.forward, transform.position - player.nameTag.position, Time.deltaTime, 0));
+                print("print(print(print))");
             }
         }
     }
@@ -266,15 +266,12 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     [PunRPC]
     public void Tagged(Vector3 taggerPos, float knockBackMultiplier)
     {
-        print("punrpcTagged");
-        print(taggerPos + "   " + knockBackMultiplier);
         SetTagger(true);
         rb.AddForce((transform.position - taggerPos) * GetTagKnockBack() * knockBackMultiplier);
     }
 
     public void SetTagger(bool value)
     {
-        print("setTagger");
         isTagger = value;
 
         if (roleText == null) return;
@@ -285,7 +282,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public void Eliminate()
     {
         Camera newCam = FindObjectOfType<Camera>();
-        print(newCam);
         newCam.gameObject.SetActive(true);
         if (roleText == null) return;
         roleText.enabled = false;

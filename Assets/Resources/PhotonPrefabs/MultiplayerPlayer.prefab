@@ -460,6 +460,7 @@ MonoBehaviour:
   forwardThrowForce: 350
   upwardsThrowForce: 125
   nickName: 
+  nameTag: {fileID: 2525174380332851939}
   nickNameText: {fileID: 7458878372994901368}
   pV: {fileID: 0}
   isTagger: 0
