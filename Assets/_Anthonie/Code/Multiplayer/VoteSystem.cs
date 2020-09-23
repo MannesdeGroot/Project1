@@ -74,7 +74,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 
         VoteButton tempVoteButton = null;
         bool moreThanOne = false;
-        string sceneName = "";
+        int sceneInt = 0;
         int saveVoteAmount = 0;
 
         for (int i = 0; i < voteButtons.Count; i++)
@@ -105,19 +105,18 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
                     tempVoteButtons.Add(voteButtons[i]);
                 }
             }
-            sceneName = tempVoteButtons[Random.Range(0, tempVoteButtons.Count - 1)].sceneName;
+            sceneInt = tempVoteButtons[Random.Range(0, tempVoteButtons.Count - 1)].sceneIndex;
         }
         else
         {
-            sceneName = tempVoteButton.sceneName;
+            sceneInt = tempVoteButton.sceneIndex;
         }
 
         if (PhotonNetwork.IsMasterClient)
         {
-            //PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 
+            PhotonNetwork.LoadLevel(sceneInt);
 
     }
 

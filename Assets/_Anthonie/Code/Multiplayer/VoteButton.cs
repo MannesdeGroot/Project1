@@ -9,7 +9,7 @@ public class VoteButton : MonoBehaviour, Photon.Pun.IPunObservable
     public PhotonView pV;
     public int voteAmount;
     public Text voteCountText;
-    public string sceneName;
+    public int sceneIndex;
     public VoteSystem voteSystem;
     void Start()
     {

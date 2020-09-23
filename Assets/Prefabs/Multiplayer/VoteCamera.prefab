@@ -389,9 +389,17 @@ PrefabInstance:
       propertyPath: sceneName
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4173710717128608174, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
+      propertyPath: sceneIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4441410586580748277, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
       propertyPath: sceneName
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441410586580748277, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
+      propertyPath: sceneIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4665230258170753532, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
       propertyPath: ObservedComponents.Array.size

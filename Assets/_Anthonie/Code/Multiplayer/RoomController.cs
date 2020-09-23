@@ -78,6 +78,9 @@ public class RoomController : MonoBehaviourPunCallbacks
         {
             if(PhotonNetwork.CurrentRoom.PlayerCount > 1)
             {
+
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
                 PhotonNetwork.LoadLevel(multiplayerSceneIndex);
 
             }
