@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     private void Tag()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, tagDistance))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, tagDistance))
         {
             if (hit.transform.tag == "Player")
             {
