@@ -114,9 +114,9 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-
+            //PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 
 
     }
