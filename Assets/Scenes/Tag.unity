@@ -2232,6 +2232,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
       propertyPath: minRespawnTime
       value: 10
       objectReference: {fileID: 0}
@@ -2239,6 +2243,10 @@ PrefabInstance:
       propertyPath: maxRespawnTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.data[2]
+      value: 
+      objectReference: {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
 --- !u!1001 &406317960
@@ -5417,6 +5425,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
       propertyPath: minRespawnTime
       value: 10
       objectReference: {fileID: 0}
@@ -5424,6 +5436,10 @@ PrefabInstance:
       propertyPath: maxRespawnTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.data[2]
+      value: 
+      objectReference: {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
 --- !u!1 &990858576
@@ -8365,6 +8381,7 @@ MonoBehaviour:
   taggersAmount: 1
   startDelay: 15
   roundTime: 60
+  timer: 0
   playerIDs: []
   pV: {fileID: 0}
   playerIDsArray: []
@@ -8444,6 +8461,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
       propertyPath: minRespawnTime
       value: 10
       objectReference: {fileID: 0}
@@ -8451,6 +8472,10 @@ PrefabInstance:
       propertyPath: maxRespawnTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.data[2]
+      value: 
+      objectReference: {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
 --- !u!65 &1681579524
@@ -8674,6 +8699,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
       propertyPath: minRespawnTime
       value: 10
       objectReference: {fileID: 0}
@@ -8681,6 +8710,10 @@ PrefabInstance:
       propertyPath: maxRespawnTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.data[2]
+      value: 
+      objectReference: {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
 --- !u!1001 &1740049597
@@ -16304,6 +16337,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
       propertyPath: minRespawnTime
       value: 10
       objectReference: {fileID: 0}
@@ -16311,6 +16348,10 @@ PrefabInstance:
       propertyPath: maxRespawnTime
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7236910406341028046, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
+      propertyPath: powerups.Array.data[2]
+      value: 
+      objectReference: {fileID: 6310281457487657581, guid: 1aa2f6581940e70429027a3bd40f1a7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd4ae071cc92464e94a52e7b18b5603, type: 3}
 --- !u!1 &3716930608782907773

@@ -9,10 +9,10 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
     protected PlayerController player;
     public Sprite icon;
     public string powerUpName;
-    PhotonView pv;
+    protected PhotonView pv;
     public float rotateSpeed;
 
-    private void Start()
+    public void Start()
     {
         pv = GetComponent<PhotonView>();
     }

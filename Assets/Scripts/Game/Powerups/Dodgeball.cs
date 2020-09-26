@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,13 @@ public class Dodgeball : MonoBehaviour
         {
             StartCoroutine(player.Stun(duration));
             active = false;
-            Destroy(gameObject, despawnTime);
+            GetComponent<PhotonView>().RPC("DestroySelf", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    public void DestroySelf()
+    {
+        Destroy(gameObject, despawnTime);
     }
 }

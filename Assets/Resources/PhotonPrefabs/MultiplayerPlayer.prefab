@@ -464,6 +464,8 @@ MonoBehaviour:
   nickNameText: {fileID: 7458878372994901368}
   pV: {fileID: 0}
   isTagger: 0
+  canTag: 0
+  tagCooldown: 1
   invincible: 0
   powerupImage: {fileID: 0}
   animThrow: 0

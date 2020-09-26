@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private Rigidbody rb;
     private MiniGame game;
     private Animator anim;
-    private int timer;
     [SerializeField] private GameObject powerUpUiElement;
     [SerializeField] private Image powerUpIcon;
     [SerializeField] private Text powerUpName;
@@ -66,6 +65,8 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     public Text nickNameText;
     public PhotonView pV;
     public bool isTagger;
+    public bool canTag;
+    public float tagCooldown;
     public bool invincible;
     public Image powerupImage;
     [Header("Animations")]
@@ -83,8 +84,6 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
         speed = moveSpeed;
         jumpVel = jumpVelocity;
-
-        nickName = pV.Owner.NickName;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -104,6 +103,14 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
 
         players = FindObjectsOfType<PlayerController>().ToList();
+    }
+
+    [PunRPC]
+    public void UpdateNames(bool value)
+    {
+        nickName = pV.Owner.NickName;
+        nickNameText.text = nickName;
+        nickNameText.color = value ? taggerColor : runnerColor;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -256,9 +263,17 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     SetTagger(false);
                     tagParticle.transform.position = hit.point;
                     tagParticle.Play();
+                    StartCoroutine(TagCooldown());
                 }
             }
         }
+    }
+
+    private IEnumerator TagCooldown()
+    {
+        canTag = false;
+        yield return new WaitForSeconds(tagCooldown);
+        canTag = true;
     }
 
     public void PhotonTag(Vector3 taggerPos, float knockback)
@@ -277,7 +292,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     {
         isTagger = value;
 
-        if (roleText == null) return;
+        pV.RPC("UpdateNames", RpcTarget.All, value);
         roleText.color = isTagger ? taggerColor : runnerColor;
         roleText.text = isTagger ? "Tagger" : "Runner";
     }
@@ -294,9 +309,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
 
     public float GetTagKnockBack()
     {
+        TagManager tag = FindObjectOfType<TagManager>();
+        float timer = tag.timer;
         if (timer != 0)
         {
-            return GameSettings.tagKnockBack * (GameSettings.roundTime / timer);
+            return GameSettings.tagKnockBack * (tag.roundTime / timer);
         }
         return 0;
     }

@@ -10,11 +10,11 @@ public class TagManager : MonoBehaviour
     public int taggersAmount;
     public float startDelay;
     public float roundTime;
+    public float timer;
     public List<string> playerIDs = new List<string>();
     public PhotonView pV;
     public string[] playerIDsArray;
     private List<PlayerController> players = new List<PlayerController>();
-    private float timer;
     public GameObject voteCam;
     public VoteSystem voteSystem;
 
