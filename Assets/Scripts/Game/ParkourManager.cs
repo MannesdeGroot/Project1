@@ -9,28 +9,27 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     public GameObject voteCam;
     public VoteSystem voteSystem;
     public PhotonView pv;
+    public List<GameObject> waypoints = new List<GameObject>();
+    int currentWaypoint = 0;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
+        for (int i = 1; i < waypoints.Count; i++)
+        {
+            waypoints[i].SetActive(false);
+        }
     }
 
-    private void EndGame(PlayerController winner)
+    private void EndGame()
     {
-        /*foreach (PlayerController player in FindObjectsOfType<PlayerController>())
-        {
-            print(1);
-            Destroy(player.gameObject);
-            voteCam.SetActive(true);
-            voteSystem.PhotonStartVoting();
-            
-        }*/
+        
 
-        print($"{winner} won");
+        print($"{PhotonNetwork.NickName} won");
         pv.RPC("EndGameForEveryone", RpcTarget.All);
     }
 
-    private void OnTriggerEnter(Collider c)
+    /*private void OnTriggerEnter(Collider c)
     {
         PlayerController player = c.GetComponent<PlayerController>();
 
@@ -38,7 +37,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
         {
             EndGame(player);
         }
-    }
+    }*/
 
     [PunRPC]
     public void EndGameForEveryone()
@@ -53,6 +52,22 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
         voteSystem.PhotonStartVoting();
     }
 
+    public void HitWaypoint()
+    {
+        waypoints[currentWaypoint].SetActive(false);
+        currentWaypoint++;
+        if(currentWaypoint == waypoints.Count && !gameEnded)
+        {
+            EndGame();
+        }
+        else
+        {
+            waypoints[currentWaypoint].SetActive(true);
+
+        }
+
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -64,4 +79,5 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
             //taggers = (List<GameObject>)stream.ReceiveNext();
         }
     }
+
 }
