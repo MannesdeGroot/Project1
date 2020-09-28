@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private bool animTag;
     private bool animJump;
     public bool animThrow;
+    [Header("Custimization")]
+    public Transform hatPos;
+    public int currentHat;
+    public List<GameObject> hats;
+    GameObject currentHatObj;
 
     void Start()
     {
@@ -125,6 +130,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             stream.SendNext(animThrow);
             stream.SendNext(jumping);
             stream.SendNext(nickName);
+            stream.SendNext(currentHat);
         }
         else if (stream.IsReading)
         {
@@ -136,6 +142,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
             animThrow = (bool)stream.ReceiveNext();
             jumping = (bool)stream.ReceiveNext();
             nickName = (string)stream.ReceiveNext();
+            currentHat = (int)stream.ReceiveNext();
         }
     }
 
@@ -162,6 +169,14 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
                     powerUp = null;
                     powerUpUiElement.SetActive(false);
                 }
+            }
+        }
+        else
+        {
+            if(currentHatObj == null && currentHat > 0)
+            {
+                CustomizationUpdate();
+
             }
         }
 
@@ -387,6 +402,19 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         anim.SetBool("Throw", animThrow);
         anim.SetBool("Jump", animJump);
         anim.SetFloat("Speed", animForwardSpeed);
+    }
+
+    
+    public void CustomizationUpdate()
+    {
+        for (int i = 0; i < hatPos.childCount; i++)
+        {
+            Destroy(hatPos.GetChild(i).gameObject);
+        }
+        if(currentHat > 0)
+        {
+            currentHatObj = Instantiate(hats[currentHat], hatPos);
+        }
     }
 
     private void OnTriggerStay(Collider c)

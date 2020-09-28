@@ -10,4 +10,5 @@ public class DataHolder
     public float sensitivity;
     public bool fullscreen;
     public string name;
+    public int hatSelected;
 }

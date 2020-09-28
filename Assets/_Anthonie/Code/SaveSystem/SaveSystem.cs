@@ -8,6 +8,8 @@ public class SaveSystem : MonoBehaviour
 {
     DataHolder dataHolder = new DataHolder();
     public Options options;
+    public HatSelect hatSelect;
+    public PlayerController playerController;
 
     private void Start()
     {
@@ -22,7 +24,7 @@ public class SaveSystem : MonoBehaviour
         print(Application.persistentDataPath + "/" + "SaveData" + ".Xml");
     }
 
-    public void SaveGame()
+    void SaveGame()
     {
 
         var serializer = new XmlSerializer(typeof(DataHolder));
@@ -46,8 +48,16 @@ public class SaveSystem : MonoBehaviour
         dataHolder.music = options.musicSlider.value;
         dataHolder.soundEffects = options.soundEffectsSlider.value;
         dataHolder.sensitivity = options.sensitivitySlider.value;
-        dataHolder.name = options.nameInput.text;
+        dataHolder.fullscreen = options.fullscreenToggle.isOn;
+        if(options.nameInput != null)
+        {
+            dataHolder.name = options.nameInput.text;
 
+        }
+        if (hatSelect != null)
+        {
+            dataHolder.hatSelected = hatSelect.currentHatSelected;
+        }
     }
 
     void SetData()
@@ -58,7 +68,20 @@ public class SaveSystem : MonoBehaviour
             options.SetMusic(dataHolder.music);
             options.SetSoundEffects(dataHolder.soundEffects);
             options.SetSensitivity(dataHolder.sensitivity);
-            options.SetName(dataHolder.name);
+            options.SetFullscreen(dataHolder.fullscreen);
+            if(options.nameInput != null)
+            {
+                options.SetName(dataHolder.name);
+            }
+            if (hatSelect != null)
+            {
+                hatSelect.currentHatSelected = dataHolder.hatSelected;
+                hatSelect.SetHat();
+            }
+            if(playerController != null)
+            {
+                playerController.currentHat = dataHolder.hatSelected;
+            }
         }
     }
 
