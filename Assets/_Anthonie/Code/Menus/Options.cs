@@ -19,6 +19,7 @@ public class Options : MonoBehaviourPunCallbacks
     public InputField nameInput;
     [Header("Misc")]
     Resolution[] resolutions;
+    public PlayerController player;
 
     void Start()
     {
@@ -74,13 +75,9 @@ public class Options : MonoBehaviourPunCallbacks
 
     public void SetSensitivity(float sensitivity)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        if(players.Length != 0)
+        if(player != null)
         {
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i].GetComponent<PlayerController>().sensitivity = sensitivity;
-            }
+            player.sensitivity = sensitivity;
         }
         
         sensitivitySlider.value = sensitivity;

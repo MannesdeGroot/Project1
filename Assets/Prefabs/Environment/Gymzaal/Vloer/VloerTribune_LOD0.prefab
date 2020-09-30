@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 3609664257619020367}
   - component: {fileID: 2727368441302144713}
   m_Layer: 0
-  m_Name: VloerTribune_LOD0 1
+  m_Name: VloerTribune_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2473380375528845600
 Transform:

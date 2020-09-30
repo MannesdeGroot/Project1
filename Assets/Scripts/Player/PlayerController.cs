@@ -1,11 +1,12 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
+public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObservable
 {
     public float sensitivity;
     public GameObject model;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
     private float mInputVert;
     public GameObject voteScreen;
     public Transform head;
+    public GameObject menu;
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
@@ -152,23 +154,30 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         {
             if (stunned) return;
 
-            Rotate();
-
-            if (Input.GetButtonDown("Fire1"))
-                Tag();
-            if (Input.GetButtonDown("Jump"))
-                Jump();
-            if (Input.GetButtonDown("Use"))
+            if (!menu.active)
             {
-                if (powerUp != null)
+                Rotate();
+                if (Input.GetButtonDown("Fire1"))
+                    Tag();
+                if (Input.GetButtonDown("Jump"))
+                    Jump();
+                if (Input.GetButtonDown("Use"))
                 {
-                    if (powerUp is DodgeballItem)
-                        animThrow = true;
+                    if (powerUp != null)
+                    {
+                        if (powerUp is DodgeballItem)
+                            animThrow = true;
 
-                    powerUp.Use();
-                    powerUp = null;
-                    powerUpUiElement.SetActive(false);
+                        powerUp.Use();
+                        powerUp = null;
+                        powerUpUiElement.SetActive(false);
+                    }
                 }
+            }
+
+            if (Input.GetButtonDown("Cancel"))
+            {
+                TurnMenuOnOff();
             }
         }
         else
@@ -208,8 +217,11 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         if (pV.IsMine)
         {
             if (stunned) return;
+            if (!menu.active)
+            {
+                Move();
 
-            Move();
+            }
         }
     }
 
@@ -417,6 +429,38 @@ public class PlayerController : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
+    public void TurnMenuOnOff()
+    {
+        menu.SetActive(!menu.active);
+        Cursor.visible = menu.active;
+        if (menu.active)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        if (otherPlayer.IsMasterClient || PhotonNetwork.PlayerList.Length < 2)
+        {
+            LeaveRoom();
+        }
+    }
+
+    public void LeaveRoom()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        PhotonNetwork.DestroyPlayerObjects(pV.Owner);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel(0);
+
+    }
     private void OnTriggerStay(Collider c)
     {
         jumping = false;

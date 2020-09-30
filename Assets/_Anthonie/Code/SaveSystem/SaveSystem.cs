@@ -10,6 +10,7 @@ public class SaveSystem : MonoBehaviour
     public Options options;
     public HatSelect hatSelect;
     public PlayerController playerController;
+    public string playerNameHolder;
 
     private void Start()
     {
@@ -52,7 +53,10 @@ public class SaveSystem : MonoBehaviour
         if(options.nameInput != null)
         {
             dataHolder.name = options.nameInput.text;
-
+        }
+        else
+        {
+            dataHolder.name = playerNameHolder;
         }
         if (hatSelect != null)
         {
@@ -72,6 +76,10 @@ public class SaveSystem : MonoBehaviour
             if(options.nameInput != null)
             {
                 options.SetName(dataHolder.name);
+            }
+            else
+            {
+                playerNameHolder = dataHolder.name;
             }
             if (hatSelect != null)
             {
