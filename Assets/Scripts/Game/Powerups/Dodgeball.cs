@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dodgeball : MonoBehaviour
+public class Dodgeball : MonoBehaviour, IPunObservable
 {
     public PlayerController thrower;
     [SerializeField] private bool active;
     [SerializeField] private float duration;
     [SerializeField] private float despawnTime;
+    private PhotonView pv;
+
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+    }
 
     private void OnCollisionEnter(Collision c)
     {
@@ -20,7 +26,7 @@ public class Dodgeball : MonoBehaviour
         {
             StartCoroutine(player.Stun(duration));
             active = false;
-            GetComponent<PhotonView>().RPC("DestroySelf", RpcTarget.All);
+            pv.RPC("DestroySelf", RpcTarget.All);
         }
     }
 
@@ -28,5 +34,17 @@ public class Dodgeball : MonoBehaviour
     public void DestroySelf()
     {
         Destroy(gameObject, despawnTime);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+
+        }
+        if (stream.IsReading)
+        {
+
+        }
     }
 }

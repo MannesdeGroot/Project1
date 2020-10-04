@@ -23,12 +23,13 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
     {
         transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
     }
+
     public void OnTriggerEnter(Collider c)
     {
         PlayerController _player = c.GetComponent<PlayerController>();
         if (_player == null) return;
 
-        if(_player.powerUp == null)
+        if (_player.powerUp == null)
         {
             _player.AddPowerUp(this);
             player = _player;

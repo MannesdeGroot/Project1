@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public string nickName;
     public Transform nameTag;
     public Text nickNameText;
+    private Transform nameTagTarget;
     public PhotonView pV;
     public bool isTagger;
     public bool canTag;
@@ -110,14 +111,27 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         }
 
         players = FindObjectsOfType<PlayerController>().ToList();
+
+        UpdateNames();
     }
 
-    [PunRPC]
-    public void UpdateNames(bool value)
+    public void UpdateNames()
     {
-        nickName = pV.Owner.NickName;
-        nickNameText.text = nickName;
-        nickNameText.color = value ? taggerColor : runnerColor;
+        if (!pV.IsMine)
+        {
+            nickNameText.text = pV.Owner.ToString();
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+            
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].pV.IsMine)
+                {
+                    nameTagTarget = players[i].transform;
+                }
+
+                players[i].nickNameText.color = players[i].isTagger ? taggerColor : runnerColor;
+            }
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -182,7 +196,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         }
         else
         {
-            if(currentHatObj == null && currentHat > 0)
+            if (currentHatObj == null && currentHat > 0)
             {
                 CustomizationUpdate();
 
@@ -319,7 +333,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         isTagger = value;
 
-        pV.RPC("UpdateNames", RpcTarget.All, value);
+        UpdateNames();
         roleText.color = isTagger ? taggerColor : runnerColor;
         roleText.text = isTagger ? "Tagger" : "Runner";
     }
@@ -416,14 +430,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         anim.SetFloat("Speed", animForwardSpeed);
     }
 
-    
+
     public void CustomizationUpdate()
     {
         for (int i = 0; i < hatPos.childCount; i++)
         {
             Destroy(hatPos.GetChild(i).gameObject);
         }
-        if(currentHat > 0)
+        if (currentHat > 0)
         {
             currentHatObj = Instantiate(hats[currentHat], hatPos);
         }

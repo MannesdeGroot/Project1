@@ -63,8 +63,6 @@ public class TagManager : MonoBehaviour
                 if (!randPlayer.isTagger)
                 {
                     randPlayer.PhotonTag(transform.position, 0);
-                    print(randPlayer.nickName);
-                    print(i);
                 }
                 else
                 {

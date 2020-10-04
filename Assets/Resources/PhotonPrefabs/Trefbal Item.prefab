@@ -112,7 +112,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: d6dccd8ce9c22f940a381941aa92ad5d, type: 3}
   powerUpName: Dodgeball
   rotateSpeed: 30
-  throwAnimTime: 1.4
 --- !u!114 &-648205939196507519
 MonoBehaviour:
   m_ObjectHideFlags: 0
