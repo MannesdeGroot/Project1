@@ -457,6 +457,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         }
     }
 
+    public void TeleportPlayer(Vector3 teleportLoc)
+    {
+        pV.RPC("PUNTeleportPlayer", RpcTarget.All, teleportLoc);
+    }
+
+    [PunRPC]
+    public void PUNTeleportPlayer(Vector3 teleportLoc)
+    {
+        transform.position = teleportLoc;
+    }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);

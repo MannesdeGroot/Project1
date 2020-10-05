@@ -61,6 +61,7 @@ MonoBehaviour:
   - ThrowBall
   - UpdateNames
   - AssignPlayer
+  - PUNTeleportPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
