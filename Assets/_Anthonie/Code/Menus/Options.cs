@@ -84,6 +84,7 @@ public class Options : MonoBehaviourPunCallbacks
 
     }
 
+    
     public void SetName(string name)
     {
         PhotonNetwork.NickName = name;

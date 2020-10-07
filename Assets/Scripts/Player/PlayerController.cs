@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public float forwardThrowForce;
     public float upwardsThrowForce;
     [Header("Multiplayer")]
+    public int team;
     private List<PlayerController> players;
     public string nickName;
     public Transform nameTag;
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             stream.SendNext(jumping);
             stream.SendNext(nickName);
             stream.SendNext(currentHat);
+            stream.SendNext(team);
         }
         else if (stream.IsReading)
         {
@@ -156,6 +158,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             jumping = (bool)stream.ReceiveNext();
             nickName = (string)stream.ReceiveNext();
             currentHat = (int)stream.ReceiveNext();
+            team = (int)stream.ReceiveNext();
         }
     }
 
@@ -334,7 +337,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         roleText.text = isTagger ? "Tagger" : "Runner";
     }
 
-    public void Eliminate()
+    [PunRPC]
+    public void photonEliminate()
     {
         Camera newCam = FindObjectOfType<Camera>();
         newCam.gameObject.SetActive(true);
@@ -342,6 +346,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         roleText.enabled = false;
         timerText.enabled = false;
         Destroy(gameObject);
+    }
+
+    public void Eliminate()
+    {
+        pV.RPC("photonEliminate", RpcTarget.All);
     }
 
     public float GetTagKnockBack()
@@ -461,6 +470,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public void PUNTeleportPlayer(Vector3 teleportLoc)
     {
         transform.position = teleportLoc;
+    }
+
+    public void SetTeam(int teamToSet)
+    {
+        team = teamToSet;
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
