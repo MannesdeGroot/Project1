@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrower: {fileID: 0}
-  active: 0
+  active: 1
   duration: 1.5
   despawnTime: 2
 --- !u!135 &466558928261719792

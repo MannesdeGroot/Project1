@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
 
         players = FindObjectsOfType<PlayerController>().ToList();
 
+        nickName = pV.Owner.NickName;
         UpdateNames();
     }
 
@@ -119,17 +120,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         if (!pV.IsMine)
         {
-            nickNameText.text = pV.Owner.ToString();
-            PlayerController[] players = FindObjectsOfType<PlayerController>();
-            
-            for (int i = 0; i < players.Length; i++)
-            {
-                if (players[i].pV.IsMine)
-                {
-                    nameTagTarget = players[i].transform;
-                }
+            nickName = pV.Owner.NickName;
+            nickNameText.text = nickName;
+            players = FindObjectsOfType<PlayerController>().ToList();
 
-                players[i].nickNameText.color = players[i].isTagger ? taggerColor : runnerColor;
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].nickNameText.color = players[i].isTagger ? taggerColor : Color.white;
             }
         }
     }
@@ -218,8 +215,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         {
             if (player != null && pV.IsMine)
             {
-                player.nickNameText.text = player.nickName;
-
+                players = FindObjectsOfType<PlayerController>().ToList();
                 Vector3 newDir = Vector3.RotateTowards(player.nameTag.forward, new Vector3(transform.position.x, player.nameTag.position.y, transform.position.z) - player.nameTag.position, Time.deltaTime * 100, 0);
                 player.nameTag.rotation = Quaternion.LookRotation(newDir);
             }
@@ -425,7 +421,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         anim.SetBool("Tagger", isTagger);
         anim.SetBool("Tag", animTag);
-        anim.SetBool("Throw", animThrow);
         anim.SetBool("Jump", animJump);
         anim.SetFloat("Speed", animForwardSpeed);
     }

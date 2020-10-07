@@ -1263,7 +1263,7 @@ MonoBehaviour:
   powerUpIcon: {fileID: 7537335076520617832}
   powerUpName: {fileID: 3688461603101607823}
   moveSpeed: 5
-  jumpVelocity: 6.5
+  jumpVelocity: 8
   powerJumpMultiplier: 1.25
   powerJumps: 0
   fallMultiplier: 1.1
