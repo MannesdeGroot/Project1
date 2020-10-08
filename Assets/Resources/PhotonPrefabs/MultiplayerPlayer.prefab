@@ -1292,6 +1292,7 @@ MonoBehaviour:
   throwPos: {fileID: 2099466970495739996}
   forwardThrowForce: 350
   upwardsThrowForce: 125
+  team: 0
   nickName: 
   nameTag: {fileID: 2525174380332851939}
   nickNameText: {fileID: 7458878372994901368}
