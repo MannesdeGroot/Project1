@@ -123,12 +123,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         {
             nickName = pV.Owner.NickName;
             nickNameText.text = nickName;
-            players = FindObjectsOfType<PlayerController>().ToList();
+            pV.RPC("UpdateNameColors", RpcTarget.All);
+        }
+    }
 
-            for (int i = 0; i < players.Count; i++)
-            {
-                players[i].nickNameText.color = players[i].isTagger ? taggerColor : Color.white;
-            }
+    [PunRPC]
+    public void UpdateNameColors()
+    {
+        players = FindObjectsOfType<PlayerController>().ToList();
+        
+        foreach(PlayerController player in players)
+        {
+            player.nickNameText.color = player.isTagger ? taggerColor : Color.white;
         }
     }
 
