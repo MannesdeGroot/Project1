@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     GameObject currentHatObj;
     public SkinnedMeshRenderer meshFull;
     public SkinnedMeshRenderer meshHeadless;
+    public Color team1Color;
+    public Color team1ColorAccent;
+    public Color team2Color;
+    public Color team2ColorAccent;
 
     void Start()
     {
@@ -134,8 +138,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public void UpdateNameColors()
     {
         players = FindObjectsOfType<PlayerController>().ToList();
-        
-        foreach(PlayerController player in players)
+
+        foreach (PlayerController player in players)
         {
             player.nickNameText.color = player.isTagger ? taggerColor : Color.white;
         }
@@ -297,6 +301,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         jumpParticle.Play();
     }
+
 
     private void Tag()
     {
@@ -484,7 +489,23 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
 
     public void SetTeam(int teamToSet)
     {
+        pV.RPC("PhotonSetTeam", RpcTarget.All, teamToSet);
+    }
+
+    [PunRPC]
+    public void PhotonSetTeam(int teamToSet)
+    {
         team = teamToSet;
+        if(team == 1)
+        {
+            meshFull.materials[0].color = team1Color;
+            meshFull.materials[1].color = team1ColorAccent;
+        }
+        else if(team == 2)
+        {
+            meshFull.materials[0].color = team2Color;
+            meshFull.materials[1].color = team2ColorAccent;
+        }
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
