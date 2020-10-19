@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class RoomController : MonoBehaviourPunCallbacks
 {
-    public int multiplayerSceneIndex;
+    public Dropdown startGame;
     public GameObject lobbyGO;
     public GameObject roomGO;
     public Transform playersPanel;
@@ -81,7 +81,7 @@ public class RoomController : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 PhotonNetwork.CurrentRoom.IsVisible = false;
-                PhotonNetwork.LoadLevel(multiplayerSceneIndex);
+                PhotonNetwork.LoadLevel(startGame.value + 1);
 
             }
         }

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     [SerializeField] private float moveSpeed;
     private float speed;
     [SerializeField] private float jumpVelocity;
+    [SerializeField] private float jumpForwardVelocity;
     [SerializeField] private float powerJumpMultiplier;
     public int powerJumps;
     private bool powerJumped;
@@ -83,6 +84,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public int currentHat;
     public List<GameObject> hats;
     GameObject currentHatObj;
+    public SkinnedMeshRenderer meshFull;
+    public SkinnedMeshRenderer meshHeadless;
 
     void Start()
     {
@@ -281,6 +284,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             }
 
             rb.velocity += Vector3.up * jumpVel + input * (jumpVel * jumpDirMultiplier);
+            rb.velocity += Vector3.forward * jumpForwardVelocity;
             jumpVel = jumpVelocity;
 
             if (rb.velocity.y < 0)

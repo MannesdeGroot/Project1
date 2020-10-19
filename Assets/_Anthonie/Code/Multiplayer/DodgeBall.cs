@@ -7,7 +7,15 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
 {
     public int lastTeamThrown;
     public bool killable = true;
+    public Vector3 startForce;
+    public PowerUp powerUp;
+    public PhotonView pv;
 
+    private void Start()
+    {
+        pv = GetComponent<PhotonView>();
+        GetComponent<Rigidbody>().AddForce(startForce);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,7 +35,19 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
         else
         {
             killable = false;
+            powerUp.ActivateSelf(true);
         }
+    }
+
+    public void PhotonSetTeam(int team)
+    {
+        pv.RPC("SetTeam", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void SetTeam(int team)
+    {
+        lastTeamThrown = team;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

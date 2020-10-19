@@ -19,18 +19,16 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
     public GameObject voteSystemObj;
     PlayerController isMinePlayer;
     bool isStarted = false;
+    public Color team1Color;
+    public Color team1ColorAccent;
+    public Color team2Color;
+    public Color team2ColorAccent;
 
     void Start()
     {
         pv = GetComponent<PhotonView>();
         PlayerController[] players = FindObjectsOfType<PlayerController>();
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i].pV.IsMine)
-            {
-                isMinePlayer = players[i];
-            }
-        }
+        
     }
 
 
@@ -44,27 +42,38 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
 
     void PreGameTimber()
     {
+        if(isMinePlayer == null)
+        {
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].pV.IsMine)
+                {
+                    isMinePlayer = players[i];
+                }
+            }
+        }
+        isMinePlayer.pregameTimer.text = preRoundtime.ToString("#");
         if (PhotonNetwork.IsMasterClient)
         {
             preRoundtime -= Time.deltaTime;
             if (preRoundtime < 0)
             {
+                DistributePlayers();
                 pv.RPC("StartGame", RpcTarget.All, team1PlayersIDs.ToArray(), team2PlayersIDs.ToArray());
                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", ball.name), Vector3.zero, Quaternion.identity);
             }
         }
-        isMinePlayer.timerText.text = preRoundtime.ToString("#");
     }
 
     [PunRPC]
     public void StartGame(string[] team1IDs, string[] team2IDs)
     {
         isStarted = true;
-        isMinePlayer.timerText.gameObject.SetActive(false);
+        isMinePlayer.pregameTimer.gameObject.SetActive(false);
         team1Players = new List<PlayerController>();
         team2Players = new List<PlayerController>();
         PlayerController[] players = FindObjectsOfType<PlayerController>();
-        DistributePlayers();
         for (int i = 0; i < players.Length; i++)
         {
             for (int j = 0; j < team1IDs.Length; j++)
@@ -72,6 +81,10 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
                 if(team1IDs[j] == players[i].pV.ViewID.ToString())
                 {
                     team1Players.Add(players[i]);
+                    players[i].meshFull.materials[0].color = team1Color;
+                    players[i].meshFull.materials[1].color = team1ColorAccent;
+                    players[i].meshHeadless.materials[0].color = team1Color;
+                    players[i].meshHeadless.materials[0].color = team1ColorAccent;
                 }
             }
             for (int j = 0; j < team2IDs.Length; j++)
@@ -79,6 +92,10 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
                 if (team2IDs[j] == players[i].pV.ViewID.ToString())
                 {
                     team2Players.Add(players[i]);
+                    players[i].meshFull.materials[0].color = team2Color;
+                    players[i].meshFull.materials[1].color = team2ColorAccent;
+                    players[i].meshHeadless.materials[0].color = team2Color;
+                    players[i].meshHeadless.materials[1].color = team2ColorAccent;
                 }
             }
         }
