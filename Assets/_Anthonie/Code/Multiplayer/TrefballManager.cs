@@ -39,12 +39,16 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
         if(isMinePlayer == null)
         {
             PlayerController[] players = FindObjectsOfType<PlayerController>();
-            for (int i = 0; i < players.Length; i++)
+            if(players != null)
             {
-                if (players[i].pV.IsMine)
+                for (int i = 0; i < players.Length; i++)
                 {
-                    isMinePlayer = players[i];
+                    if (players[i].pV.IsMine)
+                    {
+                        isMinePlayer = players[i];
+                    }
                 }
+
             }
         }
         isMinePlayer.pregameTimer.text = preRoundtime.ToString("#");
@@ -55,6 +59,7 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 SetTeams();
                 pv.RPC("StartGame", RpcTarget.All);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", ball.name), Vector3.zero, Quaternion.identity);
             }
         }
     }
@@ -68,11 +73,13 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 players[i].SetTeam(1);
                 players[i].TeleportPlayer(spawnsTeam1[Random.Range(0, spawnsTeam1.Length - 1)].position);
+                team1Amount++;
             }
             else
             {
                 players[i].SetTeam(2);
                 players[i].TeleportPlayer(spawnsTeam2[Random.Range(0, spawnsTeam2.Length - 1)].position);
+                team2Amount++;
             }
         }
     }
@@ -81,7 +88,6 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
     void StartGame()
     {
         isStarted = true;
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", ball.name), Vector3.zero, Quaternion.identity);
 
     }
 

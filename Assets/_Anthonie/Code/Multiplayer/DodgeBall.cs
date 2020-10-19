@@ -35,7 +35,7 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
         else
         {
             killable = false;
-            powerUp.ActivateSelf(true);
+            powerUp.enabled = true;
         }
     }
 

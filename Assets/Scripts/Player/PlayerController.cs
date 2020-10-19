@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             cam.gameObject.SetActive(false);
             modelHeadless.SetActive(false);
             anim = model.GetComponent<Animator>();
+            rb.useGravity = false;
         }
         else
         {
@@ -489,22 +490,26 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
 
     public void SetTeam(int teamToSet)
     {
-        pV.RPC("PhotonSetTeam", RpcTarget.All, teamToSet);
+        pV.RPC("PUNSetTeam", RpcTarget.All, teamToSet);
     }
 
     [PunRPC]
-    public void PhotonSetTeam(int teamToSet)
+    public void PUNSetTeam(int teamToSet)
     {
         team = teamToSet;
         if(team == 1)
         {
             meshFull.materials[0].color = team1Color;
             meshFull.materials[1].color = team1ColorAccent;
+            meshHeadless.materials[0].color = team1Color;
+            meshHeadless.materials[1].color = team1ColorAccent;
         }
         else if(team == 2)
         {
             meshFull.materials[0].color = team2Color;
             meshFull.materials[1].color = team2ColorAccent;
+            meshHeadless.materials[0].color = team2Color;
+            meshHeadless.materials[1].color = team2ColorAccent;
         }
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
