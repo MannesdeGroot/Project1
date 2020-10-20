@@ -1295,7 +1295,7 @@ MonoBehaviour:
   powerUpName: {fileID: 3688461603101607823}
   moveSpeed: 5
   jumpVelocity: 5
-  jumpForwardVelocity: 3
+  jumpForwardVelocity: 4
   powerJumpMultiplier: 1.25
   powerJumps: 0
   fallMultiplier: 1.1
@@ -1894,7 +1894,7 @@ PrefabInstance:
     - target: {fileID: 7529452243470336706, guid: 965b6d0fca2ca5a4e92483bc4aaced36, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 9c1db1683bc9c5943b09872acd31d609, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 965b6d0fca2ca5a4e92483bc4aaced36, type: 3}
 --- !u!1 &5314990979692859681 stripped

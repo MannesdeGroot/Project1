@@ -11,14 +11,61 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     public PhotonView pv;
     public List<GameObject> waypoints = new List<GameObject>();
     int currentWaypoint = 0;
+    PlayerController isMine;
+    public float startTime;
+    public GameObject walls;
+    bool started = false;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
+        
+    }
+
+    private void Update()
+    {
+        if (!started)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                startTime -= Time.deltaTime;
+            }
+
+        
+            if (isMine != null)
+            {
+                isMine.pregameTimer.text = startTime.ToString("#");
+            }
+            else
+            {
+                PlayerController[] players = GameObject.FindObjectsOfType<PlayerController>();
+                for (int i = 0; i < players.Length; i++)
+                {
+                    if (players[i].pV.IsMine)
+                    {
+                        isMine = players[i];
+                    }
+                }
+            }
+
+            if(startTime < 0)
+            {
+                StartGame();
+            }
+        }
+
+    }
+
+    void StartGame()
+    {
+        started = true;
+        isMine.pregameTimer.gameObject.SetActive(false);
         for (int i = 1; i < waypoints.Count; i++)
         {
             waypoints[i].SetActive(false);
+            waypoints[i].transform.localScale = Vector3.zero;
         }
+        Destroy(walls);
     }
 
     private void EndGame()
@@ -42,6 +89,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     [PunRPC]
     public void EndGameForEveryone()
     {
+        
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         for (int i = 0; i < players.Length; i++)
         {
@@ -72,11 +120,11 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     {
         if (stream.IsWriting)
         {
-            //stream.SendNext(taggers);
+            stream.SendNext(startTime);
         }
         else if (stream.IsReading)
         {
-            //taggers = (List<GameObject>)stream.ReceiveNext();
+            startTime = (float)stream.ReceiveNext();
         }
     }
 
