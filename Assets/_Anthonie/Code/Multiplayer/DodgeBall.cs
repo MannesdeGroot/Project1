@@ -7,14 +7,16 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
 {
     public int lastTeamThrown;
     public bool killable = true;
-    public Vector3 startForce;
+    public float startForceY;
+    public float startForceZ;
     public PowerUp powerUp;
     public PhotonView pv;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
-        GetComponent<Rigidbody>().AddForce(startForce);
+        GetComponent<Rigidbody>().AddForce(transform.up * startForceY);
+        GetComponent<Rigidbody>().AddForce(transform.forward * startForceZ);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,12 +24,13 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
         if(collision.gameObject.tag == "Player")
         {
             PlayerController playerHit = collision.gameObject.GetComponent<PlayerController>();
-            if(playerHit.team == lastTeamThrown)
+            if(playerHit.team == lastTeamThrown || lastTeamThrown == 0)
             {
 
             }
             else if(killable)
             {
+                GameObject.FindObjectOfType<TrefballManager>().CheckIfTeamWon(playerHit.team);
                 playerHit.Eliminate();
                 killable = false;
             }
@@ -39,13 +42,14 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
-    public void PhotonSetTeam(int team)
+    public void SetTeam(int team)
     {
-        pv.RPC("SetTeam", RpcTarget.All);
+        pv = GetComponent<PhotonView>();
+        pv.RPC("PUNSetTeam", RpcTarget.All, team);
     }
 
     [PunRPC]
-    void SetTeam(int team)
+    void PUNSetTeam(int team)
     {
         lastTeamThrown = team;
     }

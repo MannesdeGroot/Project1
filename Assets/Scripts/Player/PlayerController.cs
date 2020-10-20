@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             cam.gameObject.SetActive(false);
             modelHeadless.SetActive(false);
             anim = model.GetComponent<Animator>();
-            rb.useGravity = false;
         }
         else
         {
@@ -289,7 +288,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             }
 
             rb.velocity += Vector3.up * jumpVel + input * (jumpVel * jumpDirMultiplier);
-            rb.velocity += Vector3.forward * jumpForwardVelocity;
+            rb.AddForce(Vector3.forward * jumpForwardVelocity);
             jumpVel = jumpVelocity;
 
             if (rb.velocity.y < 0)

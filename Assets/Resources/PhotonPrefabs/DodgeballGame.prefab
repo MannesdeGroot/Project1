@@ -142,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastTeamThrown: 0
   killable: 1
-  startForce: {x: 0, y: 10, z: 100}
+  startForceY: 10
+  startForceZ: 250
   powerUp: {fileID: 7492597456979277660}
   pv: {fileID: 0}
 --- !u!114 &7492597456979277660

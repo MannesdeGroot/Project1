@@ -64,6 +64,46 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
     }
 
+    public void CheckIfTeamWon(int teamWhoDied)
+    {
+        if(teamWhoDied == 1)
+        {
+            team1Amount--;
+        }
+        else if(teamWhoDied == 2)
+        {
+            team2Amount--;
+        }
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            if(team1Amount <= 0)
+            {
+                //team2won
+                pv.RPC("EndGameForEveryone", RpcTarget.All);
+            }
+            else if(team2Amount <= 0)
+            {
+                //team1won
+                pv.RPC("EndGameForEveryone", RpcTarget.All);
+            }
+
+        }
+    }
+
+    [PunRPC]
+    public void EndGameForEveryone()
+    {
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].gameObject);
+
+        }
+        voteSystemObj.SetActive(true);
+        voteSystem.PhotonStartVoting();
+    }
+
     void SetTeams()
     {
         PlayerController[] players = FindObjectsOfType<PlayerController>();

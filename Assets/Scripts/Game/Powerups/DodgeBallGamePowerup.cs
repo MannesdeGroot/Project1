@@ -10,6 +10,6 @@ public class DodgeBallGamePowerup : PowerUp
     public override void Use()
     {
         GameObject ball = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "DodgeballGame"), player.throwPos.position, player.throwPos.rotation);
-        ball.GetComponent<DodgeBall>().PhotonSetTeam(transform.GetComponent<PlayerController>().team);
+        ball.GetComponent<DodgeBall>().SetTeam(player.team);
     }
 }

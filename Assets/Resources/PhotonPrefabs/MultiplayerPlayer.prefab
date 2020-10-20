@@ -1191,7 +1191,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 0
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -1735088442909388877}
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   powerUpName: {fileID: 3688461603101607823}
   moveSpeed: 5
   jumpVelocity: 5
-  jumpForwardVelocity: 0
+  jumpForwardVelocity: 3
   powerJumpMultiplier: 1.25
   powerJumps: 0
   fallMultiplier: 1.1
