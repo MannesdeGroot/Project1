@@ -9,6 +9,7 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
     public float preRoundtime;
     public Transform[] spawnsTeam1;
     public Transform[] spawnsTeam2;
+    public Transform ballSpawn;
     int team1Amount;
     int team2Amount;
     PhotonView pv;
@@ -59,7 +60,7 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
             {
                 SetTeams();
                 pv.RPC("StartGame", RpcTarget.All);
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", ball.name), Vector3.zero, Quaternion.identity);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", ball.name), ballSpawn.position, new Quaternion(0, Random.Range(0f, 1f), 0, 1));
             }
         }
     }

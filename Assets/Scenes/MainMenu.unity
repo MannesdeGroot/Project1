@@ -2695,6 +2695,7 @@ MonoBehaviour:
   - {fileID: 2422033647837985159, guid: d3c519c0aec15bf45b63de0feac8e71a, type: 3}
   - {fileID: 396844469387788696, guid: 193ac607c35be464da9b7b651f323d9b, type: 3}
   - {fileID: 5699955469743494206, guid: d99df42a5807131488fddfa4c7bad00c, type: 3}
+  - {fileID: 153195337926078592, guid: f900bfd6587b7fa419f471e562474c6b, type: 3}
   currentHatSelected: 0
   hatPos: {fileID: 320975418}
 --- !u!1 &1070834116

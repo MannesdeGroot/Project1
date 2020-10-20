@@ -546,4 +546,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         jumping = true;
         moveInputMultiplier = jumpMoveMultiplier;
     }
+
+    private void OnApplicationQuit()
+    {
+        LeaveRoom();
+    }
 }

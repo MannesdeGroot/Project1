@@ -11,12 +11,29 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
     public float startForceZ;
     public PowerUp powerUp;
     public PhotonView pv;
+    public SphereCollider[] colliders;
+    public float timeToActivate;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
+        colliders = GetComponents<SphereCollider>();
         GetComponent<Rigidbody>().AddForce(transform.up * startForceY);
         GetComponent<Rigidbody>().AddForce(transform.forward * startForceZ);
+    }
+
+    private void Update()
+    {
+        timeToActivate -= Time.deltaTime;
+        if(timeToActivate < 0)
+        {
+            timeToActivate = 9999999;
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = true;
+
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
