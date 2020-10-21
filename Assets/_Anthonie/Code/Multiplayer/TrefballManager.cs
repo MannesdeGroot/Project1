@@ -110,21 +110,20 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].isClamped = true;
-            players[i].zClamp = ballSpawn.position.z;
 
             if(team1Amount < team2Amount)
             {
-                players[i].SetTeam(1);
                 players[i].TeleportPlayer(spawnsTeam1[Random.Range(0, spawnsTeam1.Length - 1)].position);
+                players[i].SetTeam(1, true, ballSpawn.position.z);
                 team1Amount++;
             }
             else
             {
-                players[i].SetTeam(2);
                 players[i].TeleportPlayer(spawnsTeam2[Random.Range(0, spawnsTeam2.Length - 1)].position);
+                players[i].SetTeam(2, true, ballSpawn.position.z);
                 team2Amount++;
             }
+            
         }
     }
 

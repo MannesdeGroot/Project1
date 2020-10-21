@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public ParticleSystem tagParticle;
     public GameObject stunParticle;
     public float zClamp;
-    public bool isClamped = false;
+    bool isClamped = false;
     Vector3 lastPos;
 
     [Header("View")]
@@ -256,15 +256,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
                 if(team == 1)
                 {
                     // > mid
-                    if(transform.position.z > zClamp)
+                    if(transform.position.z < zClamp)
                     {
                         transform.position = new Vector3(transform.position.x, transform.position.y, lastPos.z);
                     }
                 }
-                else if(team == 2)
+                if(team == 2)
                 {
                     // < mid
-                    if (transform.position.z < zClamp)
+                    if (transform.position.z > zClamp)
                     {
                         transform.position = new Vector3(transform.position.x, transform.position.y, lastPos.z);
                     }
@@ -510,13 +510,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         transform.position = teleportLoc;
     }
 
-    public void SetTeam(int teamToSet)
+    public void SetTeam(int teamToSet, bool isClampedSend, float zClampSend)
     {
-        pV.RPC("PUNSetTeam", RpcTarget.All, teamToSet);
+        pV.RPC("PUNSetTeam", RpcTarget.All, teamToSet, isClampedSend, zClampSend);
     }
 
     [PunRPC]
-    public void PUNSetTeam(int teamToSet)
+    public void PUNSetTeam(int teamToSet, bool clamped, float clampZ)
     {
         team = teamToSet;
         if(team == 1)
@@ -533,6 +533,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             meshHeadless.materials[0].color = team2Color;
             meshHeadless.materials[1].color = team2ColorAccent;
         }
+        isClamped = clamped;
+        zClamp = clampZ;
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {

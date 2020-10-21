@@ -1308,6 +1308,7 @@ MonoBehaviour:
   speedBoostParticle: {fileID: 1452142693253795384}
   tagParticle: {fileID: 7627543632529629391}
   stunParticle: {fileID: 3012979858140999261}
+  zClamp: 0
   camTransform: {fileID: 4610273369893841015}
   viewClamp: 75
   pregameTimer: {fileID: 5364981531639410020}
