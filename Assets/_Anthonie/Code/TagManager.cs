@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TagManager : MonoBehaviour
+public class TagManager : MonoBehaviour, IPunObservable
 {
     public GameState state;
     public int taggersAmount;
@@ -161,6 +161,23 @@ public class TagManager : MonoBehaviour
                 startDelay--;
                 StartCoroutine(PreGameCountDown());
             }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                stream.SendNext(timer);
+                stream.SendNext(startDelay);
+            }
+        }
+        if (stream.IsReading)
+        {
+            timer = (int)stream.ReceiveNext();
+            startDelay = (int)stream.ReceiveNext();
         }
     }
 }
