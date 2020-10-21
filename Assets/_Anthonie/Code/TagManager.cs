@@ -98,7 +98,7 @@ public class TagManager : MonoBehaviour, IPunObservable
         {
             state = GameState.FINISHED;
             print($"{players[0]} won");
-            if(players[0] != null)
+            if (players[0] != null)
             {
                 Destroy(players[0].gameObject);
                 voteCam.SetActive(true);
@@ -121,7 +121,8 @@ public class TagManager : MonoBehaviour, IPunObservable
 
             foreach (PlayerController player in players)
             {
-                player.timerText.text = $"{minutes}:{secondsText}";
+                if (player.timerText != null)
+                    player.timerText.text = $"{minutes}:{secondsText}";
             }
         }
 
