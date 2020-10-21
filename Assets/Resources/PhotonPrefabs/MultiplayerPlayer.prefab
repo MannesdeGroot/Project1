@@ -1341,8 +1341,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 2422033647837985159, guid: d3c519c0aec15bf45b63de0feac8e71a, type: 3}
   - {fileID: 396844469387788696, guid: 193ac607c35be464da9b7b651f323d9b, type: 3}
-  - {fileID: 5699955469743494206, guid: d99df42a5807131488fddfa4c7bad00c, type: 3}
+  - {fileID: 7167658636432022553, guid: a1b91501c6e69ce4dbacc195519ca480, type: 3}
   - {fileID: 153195337926078592, guid: f900bfd6587b7fa419f471e562474c6b, type: 3}
+  - {fileID: 6313412087474952877, guid: 13ac2068cf36cd34fb38924ba5a7b358, type: 3}
   meshFull: {fileID: 5111611416144751006}
   meshHeadless: {fileID: 6205824505936713730}
   team1Color: {r: 0.8207547, g: 0, b: 0, a: 1}
