@@ -1259,7 +1259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GameTitle
+  m_Text: Game Day
 --- !u!222 &531932205
 CanvasRenderer:
   m_ObjectHideFlags: 0
