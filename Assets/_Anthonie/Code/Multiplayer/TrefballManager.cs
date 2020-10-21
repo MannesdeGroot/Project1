@@ -110,6 +110,9 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         for (int i = 0; i < players.Length; i++)
         {
+            players[i].isClamped = true;
+            players[i].zClamp = ballSpawn.position.z;
+
             if(team1Amount < team2Amount)
             {
                 players[i].SetTeam(1);

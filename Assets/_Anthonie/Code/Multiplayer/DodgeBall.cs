@@ -13,13 +13,15 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
     public PhotonView pv;
     public SphereCollider[] colliders;
     public float timeToActivate;
+    Rigidbody rb;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         colliders = GetComponents<SphereCollider>();
-        GetComponent<Rigidbody>().AddForce(transform.up * startForceY);
-        GetComponent<Rigidbody>().AddForce(transform.forward * startForceZ);
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.up * startForceY);
+        rb.AddForce(transform.forward * startForceZ);
     }
 
     private void Update()
@@ -56,6 +58,15 @@ public class DodgeBall : MonoBehaviour, Photon.Pun.IPunObservable
         {
             killable = false;
             powerUp.enabled = true;
+        }
+
+        if(collision.transform.tag == "Respawn")
+        {
+            rb.velocity.Equals(Vector3.zero);
+            transform.position = GameObject.FindObjectOfType<TrefballManager>().ballSpawn.position;
+            transform.rotation = new Quaternion(0, Random.Range(0f, 1f), 0, 1);
+            rb.AddForce(transform.up * startForceY);
+            rb.AddForce(transform.forward * startForceZ);
         }
     }
 

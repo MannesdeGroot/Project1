@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public ParticleSystem speedBoostParticle;
     public ParticleSystem tagParticle;
     public GameObject stunParticle;
+    public float zClamp;
+    public bool isClamped = false;
+    Vector3 lastPos;
 
     [Header("View")]
     [SerializeField] private Transform camTransform;
@@ -247,6 +250,26 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
             {
                 Move();
 
+            }
+            if (isClamped)
+            {
+                if(team == 1)
+                {
+                    // > mid
+                    if(transform.position.z > zClamp)
+                    {
+                        transform.position = new Vector3(transform.position.x, transform.position.y, lastPos.z);
+                    }
+                }
+                else if(team == 2)
+                {
+                    // < mid
+                    if (transform.position.z < zClamp)
+                    {
+                        transform.position = new Vector3(transform.position.x, transform.position.y, lastPos.z);
+                    }
+                }
+                lastPos = transform.position;
             }
         }
     }
