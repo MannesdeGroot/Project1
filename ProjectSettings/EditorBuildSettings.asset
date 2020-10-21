@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Trefball.unity
     guid: 4fa9f37848dd68a44a36da7807eada1b
+  - enabled: 1
+    path: Assets/Scenes/Soccer.unity
+    guid: aa75d82823fef0f4dbfc2324861d5eb8
   m_configObjects: {}

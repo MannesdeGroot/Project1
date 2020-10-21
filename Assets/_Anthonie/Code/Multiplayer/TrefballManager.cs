@@ -6,18 +6,21 @@ using System.IO;
 
 public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
 {
+    [Header("Time")]
     public float preRoundtime;
+    [Header("Game")]
     public Transform[] spawnsTeam1;
     public Transform[] spawnsTeam2;
     public Transform ballSpawn;
+    public GameObject ball;
     int team1Amount;
     int team2Amount;
+    bool isStarted = false;
+    PlayerController isMinePlayer;
     PhotonView pv;
-    public GameObject ball;
+    [Header("Vote")]
     public VoteSystem voteSystem;
     public GameObject voteSystemObj;
-    PlayerController isMinePlayer;
-    bool isStarted = false;
     
 
     void Start()

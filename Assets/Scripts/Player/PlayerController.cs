@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public GameObject voteScreen;
     public Transform head;
     public GameObject menu;
+    public Text team1PointsText;
+    public Text team2PointsText;
 
     [Header("Interaction")]
     [SerializeField] private float tagDistance;
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public float tagCooldown;
     public bool invincible;
     public Image powerupImage;
+
     [Header("Animations")]
     private float animForwardSpeed;
     private bool animTag;
@@ -570,6 +573,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         jumping = true;
         moveInputMultiplier = jumpMoveMultiplier;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.tag == "Respawn")
+        {
+            rb.velocity = Vector3.zero;
+            TeleportPlayer(Vector3.zero);
+        }
     }
 
     private void OnApplicationQuit()
