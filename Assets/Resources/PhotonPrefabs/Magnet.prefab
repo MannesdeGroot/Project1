@@ -51,6 +51,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7639431e9b8999f4481cdf2c2d4c9487, type: 3}
   powerUpName: magnet
   rotateSpeed: 30
+  pickUpSound: {fileID: 12384941828903332, guid: 907223697d7063c4fa044b20c5710fdd, type: 3}
+  useSound: {fileID: 12384941828903332, guid: fc5d3b7d6d74a254aaaf88da958c63cc, type: 3}
   range: 5
   knockbackPower: 400
 --- !u!114 &6749977256915442966

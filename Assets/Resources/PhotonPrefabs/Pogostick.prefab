@@ -102,6 +102,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6883c26a9269b9546a4d6e40d5b9fe12, type: 3}
   powerUpName: Pogo Stick
   rotateSpeed: 30
+  pickUpSound: {fileID: 12384941828903332, guid: 907223697d7063c4fa044b20c5710fdd, type: 3}
+  useSound: {fileID: 12384941828903332, guid: a4dc1a415c9f2c342a2ebf3a28381d7b, type: 3}
 --- !u!114 &5996737285184396451
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class Waypoint : MonoBehaviour
     public ParkourManager parkourManager;
     public Vector3 scale;
     public float scaleUpSpeed;
+    public GameObject waypointSound;
 
     private void Update()
     {
@@ -23,6 +24,7 @@ public class Waypoint : MonoBehaviour
         {
             if (other.GetComponent<PlayerController>().pV.IsMine)
             {
+                Instantiate(waypointSound, transform.position, Quaternion.identity);
                 parkourManager.HitWaypoint();
 
             }

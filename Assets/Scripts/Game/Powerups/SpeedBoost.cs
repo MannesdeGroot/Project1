@@ -10,5 +10,6 @@ public class SpeedBoost : PowerUp
     public override void Use()
     {
         player.ApplySpeedBoost(multiplier, duration);
+        base.Use();
     }
 }

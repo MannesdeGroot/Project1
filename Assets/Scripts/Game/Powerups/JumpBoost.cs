@@ -7,5 +7,6 @@ public class JumpBoost : PowerUp
     public override void Use()
     {
         player.powerJumps++;
+        base.Use();
     }
 }

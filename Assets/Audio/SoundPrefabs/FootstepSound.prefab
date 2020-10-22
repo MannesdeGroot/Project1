@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3694599636841969334}
   - component: {fileID: 721804228350451400}
   m_Layer: 0
-  m_Name: SoundPrefab
+  m_Name: FootstepSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b7dd418e7816c6245b2e91f2cd6511e4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3694599636841969334}
-  randomPitch: 0
-  destroyAfterTime: 5
+  randomPitch: 0.1
+  destroyAfterTime: 2

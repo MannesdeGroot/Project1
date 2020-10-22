@@ -9,5 +9,6 @@ public class Blanket : PowerUp
     public override void Use()
     {
         StartCoroutine(player.SetInvincible(duration));
+        base.Use();
     }
 }

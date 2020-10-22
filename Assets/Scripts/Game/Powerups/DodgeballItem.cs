@@ -13,5 +13,6 @@ public class DodgeballItem : PowerUp
         ball = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Trefbal"), player.throwPos.position, player.throwPos.rotation);
         ball.GetComponent<Dodgeball>().thrower = player;
         ball.GetComponent<Rigidbody>().AddForce(player.transform.forward * player.forwardThrowForce + player.transform.up * player.upwardsThrowForce);
+        base.Use();
     }
 }

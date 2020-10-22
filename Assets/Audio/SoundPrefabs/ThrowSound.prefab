@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3694599636841969334}
   - component: {fileID: 721804228350451400}
   m_Layer: 0
-  m_Name: SoundPrefab
+  m_Name: ThrowSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,8 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 12384941828903332}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4796782191621209901, guid: 915d1f51664fff649a2bf2fc119eb74c, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2804c8037dbdfac4ebcf42f21ac959a0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 3694599636841969334}
-  randomPitch: 0
+  randomPitch: 0.1
   destroyAfterTime: 5

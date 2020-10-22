@@ -11,5 +11,6 @@ public class DodgeBallGamePowerup : PowerUp
     {
         GameObject ball = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "DodgeballGame"), player.throwPos.position, player.throwPos.rotation);
         ball.GetComponent<DodgeBall>().SetTeam(player.team);
+        base.Use();
     }
 }

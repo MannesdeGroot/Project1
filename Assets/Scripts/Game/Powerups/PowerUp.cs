@@ -11,6 +11,8 @@ public class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
     public string powerUpName;
     protected PhotonView pv;
     public float rotateSpeed;
+    public GameObject pickUpSound;
+    public GameObject useSound;
 
     public void Start()
     {
@@ -19,9 +21,20 @@ public class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
 
     public virtual void Use()
     {
+        if(player.pV.IsMine && useSound != null)
+        {
+            Instantiate(useSound, player.transform.position, Quaternion.identity);
+            //pv.RPC("PlayUseSound", RpcTarget.All);
+        }
         Destroy(gameObject, 5);
     }
 
+    [PunRPC]
+    void PlayUseSound()
+    {
+        Instantiate(useSound, player.transform.position, Quaternion.identity);
+
+    }
     private void Update()
     {
         transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
@@ -31,11 +44,17 @@ public class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
     {
         PlayerController _player = c.GetComponent<PlayerController>();
         if (_player == null) return;
+        
 
         if (_player.powerUp == null)
         {
             _player.AddPowerUp(this);
             player = _player;
+
+            if (player.pV.IsMine && pickUpSound != null)
+            {
+                Instantiate(pickUpSound, player.transform.position, Quaternion.identity);
+            }
             pv.RPC("ActivateSelf", RpcTarget.All, false);
         }
     }

@@ -18,5 +18,7 @@ public class Pull : PowerUp
                 hit.transform.GetComponent<Rigidbody>().AddForce(-player.cam.transform.forward * knockbackPower);
             }
         }
+        base.Use();
     }
+
 }
