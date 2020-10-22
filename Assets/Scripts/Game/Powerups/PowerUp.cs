@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
+public class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
 {
     protected PlayerController player;
     public Sprite icon;
@@ -17,7 +17,10 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
         pv = GetComponent<PhotonView>();
     }
 
-    public abstract void Use();
+    public virtual void Use()
+    {
+        Destroy(gameObject, 5);
+    }
 
     private void Update()
     {
@@ -40,12 +43,8 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
     [PunRPC]
     public void ActivateSelf(bool value)
     {
-        GetComponent<Renderer>().enabled = value;
-        GetComponent<Collider>().enabled = value;
-        if (!value)
-        {
-            Destroy(gameObject, 5);
-        }
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

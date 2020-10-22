@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6883c26a9269b9546a4d6e40d5b9fe12, type: 3}
-  powerUpName: Pogostick
+  powerUpName: Pogo Stick
   rotateSpeed: 30
 --- !u!114 &5996737285184396451
 MonoBehaviour:

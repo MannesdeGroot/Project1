@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     [SerializeField] private GameObject powerUpUiElement;
     [SerializeField] private Image powerUpIcon;
     [SerializeField] private Text powerUpName;
+    public PowerUp powerUpHolder;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;

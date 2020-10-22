@@ -1572,6 +1572,7 @@ MonoBehaviour:
   powerUpUiElement: {fileID: 9130675463480876481}
   powerUpIcon: {fileID: 7537335076520617832}
   powerUpName: {fileID: 3688461603101607823}
+  powerUpHolder: {fileID: 0}
   moveSpeed: 5
   jumpVelocity: 5
   jumpForwardVelocity: 4
