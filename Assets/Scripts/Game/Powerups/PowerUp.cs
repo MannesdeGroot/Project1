@@ -44,7 +44,7 @@ public abstract class PowerUp : MonoBehaviour, Photon.Pun.IPunObservable
         GetComponent<Collider>().enabled = value;
         if (!value)
         {
-            //Destroy(gameObject, 5);
+            Destroy(gameObject, 5);
         }
     }
 

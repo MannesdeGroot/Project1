@@ -95,14 +95,14 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
                                 secs -= 60;
                                 mins++;
                             }
-                            else if(secs < 10)
-                            {
-                                isMinePlayer.pregameTimer.text = mins.ToString() + ":0" + secs.ToString("#");
-                                done = true;
-                            }
                             else if(secs < 1)
                             {
                                 isMinePlayer.pregameTimer.text = mins.ToString() + ":00";
+                                done = true;
+                            }
+                            else if(secs < 9.5)
+                            {
+                                isMinePlayer.pregameTimer.text = mins.ToString() + ":0" + secs.ToString("#");
                                 done = true;
                             }
                             else
@@ -217,7 +217,7 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
 
         voteObj.SetActive(true);
-        voteSystem.StartVoting();
+        voteSystem.PhotonStartVoting();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -226,12 +226,14 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
         {
             stream.SendNext(preRoundTime);
             stream.SendNext(roundTime);
+            stream.SendNext(started);
             
         }
         else if (stream.IsReading)
         {
             preRoundTime = (float)stream.ReceiveNext();
             roundTime = (float)stream.ReceiveNext();
+            started = (bool)stream.ReceiveNext();
             
         }
     }
