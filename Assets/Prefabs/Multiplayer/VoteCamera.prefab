@@ -1049,7 +1049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7580878282056947527, guid: 62860b7b6bf703c45878413594b399ca, type: 3}
       propertyPath: m_Text
-      value: 'ObsticleRun:
+      value: 'ObstacleRun:
 
 '
       objectReference: {fileID: 0}

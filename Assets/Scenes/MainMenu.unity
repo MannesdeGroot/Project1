@@ -5695,7 +5695,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Tag
       m_Image: {fileID: 0}
-    - m_Text: ObsticleRun
+    - m_Text: ObstacleRun
       m_Image: {fileID: 0}
     - m_Text: Dodgeball
       m_Image: {fileID: 0}

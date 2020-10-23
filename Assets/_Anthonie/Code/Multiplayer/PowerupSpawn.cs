@@ -24,17 +24,30 @@ public class PowerupSpawn : MonoBehaviour, Photon.Pun.IPunObservable
     }
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient && spawnedObj == null)
+        if(PhotonNetwork.IsMasterClient && spawnedObj == null)
         {
             timeToSpawnNext -= Time.deltaTime;
-            if(timeToSpawnNext < 0 )
+            if (timeToSpawnNext < 0)
             {
-                //pv.RPC("SpawnPowerup", RpcTarget.All, Random.Range(0, powerups.Count));
                 SpawnPowerup(Random.Range(0, powerups.Count));
                 timeToSpawnNext = Random.Range(minRespawnTime, maxRespawnTime);
 
             }
         }
+        else if (spawnedObj != null)
+        {
+            if (PhotonNetwork.IsMasterClient && !spawnedObj.GetComponent<MeshRenderer>().enabled)
+            {
+                timeToSpawnNext -= Time.deltaTime;
+                if (timeToSpawnNext < 0)
+                {
+                    SpawnPowerup(Random.Range(0, powerups.Count));
+                    timeToSpawnNext = Random.Range(minRespawnTime, maxRespawnTime);
+
+                }
+            }
+        }
+        
     }
 
     

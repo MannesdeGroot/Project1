@@ -213,9 +213,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
                             RaycastHit hit;
                             if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, powerUp.GetComponent<Kick>().range))
                             {
-                                powerUp.Use();
-                                powerUp = null;
-                                powerUpUiElement.SetActive(false);
+                                if (hit.transform.tag == "Football")
+                                {
+
+                                    powerUp.Use();
+                                    powerUp = null;
+                                    powerUpUiElement.SetActive(false);
+                                }
                             }
                         }
                         else if(powerUp is Pull)
@@ -223,9 +227,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
                             RaycastHit hit;
                             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, powerUp.GetComponent<Pull>().range))
                             {
-                                powerUp.Use();
-                                powerUp = null;
-                                powerUpUiElement.SetActive(false);
+                                if(hit.transform.tag == "Football")
+                                {
+                                    powerUp.Use();
+                                    powerUp = null;
+                                    powerUpUiElement.SetActive(false);
+
+                                }
                             }
                         }
                         else
@@ -416,6 +424,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         SetTagger(true);
         rb.AddForce((transform.position - taggerPos) * GetTagKnockBack() * knockBackMultiplier);
         Instantiate(tagSound, transform.position, Quaternion.identity);
+        UpdateNames();
+
     }
 
     public void SetTagger(bool value)
@@ -626,10 +636,19 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.tag == "Respawn")
+        if (pV.IsMine)
         {
-            rb.velocity = Vector3.zero;
-            TeleportPlayer(Vector3.zero);
+            if(collision.transform.tag == "Respawn")
+            {
+                rb.velocity = Vector3.zero;
+                TeleportPlayer(Vector3.zero);
+            }
+
+            if(collision.transform.tag == "Football")
+            {
+                collision.transform.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+            }
+
         }
     }
 
