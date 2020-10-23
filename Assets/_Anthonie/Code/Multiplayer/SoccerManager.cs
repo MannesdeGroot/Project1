@@ -23,6 +23,10 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
     [Header("Vote")]
     public VoteSystem voteSystem;
     public GameObject voteObj;
+    [Header("Sound")]
+    public GameObject startRoundSound;
+    public GameObject scoreSound;
+    bool startSoundPlayed = false;
 
     private void Start()
     {
@@ -63,6 +67,11 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
         else
         {
+            if (!startSoundPlayed)
+            {
+                startSoundPlayed = true;
+                Instantiate(startRoundSound, ballSpawn.position, Quaternion.identity);
+            }
             if (PhotonNetwork.IsMasterClient)
             {
                 roundTime -= Time.deltaTime;
@@ -158,6 +167,7 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
         isMinePlayer.team1PointsText.text = team1points.ToString();
         isMinePlayer.team2PointsText.text = team2points.ToString();
+        Instantiate(scoreSound, ballSpawn.position, Quaternion.identity);
     }
 
     void CheckWhoWon()
@@ -172,14 +182,16 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
             //team1 won
 
 
-            pv.RPC("EndGame", RpcTarget.All);
+            roundTime = 500;
+            pv.RPC("EndGame", RpcTarget.All, "TeamRed");
         }
         else
         {
             //team2 won
 
 
-            pv.RPC("EndGame", RpcTarget.All);
+            roundTime = 500;
+            pv.RPC("EndGame", RpcTarget.All, "TeamBlue");
         }
     }
 
@@ -208,7 +220,7 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
     }
 
     [PunRPC]
-    void EndGame()
+    void EndGame(string winner)
     {
         PlayerController[] players = GameObject.FindObjectsOfType<PlayerController>();
         for (int i = 0; i < players.Length; i++)
@@ -218,6 +230,11 @@ public class SoccerManager : MonoBehaviour, Photon.Pun.IPunObservable
 
         voteObj.SetActive(true);
         voteSystem.PhotonStartVoting();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            voteSystem.SetWinner(winner);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

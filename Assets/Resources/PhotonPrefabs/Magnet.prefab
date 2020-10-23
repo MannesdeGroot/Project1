@@ -53,7 +53,7 @@ MonoBehaviour:
   rotateSpeed: 30
   pickUpSound: {fileID: 12384941828903332, guid: 907223697d7063c4fa044b20c5710fdd, type: 3}
   useSound: {fileID: 12384941828903332, guid: fc5d3b7d6d74a254aaaf88da958c63cc, type: 3}
-  range: 5
+  range: 10
   knockbackPower: 400
 --- !u!114 &6749977256915442966
 MonoBehaviour:

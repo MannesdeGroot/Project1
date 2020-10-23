@@ -13,15 +13,17 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
     public Transform[] spawnsTeam2;
     public Transform ballSpawn;
     public GameObject ball;
-    int team1Amount;
-    int team2Amount;
+    public int team1Amount;
+    public int team2Amount;
     bool isStarted = false;
     PlayerController isMinePlayer;
     PhotonView pv;
     [Header("Vote")]
     public VoteSystem voteSystem;
     public GameObject voteSystemObj;
-    
+    [Header("Sounds")]
+    public GameObject startRoundSound;
+
 
     void Start()
     {
@@ -70,33 +72,39 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
 
     public void CheckIfTeamWon(int teamWhoDied)
     {
-        if(teamWhoDied == 1)
+        pv.RPC("PUNCheckIfTeamWon", RpcTarget.All, teamWhoDied);
+    }
+
+    [PunRPC]
+    public void PUNCheckIfTeamWon(int teamWhoDied)
+    {
+        if (teamWhoDied == 1)
         {
             team1Amount--;
         }
-        else if(teamWhoDied == 2)
+        else if (teamWhoDied == 2)
         {
             team2Amount--;
         }
         if (PhotonNetwork.IsMasterClient)
         {
 
-            if(team1Amount <= 0)
+            if (team1Amount <= 0)
             {
                 //team2won
-                pv.RPC("EndGameForEveryone", RpcTarget.All);
+                pv.RPC("EndGameForEveryone", RpcTarget.All, "TeamBlue");
             }
-            else if(team2Amount <= 0)
+            else if (team2Amount <= 0)
             {
                 //team1won
-                pv.RPC("EndGameForEveryone", RpcTarget.All);
+                pv.RPC("EndGameForEveryone", RpcTarget.All, "TeamRed");
             }
 
         }
     }
 
     [PunRPC]
-    public void EndGameForEveryone()
+    public void EndGameForEveryone(string winner)
     {
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         for (int i = 0; i < players.Length; i++)
@@ -106,6 +114,11 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
         voteSystemObj.SetActive(true);
         voteSystem.PhotonStartVoting();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            voteSystem.SetWinner(winner);
+        }
     }
 
     void SetTeams()
@@ -134,7 +147,7 @@ public class TrefballManager : MonoBehaviour, Photon.Pun.IPunObservable
     void StartGame()
     {
         isStarted = true;
-
+        Instantiate(startRoundSound, transform.position, Quaternion.identity);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

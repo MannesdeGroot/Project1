@@ -1459,6 +1459,7 @@ MonoBehaviour:
   - {fileID: 2045882406}
   startTime: 10
   walls: {fileID: 33805027}
+  startSound: {fileID: 12384941828903332, guid: 24ea3a9023553c746b889d61d86f7adb, type: 3}
 --- !u!1 &1821564528
 GameObject:
   m_ObjectHideFlags: 0

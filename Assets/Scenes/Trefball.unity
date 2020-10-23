@@ -847,7 +847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 322362020}
   - component: {fileID: 322362019}
-  - component: {fileID: 322362018}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -855,14 +854,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &322362018
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322362017}
-  m_Enabled: 1
 --- !u!20 &322362019
 Camera:
   m_ObjectHideFlags: 0
@@ -3007,6 +2998,7 @@ MonoBehaviour:
   ball: {fileID: 728651036560035463, guid: c9f8c4559799eff42824b79a46b5672d, type: 3}
   voteSystem: {fileID: 4252416185097113774}
   voteSystemObj: {fileID: 4252416185097113775}
+  startRoundSound: {fileID: 12384941828903332, guid: 24ea3a9023553c746b889d61d86f7adb, type: 3}
 --- !u!4 &1895209577
 Transform:
   m_ObjectHideFlags: 0

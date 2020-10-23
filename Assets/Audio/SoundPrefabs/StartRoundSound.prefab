@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3694599636841969334}
   - component: {fileID: 721804228350451400}
   m_Layer: 0
-  m_Name: TagSound
+  m_Name: StartRoundSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4796782191621209901, guid: 915d1f51664fff649a2bf2fc119eb74c, type: 2}
-  m_audioClip: {fileID: 8300000, guid: b58ba0faab545464f8aa2a165a35fa7f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 99d185a043c374f4d873b241fa48d89c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -88,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

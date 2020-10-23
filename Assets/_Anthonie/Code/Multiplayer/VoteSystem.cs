@@ -14,6 +14,7 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
     public VoteButton currentVote;
     public PhotonView pv;
     public Text voteTimeText;
+    public Text winnerText;
 
     private void Start()
     {
@@ -117,6 +118,17 @@ public class VoteSystem : MonoBehaviour, Photon.Pun.IPunObservable
             pv.RPC("LoadScene", RpcTarget.All, sceneInt);
         }
 
+    }
+
+    public void SetWinner(string winnerName)
+    {
+        pv.RPC("PUNSetWinner", RpcTarget.All, winnerName);
+    }
+
+    [PunRPC]
+    void PUNSetWinner(string name)
+    {
+        winnerText.text = name;
     }
 
     [PunRPC]

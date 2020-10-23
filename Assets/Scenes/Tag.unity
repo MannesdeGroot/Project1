@@ -607,7 +607,6 @@ GameObject:
   m_Component:
   - component: {fileID: 797992845}
   - component: {fileID: 797992844}
-  - component: {fileID: 797992843}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -615,14 +614,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &797992843
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797992842}
-  m_Enabled: 1
 --- !u!20 &797992844
 Camera:
   m_ObjectHideFlags: 0
@@ -1194,7 +1185,8 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1652194406}
   viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1220,6 +1212,7 @@ MonoBehaviour:
   playerIDsArray: []
   voteCam: {fileID: 21143902}
   voteSystem: {fileID: 264535166}
+  startRoundSound: {fileID: 12384941828903332, guid: 24ea3a9023553c746b889d61d86f7adb, type: 3}
 --- !u!4 &1652194407
 Transform:
   m_ObjectHideFlags: 0

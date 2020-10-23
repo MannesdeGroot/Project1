@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObservable
 {
@@ -97,6 +98,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public Color team1ColorAccent;
     public Color team2Color;
     public Color team2ColorAccent;
+    [Header("Sounds")]
+    public GameObject footstepSound;
+    public float footstepSoundSpeed;
+    float footstepSoundSpeedtime;
+    public GameObject jumpSound;
+    public GameObject tagSound;
 
     void Start()
     {
@@ -201,10 +208,33 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
                     {
                         if (powerUp is DodgeballItem)
                             animThrow = true;
+                        if(powerUp is Kick)
+                        {
+                            RaycastHit hit;
+                            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, powerUp.GetComponent<Kick>().range))
+                            {
+                                powerUp.Use();
+                                powerUp = null;
+                                powerUpUiElement.SetActive(false);
+                            }
+                        }
+                        else if(powerUp is Pull)
+                        {
+                            RaycastHit hit;
+                            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, powerUp.GetComponent<Pull>().range))
+                            {
+                                powerUp.Use();
+                                powerUp = null;
+                                powerUpUiElement.SetActive(false);
+                            }
+                        }
+                        else
+                        {
+                            powerUp.Use();
+                            powerUp = null;
+                            powerUpUiElement.SetActive(false);
 
-                        powerUp.Use();
-                        powerUp = null;
-                        powerUpUiElement.SetActive(false);
+                        }
                     }
                 }
             }
@@ -286,8 +316,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
         animForwardSpeed = Mathf.Abs(Input.GetAxis("Horizontal") + Input.GetAxis("Vertical"));
 
         transform.Translate(input);
+        if(Input.GetAxis("Horizontal") > .1 || Input.GetAxis("Vertical") > .1 && !animJump)
+        {
+            footstepSoundSpeedtime -= Time.deltaTime;
+            if (footstepSoundSpeedtime < 0)
+            {
+                footstepSoundSpeedtime = footstepSoundSpeed;
+                pV.RPC("PlayWalkSound", RpcTarget.All);
+            }
+
+        }
     }
 
+    [PunRPC]
+    void PlayWalkSound()
+    {
+        Instantiate(footstepSound, transform.position, Quaternion.identity);
+
+    }
     private void Rotate()
     {
         float rotHor = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
@@ -327,6 +373,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     public void PlayJump()
     {
         jumpParticle.Play();
+        Instantiate(jumpSound, transform.position, Quaternion.identity);
     }
 
 
@@ -368,6 +415,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, Photon.Pun.IPunObserv
     {
         SetTagger(true);
         rb.AddForce((transform.position - taggerPos) * GetTagKnockBack() * knockBackMultiplier);
+        Instantiate(tagSound, transform.position, Quaternion.identity);
     }
 
     public void SetTagger(bool value)

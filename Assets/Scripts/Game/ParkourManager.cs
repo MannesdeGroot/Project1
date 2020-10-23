@@ -15,6 +15,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     public float startTime;
     public GameObject walls;
     bool started = false;
+    public GameObject startSound;
 
     private void Start()
     {
@@ -60,6 +61,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     {
         started = true;
         isMine.pregameTimer.gameObject.SetActive(false);
+        Instantiate(startSound, transform.position, Quaternion.identity);
         for (int i = 1; i < waypoints.Count; i++)
         {
             waypoints[i].SetActive(false);
@@ -73,7 +75,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
         
 
         print($"{PhotonNetwork.NickName} won");
-        pv.RPC("EndGameForEveryone", RpcTarget.All);
+        pv.RPC("EndGameForEveryone", RpcTarget.All, PhotonNetwork.NickName);
     }
 
     /*private void OnTriggerEnter(Collider c)
@@ -87,7 +89,7 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
     }*/
 
     [PunRPC]
-    public void EndGameForEveryone()
+    public void EndGameForEveryone(string winner)
     {
         
         PlayerController[] players = FindObjectsOfType<PlayerController>();
@@ -98,6 +100,11 @@ public class ParkourManager : MonoBehaviour, Photon.Pun.IPunObservable
         }
         voteCam.SetActive(true);
         voteSystem.PhotonStartVoting();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            voteSystem.SetWinner(winner);
+        }
     }
 
     public void HitWaypoint()

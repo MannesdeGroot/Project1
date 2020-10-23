@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.IO;
 
 public class TagManager : MonoBehaviour, IPunObservable
 {
@@ -17,6 +18,7 @@ public class TagManager : MonoBehaviour, IPunObservable
     private List<PlayerController> players = new List<PlayerController>();
     public GameObject voteCam;
     public VoteSystem voteSystem;
+    public GameObject startRoundSound;
 
     void Start()
     {
@@ -69,6 +71,7 @@ public class TagManager : MonoBehaviour, IPunObservable
                     i--;
                 }
             }
+            pV.RPC("PlayStartRoundSound", RpcTarget.All);
         }
         timer = roundTime;
         StartCoroutine(CountDown());
@@ -79,6 +82,11 @@ public class TagManager : MonoBehaviour, IPunObservable
         }
     }
 
+    [PunRPC]
+    void PlayStartRoundSound()
+    {
+        Instantiate(startRoundSound, transform.position, Quaternion.identity);
+    }
     private void EndRound()
     {
         for (int i = 0; i < players.Count; i++)
@@ -100,9 +108,14 @@ public class TagManager : MonoBehaviour, IPunObservable
             print($"{players[0]} won");
             if (players[0] != null)
             {
+                string winner = players[0].pV.Owner.NickName;
                 Destroy(players[0].gameObject);
                 voteCam.SetActive(true);
                 voteSystem.PhotonStartVoting();
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    voteSystem.SetWinner(winner);
+                }
 
             }
         }

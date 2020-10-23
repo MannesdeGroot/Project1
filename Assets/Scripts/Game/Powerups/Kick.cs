@@ -16,8 +16,8 @@ public class Kick : PowerUp
             {
                 hit.transform.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
                 hit.transform.GetComponent<Rigidbody>().AddForce(player.cam.transform.forward * knockbackPower);
+                base.Use();
             }
         }
-        base.Use();
     }
 }
